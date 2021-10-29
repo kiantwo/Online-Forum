@@ -2,7 +2,7 @@
   <a routerLink="login/.."><fa-icon [icon]="faArrowLeft"></fa-icon></a>
 </div>
 <div class="register">
-  <form class="form-register">
+  <form [formGroup]="form" class="form-register" (ngSubmit)="onSubmit()">
     <h1>Register</h1>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -13,8 +13,7 @@
         id="inputEmail"
         class="form-control"
         placeholder="E-mail address"
-        required
-        autofocus
+        formControlName="email"
       />
     </div>
     <div class="input-group mb-3">
@@ -28,8 +27,7 @@
         id="inputUsername"
         class="form-control"
         placeholder="Username"
-        required
-        autofocus
+        formControlName="username"
       />
     </div>
     <div class="input-group mb-3">
@@ -43,7 +41,7 @@
         id="inputPassword"
         class="form-control"
         placeholder="Password"
-        required
+        formControlName="password"
       />
     </div>
     <div class="input-group mb-3">
@@ -54,13 +52,13 @@
         </div>
         <input
           type="password"
-          id="inputPassword"
+          id="confirmPassword"
           class="form-control"
           placeholder="Confirm password"
-          required
+          formControlName="confirmPass"
         />
       </div>
-    <button class="btn btn-lg btn-dark btn-block" type="submit">
+    <button class="btn btn-lg btn-dark btn-block" type="submit" [disabled]="!form.valid">
       Create account
     </button>
   </form>

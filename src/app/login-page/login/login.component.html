@@ -3,24 +3,23 @@
   <h3>Welcome!</h3>
 </div>
 <div class="signin">
-  <form class="form-signin">
+  <form [formGroup]="form" class="form-signin" (ngSubmit)="onSubmit()">
     <h1>Sign-in</h1>
-    <div class="input-group mb-3">
+    <div class="form-group input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text"
           ><fa-icon [icon]="faUser"></fa-icon
         ></span>
       </div>
       <input
-        type="name"
-        id="inputUsername"
+        type="username"
+        id="username"
         class="form-control"
         placeholder="Username"
-        required
-        autofocus
+        formControlName="username"
       />
     </div>
-    <div class="input-group mb-3">
+    <div class="form-group input-group mb-3">
       <div class="input-group-prepend">
         <span class="input-group-text"
           ><fa-icon [icon]="faLock"></fa-icon
@@ -28,13 +27,13 @@
       </div>
       <input
         type="password"
-        id="inputPassword"
+        id="password"
         class="form-control"
         placeholder="Password"
-        required
+        formControlName="password"
       />
     </div>
     <a routerLink="/register" class="create-account">Don't have an account?</a>
-    <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-dark btn-block" type="submit" [disabled]="!form.valid">Sign in</button>
   </form>
 </div>
