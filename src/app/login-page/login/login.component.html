@@ -1,0 +1,40 @@
+<div class="text-welcome">
+  <h1>Boards of Wharfedale</h1>
+  <h3>Welcome!</h3>
+</div>
+<div class="signin">
+  <form class="form-signin">
+    <h1>Sign-in</h1>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faUser"></fa-icon
+        ></span>
+      </div>
+      <input
+        type="name"
+        id="inputUsername"
+        class="form-control"
+        placeholder="Username"
+        required
+        autofocus
+      />
+    </div>
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faLock"></fa-icon
+        ></span>
+      </div>
+      <input
+        type="password"
+        id="inputPassword"
+        class="form-control"
+        placeholder="Password"
+        required
+      />
+    </div>
+    <a routerLink="/register" class="create-account">Don't have an account?</a>
+    <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+  </form>
+</div>

@@ -1,0 +1,65 @@
+body {
+    font-family: 'Inter', sans-serif;
+}
+
+.right-pane {
+    min-height: 100vh;
+    width: 45%;
+}
+
+.register {
+    margin-top: 45%;
+    margin-bottom: 35%;
+    margin-left: 15%;
+}
+
+.form-register {
+    width: 30%;
+    text-align: left;
+    position: absolute;
+    margin: auto;
+}
+
+.input-group {
+    width: 100%;
+}
+
+.form-signin > p {
+    text-align: center;
+}
+
+.input-group > .form-control, .input-group-prepend > .input-group-text {
+    height: 55px;
+    font-size: 14pt;
+}
+
+.form-register > .btn {
+    margin-top: 4%;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.input-group-text {
+    width: 50px;
+}
+
+.input-group-text > fa-icon {
+    margin: 15%;
+}
+
+.create-account {
+    text-align: center;
+    display: block;
+    color: grey;
+}
+
+.back {
+    margin-top: 2%;
+    margin-left: 1%;
+    font-size: 24pt;
+}
+
+a {
+    color: black;
+}

@@ -1,0 +1,32 @@
+.container-fluid {
+    height: 100vh;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.header-wrap {
+    height: 60vh;
+    width: 100%;
+    /*background-color: rgb(255, 203, 61);*/
+}
+
+.header {
+    top: 0;
+    width: 600px;
+    height: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.footer > h3{
+    text-align: center;
+    font-size: 64pt;
+}
+
+.footer > p {
+    text-align: center;
+    font-size: 18pt;
+    color: gray;
+}
