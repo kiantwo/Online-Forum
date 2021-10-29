@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ForumMainComponent } from './forum/forum-main/forum-main.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    component: ForumMainComponent,
+  },
   {
     path: "**",
     component: NotFoundComponent,
