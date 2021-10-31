@@ -1,8 +1,6 @@
 export interface User {
     uid: string;
     email: string;
-    username: string;
+    displayName: string;
     password: string;
-    isAdmin: boolean;
-    isLogged: boolean;
 }

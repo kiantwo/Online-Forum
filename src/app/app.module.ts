@@ -17,6 +17,7 @@ import {
   AngularFirestoreModule,
 } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AuthService } from './shared/services/auth.service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { AngularFireModule } from '@angular/fire/compat';
     provideFirestore(() => getFirestore()),
     FontAwesomeModule
   ],
-  providers: [AngularFirestore],
+  providers: [AngularFirestore, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { faArrowLeft, faIdCard, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
@@ -16,29 +17,34 @@ export class RegisterComponent implements OnInit {
   faIdCard = faIdCard;
 
   form = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    confirmPass: ['', [Validators.required]],
+    displayName: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(6)]],
+    confirmPass: ['', [Validators.required, Validators.minLength(6)]],
     email: ['', [Validators.required, Validators.email]]
   })
 
-  constructor(private fb: FormBuilder, private auth: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
+    //re-direct to forum page if user already logged in
+    if (this.authService.isLoggedIn) {
+      this.router.navigate(['main']);
+    }
   }
 
   onSubmit() {
+    console.log(this.f.password.value);
+    
     if(this.f.password.value === this.f.confirmPass.value) {
-      const userData: User = {
+      const payload: User = {
         uid: '',
+        displayName: this.f.displayName.value,
         email: this.f.email.value,
-        username: this.f.username.value,
-        password: this.f.password.value,
-        isAdmin: false,
-        isLogged: false
+        password: this.f.password.value
       };
-
-      this.auth.register(userData);
+      
+      //call register function from AuthService
+      this.authService.register(payload);
       this.form.reset();
     }
 
