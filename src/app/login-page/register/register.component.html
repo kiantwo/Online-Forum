@@ -2,10 +2,15 @@
   <a routerLink="login/.."><fa-icon [icon]="faArrowLeft"></fa-icon></a>
 </div>
 <div class="register">
-  <form [formGroup]="form" class="form-register" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="form"
+    class="form-register needs-validation"
+    novalidate
+    (ngSubmit)="onSubmit()"
+  >
     <h1>Register</h1>
     <div class="input-group mb-3">
-      <div class="input-group-prepend">
+      <div class="input-group-prepend has-validation">
         <span class="input-group-text">@</span>
       </div>
       <input
@@ -14,7 +19,15 @@
         class="form-control"
         placeholder="E-mail address"
         formControlName="email"
+        [ngClass]="{ 'is-invalid': buttonPressed && email.invalid }"
+        required
       />
+    </div>
+    <div class="text-danger" *ngIf="email.errors?.required && buttonPressed">
+      E-mail is required.
+    </div>
+    <div class="text-danger" *ngIf="email.errors?.email && buttonPressed">
+      Invalid e-mail address.
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -28,7 +41,17 @@
         class="form-control"
         placeholder="Display name"
         formControlName="displayName"
+        [ngClass]="{ 'is-invalid': buttonPressed && displayName.invalid }"
       />
+    </div>
+    <div class="text-danger" *ngIf="displayName.errors?.required && buttonPressed">
+      Display name is required.
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="displayName.errors?.minlength && buttonPressed"
+    >
+      Display name should be 6 characters long.
     </div>
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -42,23 +65,58 @@
         class="form-control"
         placeholder="Password"
         formControlName="password"
+        [ngClass]="{ 'is-invalid': buttonPressed && password.invalid }"
       />
     </div>
+    <div class="text-danger" *ngIf="password.errors?.required && buttonPressed">
+      Password is required.
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="password.errors?.minlength && buttonPressed"
+    >
+      Password should be 6 characters long.
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="!isSame && buttonPressed && !password.invalid"
+    >
+      Passwords do not match.
+    </div>
     <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <span class="input-group-text"
-            ><fa-icon [icon]="faLock"></fa-icon
-          ></span>
-        </div>
-        <input
-          type="password"
-          id="confirmPassword"
-          class="form-control"
-          placeholder="Confirm password"
-          formControlName="confirmPass"
-        />
+      <div class="input-group-prepend">
+        <span class="input-group-text"
+          ><fa-icon [icon]="faLock"></fa-icon
+        ></span>
       </div>
-    <button class="btn btn-lg btn-dark btn-block" type="submit" [disabled]="!form.valid">
+      <input
+        type="password"
+        id="confirmPassword"
+        class="form-control"
+        placeholder="Confirm password"
+        formControlName="confirmPass"
+        [ngClass]="{ 'is-invalid': buttonPressed && confirmPass.invalid }"
+      />
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="confirmPass.errors?.required && buttonPressed"
+    >
+      Password confirmation is required.
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="confirmPass.errors?.minlength && buttonPressed"
+    >
+      Password should be 6 characters long.
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="!isSame && buttonPressed && !confirmPass.invalid"
+    >
+      Passwords do not match.
+    </div>
+    <button class="btn btn-lg btn-dark btn-block" type="submit">
       Create account
     </button>
   </form>

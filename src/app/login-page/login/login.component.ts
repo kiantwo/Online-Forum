@@ -13,7 +13,9 @@ import { User } from 'src/app/shared/services/user';
 export class LoginComponent implements OnInit {
   faUser = faUser;
   faLock = faLock;
-  errMessage = '';
+
+  buttonPressed = false;
+  hasChange = false;
 
   form = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -27,13 +29,38 @@ export class LoginComponent implements OnInit {
     if (this.authService.isLoggedIn) {
       this.router.navigate(['main']);
     }
+
+    this.onFormValueChange();
+  }
+
+  onFormValueChange() {
+    const initialValue = this.form.value
+    this.form.valueChanges.subscribe(value => {
+      this.hasChange = Object.keys(initialValue).some(key => this.form.value[key] !=
+        initialValue[key])
+
+      //set buttonPressed back to false if user changes input
+      if (this.hasChange) {
+        this.buttonPressed = false;
+      }
+    });
   }
 
   get f() {
     return this.form.controls;
   }
 
+  get email() {
+    return this.form.controls.email;
+  }
+
+  get password() {
+    return this.form.controls.password;
+  }
+
   onSubmit() {
+    this.buttonPressed = true;
+
     if (this.form.valid) {
       console.log(this.authService.isLoggedIn);
       const payload: User = {
@@ -44,10 +71,6 @@ export class LoginComponent implements OnInit {
       }
 
       this.authService.login(payload);
-    }
-
-    else {
-      this.errMessage = 'Invalid credentials';
     }
   }
 

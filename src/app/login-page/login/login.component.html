@@ -3,11 +3,16 @@
   <h3>Welcome!</h3>
 </div>
 <div class="signin">
-  <form [formGroup]="form" class="form-signin" (ngSubmit)="onSubmit()">
+  <form
+    [formGroup]="form"
+    class="form-signin needs-validation"
+    novalidate
+    (ngSubmit)="onSubmit()"
+  >
     <h1>Sign-in</h1>
     <div class="form-group input-group mb-3">
-      <div class="input-group-prepend">
-        <span class="input-group-text"
+      <div class="input-group-prepend has-validation">
+        <span class="input-group-text" 
           ><fa-icon [icon]="faUser"></fa-icon
         ></span>
       </div>
@@ -17,10 +22,18 @@
         class="form-control"
         placeholder="E-mail address"
         formControlName="email"
+        [ngClass]="{ 'is-invalid': buttonPressed && email.invalid }"
+        required
       />
     </div>
+    <div class="text-danger" *ngIf="email.errors?.required && buttonPressed">
+      E-mail is required.
+    </div>
+    <div class="text-danger" *ngIf="email.errors?.email && buttonPressed">
+      Invalid e-mail address.
+    </div>
     <div class="form-group input-group mb-3">
-      <div class="input-group-prepend">
+      <div class="input-group-prepend has-validation">
         <span class="input-group-text"
           ><fa-icon [icon]="faLock"></fa-icon
         ></span>
@@ -31,10 +44,20 @@
         class="form-control"
         placeholder="Password"
         formControlName="password"
+        [ngClass]="{ 'is-invalid': buttonPressed && password.invalid }"
+        required
       />
+    </div>
+    <div class="text-danger" *ngIf="password.errors?.required && buttonPressed">
+      Password is required.
+    </div>
+    <div
+      class="text-danger"
+      *ngIf="password.errors?.minlength && buttonPressed"
+    >
+      Password should be 6 characters long.
     </div>
     <a routerLink="/register" class="create-account">Don't have an account?</a>
     <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
-    <p class="error-alert" *ngIf="!form.valid">{{ errMessage }}</p>
   </form>
 </div>
