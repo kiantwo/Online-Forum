@@ -12,6 +12,11 @@ import { LoginPageModule } from './login-page/login-page.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ForumModule } from './forum/forum.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  AngularFirestore,
+  AngularFirestoreModule,
+} from '@angular/fire/compat/firestore';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -19,6 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NotFoundComponent,
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
     BrowserModule,
     LoginPageModule,
     ForumModule,
@@ -30,7 +37,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     provideFirestore(() => getFirestore()),
     FontAwesomeModule
   ],
-  providers: [],
+  providers: [AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faArrowLeft, faIdCard, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { User } from 'src/app/shared/services/user';
 
 @Component({
   selector: 'app-register',
@@ -20,18 +22,28 @@ export class RegisterComponent implements OnInit {
     email: ['', [Validators.required, Validators.email]]
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private auth: AuthService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit() {
     if(this.f.password.value === this.f.confirmPass.value) {
-      console.log(this.form.controls);
+      const userData: User = {
+        uid: '',
+        email: this.f.email.value,
+        username: this.f.username.value,
+        password: this.f.password.value,
+        isAdmin: false,
+        isLogged: false
+      };
+
+      this.auth.register(userData);
+      this.form.reset();
     }
 
     else {
-      console.log('Error');
+      alert('Error');
     }
   }
 
