@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
+import { getAuth } from 'firebase/auth';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
 
@@ -26,7 +27,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     //re-direct to forum page if user already logged in
-    if (this.authService.isLoggedIn) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    
+    if (user) {  //check if currentUser exists, if it does == user is logged in
       this.router.navigate(['main']);
     }
 
@@ -62,15 +66,14 @@ export class LoginComponent implements OnInit {
     this.buttonPressed = true;
 
     if (this.form.valid) {
-      console.log(this.authService.isLoggedIn);
-      const payload: User = {
+      const userData: User = {
         uid: '',
         displayName: '',
         email: this.f.email.value,
         password: this.f.password.value
       }
 
-      this.authService.login(payload);
+      this.authService.login(userData);
     }
   }
 

@@ -1,14 +1,21 @@
-<h1 style="text-align: center;">--Forum Main Page Goes Here--</h1>
-<div class="row" *ngIf="authService.userData as user">
+<div class="container-fluid">
+  <div class="row" *ngIf="authService.userData as user">
     <div class="col-md-12">
       <div class="media">
         <div class="media-body">
-          <h1>Hello: <strong>{{(user.displayName) ? user.displayName : 'User'}}</strong></h1>
-          <p>User ID: <strong>{{user.uid}}</strong></p>
-          <p>Email: <strong>{{user.email}}</strong></p>
-          <p>Email Verified: <strong>{{user.emailVerified}}</strong></p>
+          <span>
+            Display Name:
+            <strong>{{ user.displayName ? user.displayName : "User" }}</strong>
+          </span>
+          <span>
+            User ID: <strong>{{ user.uid }}</strong>
+          </span>
+          <span>
+            Email: <strong>{{ user.email }}</strong>
+          </span>
         </div>
       </div>
     </div>
   </div>
-<a href='' (click)="authService.logout()">Sign out</a>
+  <h1>-- Forum Content Here --</h1>
+</div>

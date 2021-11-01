@@ -1,0 +1,31 @@
+hr {
+    margin: 0;
+    color: black;
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.navbar {
+    height: 5vh;
+    width: 100%;
+}
+
+.header-wrap {
+    height: 25vh;
+    width: 100%;
+    background-color: rgb(255, 203, 61);
+}
+
+.header-title {
+    text-align: center;
+    padding-top: 3.5%;
+    font-size: 56pt;
+    letter-spacing: 25pt;
+}
+
+.header-subtitle {
+    text-align: center;
+    font-size: 16pt;
+}

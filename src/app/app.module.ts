@@ -18,17 +18,19 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './shared/services/auth.service';
+import { AdminModule } from './admin/admin.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent,
+    NotFoundComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserModule,
     LoginPageModule,
+    AdminModule,
     ForumModule,
     AppRoutingModule,
     ReactiveFormsModule,

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from './shared/services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +18,7 @@ export class AppComponent {
 
   isLoggedIn = false;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, public authService: AuthService) {
 
   }
 

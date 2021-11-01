@@ -7,7 +7,6 @@
     [formGroup]="form"
     class="form-signin needs-validation"
     novalidate
-    (ngSubmit)="onSubmit()"
   >
     <h1>Sign-in</h1>
     <div class="form-group input-group mb-3">
@@ -58,6 +57,6 @@
       Password should be 6 characters long.
     </div>
     <a routerLink="/register" class="create-account">Don't have an account?</a>
-    <button class="btn btn-lg btn-dark btn-block" type="submit">Sign in</button>
+    <button class="btn btn-lg btn-dark btn-block" type="button" (click)="onSubmit()">Sign in</button>
   </form>
 </div>

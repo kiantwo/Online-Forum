@@ -1,0 +1,29 @@
+.container-fluid {
+    height: 75vh;
+    width: 95%;
+    margin: 10;
+    padding: 0;
+    text-align: center;
+}
+
+span {
+    margin-right: 2%;
+}
+
+.row {
+    margin-top: 1.5%;
+    margin-bottom: 2%;
+}
+
+/*.header-wrap {
+    height: 25vh;
+    width: 100%;
+    background-color: rgb(255, 203, 61);
+}
+
+.header-title {
+    text-align: center;
+    padding-top: 5%;
+    font-size: 56pt;
+    letter-spacing: 25pt;
+}*/

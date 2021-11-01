@@ -1,1 +1,52 @@
+<div class="header-wrap" *ngIf="authService.userData">
+  <h1 class="header-title">WHARFEDALE</h1>
+  <p class="header-subtitle">Online Message Boards</p>
+</div>
+<hr/>
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  *ngIf="authService.userData"
+>
+  <div class="container-fluid">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item">
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            aria-current="page"
+            routerLink="/"
+            [routerLinkActiveOptions]="{ exact: true }"
+            >Home</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/admin"
+            >Admin</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/account"
+            >My Account</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" (click)="authService.logout()">Logout</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<hr />
 <router-outlet></router-outlet>
