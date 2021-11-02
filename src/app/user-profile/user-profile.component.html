@@ -1,0 +1,28 @@
+<div class="modal fade" tabindex="-1" id="account-modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">My Account</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <img
+          class="align-self-start mr-5 img-thumbnail rounded-circle"
+          src="{{(user.photoURL) ? user.photoURL : '/assets/images/default-icon.png'}}"
+        />
+        <p><strong>Display Name: </strong> {{ user.displayName }}</p>
+        <p><strong>E-mail address: </strong> {{ user.email }}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

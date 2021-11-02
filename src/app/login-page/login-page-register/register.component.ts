@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faArrowLeft, faIdCard, faLock, faUser } from '@fortawesome/free-solid-svg-icons';
-import { getAuth } from 'firebase/auth';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { User } from 'src/app/shared/services/user';
 
@@ -32,12 +31,8 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     //re-direct to forum page if user already logged in
-    const auth = getAuth();
-    const user = auth.currentUser;
-    
-    if (user) {   //check if currentUser exists, if it does == user is logged in
+    if(this.authService.isLoggedIn)
       this.router.navigate(['main']);
-    }
 
     this.onFormValueChange();
   }
@@ -69,7 +64,8 @@ export class RegisterComponent implements OnInit {
           uid: '',
           displayName: this.f.displayName.value,
           email: this.f.email.value,
-          password: this.f.password.value
+          password: this.f.password.value,
+          isAdmin: false
         };
 
         //call register function from AuthService
@@ -81,8 +77,6 @@ export class RegisterComponent implements OnInit {
 
   //check if password is the same for both inputs
   checkSame() {
-    console.log(this.f.password.value);
-    console.log(this.f.confirmPass.value);
     //check if not empty
     if (this.f.password.value.length != 0 && this.f.confirmPass.value.length != 0) {
       if (this.f.password.value === this.f.confirmPass.value) {

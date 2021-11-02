@@ -6,7 +6,6 @@
     [formGroup]="form"
     class="form-register needs-validation"
     novalidate
-    (ngSubmit)="onSubmit()"
   >
     <h1>Register</h1>
     <div class="input-group mb-3">
@@ -116,8 +115,8 @@
     >
       Passwords do not match.
     </div>
-    <button class="btn btn-lg btn-dark btn-block" type="submit">
-      Create account
+    <button class="btn btn-lg btn-dark btn-block" type="button" (click)="onSubmit()">
+      Create Account and Login
     </button>
   </form>
 </div>

@@ -10,23 +10,21 @@ import { AuthService } from './shared/services/auth.service';
 export class AppComponent {
   title = 'online-forum';
 
+  currentUser: any;
   form = this.fb.group({
     username: ['', [Validators.required]],
     password: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]]
   });
 
-  isLoggedIn = false;
-
   constructor(private fb: FormBuilder, public authService: AuthService) {
-
   }
 
   ngOnInit(): void {
 
   }
 
-  get f () {
+  get f() {
     return this.form.controls;
   }
 }

@@ -2,7 +2,7 @@
   <h1 class="header-title">WHARFEDALE</h1>
   <p class="header-subtitle">Online Message Boards</p>
 </div>
-<hr/>
+<hr />
 <nav
   class="navbar navbar-expand-lg navbar-light bg-light"
   *ngIf="authService.userData"
@@ -37,7 +37,11 @@
           >
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/account"
+          <a
+            class="nav-link"
+            data-bs-toggle="modal"
+            data-bs-target="#account-modal"
+            href=""
             >My Account</a
           >
         </li>
@@ -49,4 +53,5 @@
   </div>
 </nav>
 <hr />
+<app-user-profile  *ngIf="authService.userData as user" [user]="user"></app-user-profile>
 <router-outlet></router-outlet>

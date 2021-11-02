@@ -19,11 +19,13 @@ import {
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './shared/services/auth.service';
 import { AdminModule } from './admin/admin.module';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NotFoundComponent
+    UserProfileComponent,
+    NotFoundComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),
