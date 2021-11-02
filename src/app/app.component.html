@@ -48,6 +48,9 @@
         <li class="nav-item">
           <a class="nav-link" href="" (click)="authService.logout()">Logout</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" data-bs-toggle="modal" data-bs-target="#createTopic" >+ Create Topic</a>
+        </li>
       </ul>
     </div>
   </div>
@@ -55,3 +58,6 @@
 <hr />
 <app-user-profile  *ngIf="authService.userData as user" [user]="user"></app-user-profile>
 <router-outlet></router-outlet>
+<div class="modal fade" id="createTopic" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <app-forum-create-topic></app-forum-create-topic>
+</div>

@@ -1,0 +1,47 @@
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h1>Create a Topic</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="main-div">
+                <form 
+                class="text-center"
+                [formGroup]="form"
+                (ngSubmit)="onSubmit()"
+                >
+                    <div class="input-group form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Title: </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="topic">
+                    </div>
+                    <div class="input-group form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> Description: </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="description">
+                    </div>
+                    <div class="input-group form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Access: </span>
+                        </div>
+                        <select class="form-control" formControlName="access">
+                            <option value="private">Private</option>
+                            <option value="public">Public</option>
+                        </select>
+                    </div>
+                    <div class="input-group form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Image: </span>
+                        </div>
+                        <input type="file" class="form-control" formControlName="imageUrl" name="topicImage" id="topicImage">
+                    </div>
+                    <button type="submit" class="btn btn-primary"> Create Topic</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
