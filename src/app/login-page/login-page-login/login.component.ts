@@ -3,7 +3,6 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { faLock, faUser } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/shared/services/auth.service';
-import { User } from 'src/app/shared/services/user';
 
 @Component({
   selector: 'app-login',

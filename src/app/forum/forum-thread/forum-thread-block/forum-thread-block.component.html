@@ -1,12 +1,18 @@
 <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th scope="col"></th>
-      <th scope="col-6"></th>
-    </tr>
-  </thead>
   <tbody>
     <tr>
+      <td scope="col"></td>
+      <td scope="col-6">
+        <div class="date-posted">
+          <p>
+            <span class="clock-icon">
+              <fa-icon [icon]="faClock"></fa-icon> </span
+            >Date posted: 2021-11-03 at 6:01 PM
+          </p>
+        </div>
+      </td>
+    </tr>
+    <tr>
       <td class="user-cell">
         <div class="user">
           <div class="user-avatar">
@@ -34,12 +40,25 @@
           </p>
         </div>
         <div class="footer">
-          <a href="#">Reply </a>
+          <a href="#"
+            ><span class="reply-icon">
+              <fa-icon [icon]="faReply"></fa-icon> </span
+            >Reply</a
+          >
         </div>
       </td>
     </tr>
     <tr>
-      <td></td>
+      <td scope="col"></td>
+      <td scope="col-6">
+        <div class="date-posted">
+          <p>
+            <span class="clock-icon">
+              <fa-icon [icon]="faClock"></fa-icon> </span
+            >Date posted: 2021-11-03 at 6:01 PM
+          </p>
+        </div>
+      </td>
     </tr>
     <tr>
       <td class="user-cell">
@@ -58,7 +77,11 @@
       </td>
       <td class="message-cell">
         <div class="reply">
-          <p class="reply-to"><strong>User</strong> wrote:</p>
+          <p class="reply-to">
+            <span class="comment-icon">
+              <fa-icon [icon]="faCommentDots"></fa-icon> </span
+            ><strong>User</strong> wrote:
+          </p>
           <p class="reply-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -81,12 +104,25 @@
           </p>
         </div>
         <div class="footer">
-          <a href="#">Reply</a>
+          <a href="#"
+            ><span class="reply-icon">
+              <fa-icon [icon]="faReply"></fa-icon> </span
+            >Reply</a
+          >
         </div>
       </td>
     </tr>
     <tr>
-      <td></td>
+      <td scope="col"></td>
+      <td scope="col-6">
+        <div class="date-posted">
+          <p>
+            <span class="clock-icon">
+              <fa-icon [icon]="faClock"></fa-icon> </span
+            >Date posted: 2021-11-03 at 6:01 PM
+          </p>
+        </div>
+      </td>
     </tr>
     <tr>
       <td class="user-cell">
@@ -105,7 +141,11 @@
       </td>
       <td class="message-cell">
         <div class="reply">
-          <p class="reply-to"><strong>User</strong> wrote:</p>
+          <p class="reply-to">
+            <span class="comment-icon">
+              <fa-icon [icon]="faCommentDots"></fa-icon> </span
+            ><strong>User</strong> wrote:
+          </p>
           <p class="reply-text">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
             eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
@@ -128,12 +168,13 @@
           </p>
         </div>
         <div class="footer">
-          <a href="#">Reply</a>
+          <a href="#">
+            <span class="reply-icon">
+              <fa-icon [icon]="faReply"></fa-icon> </span
+            >Reply</a
+          >
         </div>
       </td>
-    </tr>
-    <tr>
-      <td></td>
     </tr>
   </tbody>
 </table>
