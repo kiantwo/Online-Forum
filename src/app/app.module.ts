@@ -20,6 +20,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './shared/services/auth.service';
 import { AdminModule } from './admin/admin.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ForumThreadModule } from './forum/forum-thread/forum-thread.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
     LoginPageModule,
     AdminModule,
     ForumModule,
+    ForumThreadModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

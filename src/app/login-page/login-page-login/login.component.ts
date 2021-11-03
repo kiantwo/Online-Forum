@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
     password: ['', [Validators.required, Validators.minLength(6)]]
   });
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, public authService: AuthService, public router: Router) { }
 
   ngOnInit(): void {
     //re-direct to forum page if user already logged in

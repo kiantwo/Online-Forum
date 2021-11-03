@@ -1,0 +1,72 @@
+.user-avatar > img {
+  height: 140px;
+  width: 150px;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-avatar > .rounded-circle {
+  border: 1px solid rgb(218, 218, 218);
+}
+
+.user-details {
+  width: 170px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 10%;
+}
+
+.user-details > h3 {
+  font-weight: 700;
+  font-size: 18pt;
+  margin: 0;
+  padding: 0;
+}
+
+.user-details > p {
+  margin: 0;
+  padding: 0;
+  color: gray;
+  font-size: 11.5pt;
+}
+
+.user-cell {
+  min-width: 200px;
+  width: 200px;
+  height: 200px;
+  padding: 1%;
+}
+
+.message {
+  padding: 1%;
+  padding-top: 2%;
+}
+
+.footer {
+  margin-top: 2%;
+  padding: 1%;
+}
+
+.reply {
+    margin: 1%;
+    background-color: rgb(255, 221, 129);
+    border-radius: 10px;
+    width: auto;
+}
+
+.reply > .reply-to {
+    padding: 2%;
+    padding-bottom: 0;
+}
+
+.reply > .reply-text {
+    padding: 2%;
+}
+
+.table {
+    margin-top: 2%;
+    height: auto;
+}

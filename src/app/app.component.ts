@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from './shared/services/auth.service';
 
@@ -17,11 +18,22 @@ export class AppComponent {
     email: ['', [Validators.required, Validators.email]]
   });
 
-  constructor(private fb: FormBuilder, public authService: AuthService) {
+  isAdmin = false;
+
+  constructor(private fb: FormBuilder, public authService: AuthService, public afs: AngularFirestore) {
   }
 
   ngOnInit(): void {
-
+    //check if currentUser isAdmin
+    this.authService.afAuth.onAuthStateChanged(currentUser => {
+      if (currentUser) {
+        this.afs.collection('users').doc(currentUser.uid).get().subscribe((result) => {
+          if (result) {
+            this.isAdmin = result.get('isAdmin');
+          }
+        })
+      }
+    })
   }
 
   get f() {

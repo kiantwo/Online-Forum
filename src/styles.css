@@ -1,10 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap");
 
 html,
 body {
   min-height: 100vh;
   height: auto;
   margin: 0;
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
+  /*background-color: rgb(255, 203, 61);*/
+}
+
+.modal-header-warning {
+  color: black;
+  padding: 9px 15px;
+  border-bottom: 1px solid #eee;
+  background-color: rgb(255, 203, 61);
+  -webkit-border-top-left-radius: 5px;
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topleft: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+a:link,
+a:visited,
+a:active {
+  color: rgb(141, 141, 141);
+  background-color: transparent;
+  text-decoration: none;
+}
+
+a:hover {
+  color: black;
+  background-color: transparent;
+  text-decoration: underline;
 }

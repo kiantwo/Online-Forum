@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { getAuth } from 'firebase/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -8,18 +8,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
   styleUrls: ['./forum-main.component.css']
 })
 export class ForumMainComponent implements OnInit {
-  constructor(public authService: AuthService) { }
 
-  user: any;
-  uid: any;
+  constructor(public authService: AuthService, public afs: AngularFirestore) { }
 
-  ngOnInit(): void {
-    /*this.authService.afAuth.onAuthStateChanged(user => {
-      if (user) {
-        //(partial) get collection data of logged in user
-        this.authService.getLoggedInData(user.uid);
-      }
-    })*/
-  }
+  ngOnInit(): void { }
 
 }
