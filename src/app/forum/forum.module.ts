@@ -5,12 +5,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForumRoutingModule } from './forum-routing.module';
 import { ForumMainComponent } from './forum-main/forum-main.component';
 import { ForumCreateTopicComponent } from './forum-create-topic/forum-create-topic.component';
+import { ForumTopicsComponent } from './forum-topics/forum-topics.component';
+import { ForumEditTopicComponent } from './forum-edit-topic/forum-edit-topic.component';
 
 
 @NgModule({
   declarations: [
     ForumMainComponent,
-    ForumCreateTopicComponent
+    ForumCreateTopicComponent,
+    ForumTopicsComponent,
+    ForumEditTopicComponent
   ],
   imports: [
     CommonModule,
@@ -21,6 +25,7 @@ import { ForumCreateTopicComponent } from './forum-create-topic/forum-create-top
   exports: [
     ForumMainComponent,
     ForumCreateTopicComponent,
+    ForumTopicsComponent
   ]
 })
 export class ForumModule { }

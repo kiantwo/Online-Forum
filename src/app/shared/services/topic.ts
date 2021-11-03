@@ -1,6 +1,6 @@
 export interface Topic{
     topicID: string;
-    topic: string;
+    name: string;
     description: string;
     access: string;
     imageUrl: string;

@@ -25,6 +25,14 @@ export class TopicService {
      return this.topic$;
    }
 
+   deleteTopic(){
+     this.topicCollection.doc()
+   }
+
+   editTopic(topicID: string, topicChanges: Topic){
+     this.topicCollection.doc(topicID).update(topicChanges);
+   }
+
 
 
 }
