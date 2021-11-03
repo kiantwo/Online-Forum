@@ -12,7 +12,7 @@ import { FormBuilder } from '@angular/forms';
 export class ForumCreateTopicComponent implements OnInit {
   form = this.fb.group({
     topicID: [''],
-    topic:[''],
+    name:[''],
     description: [''],
     access:[''],
     imageUrl: [''],
@@ -28,7 +28,7 @@ export class ForumCreateTopicComponent implements OnInit {
       topicID: '',
       description: this.f.description.value,
       imageUrl: '',
-      topic: this.f.topic.value,
+      name: this.f.name.value,
       access: this.f.access.value,
     };
     
