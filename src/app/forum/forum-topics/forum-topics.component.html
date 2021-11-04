@@ -1,27 +1,36 @@
-<div class="container-fluid">
-    <div class="user-list">
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th scope="col">Topic </th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Access</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let topic of topic$; index as i">
-                    <th scope="row"> {{ topic.name }}</th>
-                    <td>{{ topic.description }}</td>
-                    <td >{{ topic.access }}</td>
-                    <td class="edit" (click)="onClick(i)" data-bs-toggle="modal" data-bs-target="#editTopic">Edit</td>
-                    
-                </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div class="modal fade" id="editTopic" tabindex="-1"  aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <app-forum-edit-topic></app-forum-edit-topic>
-    </div>
+<div class="user-list">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Topic</th>
+        <th scope="col">Description</th>
+        <th scope="col">Access</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let topic of topic$; index as i">
+        <th scope="row">{{ topic.name }}</th>
+        <td>{{ topic.description }}</td>
+        <td>{{ topic.access }}</td>
+        <td
+          class="edit"
+          (click)="onClick(i)"
+          data-bs-toggle="modal"
+          data-bs-target="#editTopic"
+        >
+          Edit
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
+<div
+  class="modal fade"
+  id="editTopic"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <app-forum-edit-topic></app-forum-edit-topic>
+</div>

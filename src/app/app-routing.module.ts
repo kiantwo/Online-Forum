@@ -8,16 +8,16 @@ import { AuthGuard } from './shared/guard/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login', 
+    redirectTo: 'login',
     pathMatch: 'full',
   },
   {
     path: 'main',
     component: ForumMainComponent,
-    canActivate: [AuthGuard]  //dont let user access if isLoggedIn returns false
+    canActivate: [AuthGuard],  //dont let user access if isLoggedIn returns false
   },
   {
-    path: 'thread',
+    path: 'thread/:id', // localhost:4200/(topic)/thread/threadid
     component: ForumThreadMainComponent,
     canActivate: [AuthGuard]
   },

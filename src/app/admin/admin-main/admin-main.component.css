@@ -1,15 +1,34 @@
 .container {
-    background-color: white;
-    height: 100vh;
-    width: 80%;
-    padding: 2%;
+  background-color: white;
+  height: 100%;
+  width: 80%;
+  padding: 2%;
 }
 
 .table {
-    font-size: 11pt;
+  font-size: 11pt;
 }
 
 .user-list {
-    height: auto;
-    width: auto;
+  height: auto;
+  width: auto;
+}
+
+.actions {
+  text-align: center;
+}
+
+.ban-icon > fa-icon {
+  color: red;
+  font-size: 16pt;
+}
+
+.ban-icon > p {
+  margin-top: 5%;
+  padding: 0;
+}
+
+.actions > a {
+  margin: 0;
+  padding: 0;
 }

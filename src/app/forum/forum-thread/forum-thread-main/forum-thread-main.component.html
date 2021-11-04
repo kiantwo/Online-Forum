@@ -9,13 +9,19 @@
     aria-label="breadcrumb"
   >
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="main/..">Forum Main</a></li>
-      <li class="breadcrumb-item"><a routerLink="main/..">Topic Name</a></li>
-      <li class="breadcrumb-item active" aria-current="page">Thread Name</li>
+      <li class="breadcrumb-item"><a routerLink="main/../..">Forum Main</a></li>
+      <li class="breadcrumb-item">
+        <a routerLink="main/../..">{{ topics$.name }}</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+        {{ thread.title }}
+      </li>
     </ol>
   </nav>
-  <h2 class="thread-name">Thread Name</h2>
-  <p>Original Poster: <strong>User Display Name</strong></p>
+  <h2 class="thread-name">{{ thread.title }}</h2>
+  <p>
+    Original Poster: <strong>{{ thread.poster }}</strong>
+  </p>
   <button type="button" class="btn btn-md btn-dark">Reply to thread</button>
-  <app-forum-thread-block></app-forum-thread-block>
+  <app-forum-thread-block [replies$]="replies$"></app-forum-thread-block>
 </div>

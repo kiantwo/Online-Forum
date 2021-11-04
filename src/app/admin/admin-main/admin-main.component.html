@@ -11,6 +11,7 @@
           <th scope="col">E-mail address</th>
           <th scope="col">Display name</th>
           <th scope="col">Password</th>
+          <th scope="col">Date Registered</th>
           <th scope="col">Actions</th>
         </tr>
       </thead>
@@ -20,7 +21,15 @@
           <td>{{ user.email }}</td>
           <td>{{ user.displayName }}</td>
           <td>{{ user.password }}</td>
-          <td><a class="nav-link" href="" (click)="onClick(i)">Ban user</a></td>
+          <td>{{ user.dateRegistered.seconds * 1000 | date: "MMMM d, y" }}</td>
+          <td class="actions">
+            <a href="" (click)="onClick(i)">
+              <p class="ban-icon">
+                <fa-icon [icon]="faUserSlash"></fa-icon>
+              </p>
+              Ban User
+            </a>
+          </td>
         </tr>
       </tbody>
     </table>

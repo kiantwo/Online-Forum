@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row" *ngIf="authService.userData as user">
     <div class="col-md-12">
       <div class="media">
@@ -12,12 +12,12 @@
       </div>
     </div>
   </div>
-  <h1>-- Forum Content Here --</h1>
-  <a
-    routerLinkActive="active"
-    routerLink="/thread"
-    >Go to thread</a
-  >
+  <div class="threads" *ngFor="let thread of threads$">
+    <!--route to /thread/threadID-->
+    <a routerLinkActive="active" [routerLink]="['/thread', thread.threadID]">{{
+      thread.title
+    }}</a>
+  </div>
 
   <app-forum-topics></app-forum-topics>
 </div>

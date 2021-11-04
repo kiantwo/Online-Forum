@@ -65,7 +65,8 @@ export class RegisterComponent implements OnInit {
           displayName: this.f.displayName.value,
           email: this.f.email.value,
           password: this.f.password.value,
-          isAdmin: false
+          isAdmin: false,
+          dateRegistered: ''
         };
 
         //call register function from AuthService

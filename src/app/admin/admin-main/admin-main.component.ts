@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class AdminMainComponent implements OnInit {
   users$: any[] = [];
+  faUserSlash = faUserSlash;
 
   constructor(public authService: AuthService) { }
 

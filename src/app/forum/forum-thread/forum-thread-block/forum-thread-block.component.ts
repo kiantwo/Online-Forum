@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faClock, faCommentDots } from '@fortawesome/free-regular-svg-icons';
 import { faReply } from '@fortawesome/free-solid-svg-icons';
 
@@ -11,6 +11,8 @@ export class ForumThreadBlockComponent implements OnInit {
   faReply = faReply;
   faClock = faClock;
   faCommentDots = faCommentDots;
+
+  @Input() replies$: any;
 
   constructor() { }
 
