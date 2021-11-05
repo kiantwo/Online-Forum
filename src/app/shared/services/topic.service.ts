@@ -25,6 +25,10 @@ export class TopicService {
     return this.topic$;
   }
 
+  getSingleTopic(topicID: any) {
+    return this.afs.collection('topics').doc(topicID).get();
+  }
+
   getThreads(topicID: any) {
     const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
     const thread$ = threadCollection.valueChanges();
@@ -37,6 +41,10 @@ export class TopicService {
     const replies$ = repliesCollection.valueChanges();
 
     return replies$;
+  }
+
+  getSingleReply(topicID: any, threadID: any, replyID: any) {
+    return this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies').doc(replyID).get();
   }
 
   deleteTopic() {

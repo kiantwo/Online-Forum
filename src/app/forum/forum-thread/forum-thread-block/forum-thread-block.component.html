@@ -1,5 +1,5 @@
 <table class="table table-bordered">
-  <tbody *ngFor="let reply of replies$">
+  <tbody>
     <tr>
       <td scope="col"></td>
       <td scope="col-6">
@@ -7,7 +7,7 @@
           <p>
             <span class="clock-icon">
               <fa-icon [icon]="faClock"></fa-icon> </span
-            >Date posted: 2021-11-03 at 6:01 PM
+            >Date posted: {{ reply.datePosted.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
           </p>
         </div>
       </td>
@@ -17,13 +17,17 @@
         <div class="user">
           <div class="user-avatar">
             <img
-              src="assets/images/default-icon.png"
+              src="{{
+                from.photoURL
+                  ? from.photoURL
+                  : '/assets/images/default-icon.png'
+              }}"
               class="img-thumbnail rounded-circle"
             />
           </div>
           <div class="user-details">
-            <h3>{{ reply.from }}</h3>
-            <p>{{ reply.from }}s</p>
+            <h3>{{ from.displayName }}</h3>
+            <p>{{ from.email }}</p>
           </div>
         </div>
       </td>
@@ -32,16 +36,10 @@
           <p class="reply-to">
             <span class="comment-icon">
               <fa-icon [icon]="faCommentDots"></fa-icon> </span
-            ><strong>User</strong> wrote:
+            ><strong>{{ to.displayName }}</strong> wrote:
           </p>
-          <p class="reply-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+          <p class="quote-text">
+            {{ to.message }}
           </p>
         </div>
         <div class="message">
@@ -50,52 +48,23 @@
           </p>
         </div>
         <div class="footer">
-          <a href="#"
+          <a href="javascript:void(0)" (click)="onReply(index)" class="reply-link"
             ><span class="reply-icon">
               <fa-icon [icon]="faReply"></fa-icon> </span
             >Reply</a
+          >
+          <a href="javascript:void(0)" *ngIf="currentUserID === reply.from" class="edit-link"
+            ><span class="reply-icon">
+              <fa-icon [icon]="faEdit"></fa-icon> </span
+            >Edit</a
+          >
+          <a href="javascript:void(0)" *ngIf="currentUserID === reply.from" class="delete-link"
+            ><span class="reply-icon">
+              <fa-icon [icon]="faDelete"></fa-icon> </span
+            >Delete reply</a
           >
         </div>
       </td>
     </tr>
   </tbody>
 </table>
-
-<!--
-      <td class="message-cell">
-        <div class="reply">
-          <p class="reply-to">
-            <span class="comment-icon">
-              <fa-icon [icon]="faCommentDots"></fa-icon> </span
-            ><strong>User</strong> wrote:
-          </p>
-          <p class="reply-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </div>
-        <div class="message">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
-          </p>
-        </div>
-        <div class="footer">
-          <a href="#"
-            ><span class="reply-icon">
-              <fa-icon [icon]="faReply"></fa-icon> </span
-            >Reply</a
-          >
-        </div>
-      </td>
--->

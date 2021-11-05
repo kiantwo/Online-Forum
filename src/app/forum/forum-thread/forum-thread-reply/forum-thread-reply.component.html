@@ -1,0 +1,34 @@
+<form>
+  <table class="table table-bordered">
+    <tbody>
+      <tr>
+        <td scope="col-6">
+          <h2>Reply to thread</h2>
+          <div class="form-group thread-title-area">
+              <label for="replying-to" class="form-label">
+                Replying to:
+              </label>
+            <input
+              type="text"
+              [value]="quotedDisplayName"
+              disabled
+              class="form-control"
+              id="thread-title"
+            />
+          </div>
+          <div class="form-group message-area">
+            <textarea class="form-control" id="message" rows="10"></textarea>
+          </div>
+          <button type="button" class="btn btn-dark btn-md">Post</button>
+          <button
+            type="button"
+            class="btn btn-secondary btn-md"
+            (click)="closeEvent(false)"
+          >
+            Cancel
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

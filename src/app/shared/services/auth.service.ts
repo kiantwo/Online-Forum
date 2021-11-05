@@ -122,4 +122,8 @@ export class AuthService {
   getUsers() {
     return this.user$;
   }
+
+  getSingleUser(uid: any) {
+    return this.afs.collection('users').doc(uid).get();
+  }
 }

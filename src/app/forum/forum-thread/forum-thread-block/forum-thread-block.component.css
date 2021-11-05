@@ -62,12 +62,13 @@
   padding-bottom: 0;
 }
 
-.reply > .reply-text {
+.reply > .quote-text {
   padding: 2%;
 }
 
 .table {
-  margin-top: 2%;
+  margin: -0.1%;
+  padding: 0;
   height: auto;
 }
 
@@ -86,4 +87,8 @@
 .reply-icon,
 .comment-icon {
   padding-right: 0.5%;
+}
+
+.footer > a {
+  margin-right: 1%;
 }

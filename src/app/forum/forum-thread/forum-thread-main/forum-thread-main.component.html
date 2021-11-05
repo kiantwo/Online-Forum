@@ -20,8 +20,21 @@
   </nav>
   <h2 class="thread-name">{{ thread.title }}</h2>
   <p>
-    Original Poster: <strong>{{ thread.poster }}</strong>
+    Original Poster: <strong>{{ displayName }}</strong>
   </p>
-  <button type="button" class="btn btn-md btn-dark">Reply to thread</button>
-  <app-forum-thread-block [replies$]="replies$"></app-forum-thread-block>
+  <button type="button" class="btn btn-md btn-dark" (click)="onClick()">
+    Reply to thread
+  </button>
+
+  <app-forum-thread-block
+    *ngFor="let reply of replies$; index as i"
+    [reply]="reply"
+    [index]="i"
+    (quotedReply)="onReply($event)"
+  ></app-forum-thread-block>
+  <app-forum-thread-reply
+    *ngIf="isClicked"
+    [quotedReply]="replies$[quotedIndex]"
+    (onClose)="onClose($event)"
+  ></app-forum-thread-reply>
 </div>
