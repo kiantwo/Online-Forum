@@ -54,4 +54,21 @@ export class TopicService {
   editTopic(topicID: string, topicChanges: Topic) {
     this.topicCollection.doc(topicID).update(topicChanges);
   }
+
+  addReply(reply: any, topicID: any, threadID: any) {
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
+    const pushkey = this.afs.createId();
+    reply.replyID = pushkey;
+    repliesCollection.doc(pushkey).set(reply);
+  }
+
+  editReply(messageChanges: any, replyID: any, topicID: any, threadID: any) {
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
+    repliesCollection.doc(replyID).update({message: messageChanges});
+  }
+
+  deleteReply(replyID: any, topicID: any, threadID: any) {
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
+    repliesCollection.doc(replyID).delete();
+  }
 }

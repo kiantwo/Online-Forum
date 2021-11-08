@@ -5,7 +5,7 @@ import { MainComponent } from './login-page-main/main.component';
 import { RegisterComponent } from './login-page-register/register.component';
 
 const routes: Routes = [
-  {
+  /*{
     path: 'login',
     component: MainComponent,
     children: [
@@ -13,6 +13,15 @@ const routes: Routes = [
         path: '', component: LoginComponent,
       }
     ]
+  },*/
+  {
+    path: '',
+    component: MainComponent,
+    children: [
+      {
+        path: '', component: LoginComponent,
+      },
+    ],
   },
   {
     path: 'register',

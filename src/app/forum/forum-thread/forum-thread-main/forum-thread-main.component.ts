@@ -12,14 +12,14 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 export class ForumThreadMainComponent implements OnInit {
   topics$: any;
   replies$: any;
+
   threadID: any;
   thread: any;
   displayName: any;
   quotedIndex: any;
+  replyClicked = false;
 
   constructor(public authService: AuthService, public topicService: TopicService, private route: ActivatedRoute, public afs: AngularFirestore) { }
-
-  isClicked = false;
 
   ngOnInit(): void {
     //get id passed to route
@@ -51,18 +51,18 @@ export class ForumThreadMainComponent implements OnInit {
   }
 
   //big reply button is clicked
-  onClick() {
-    this.isClicked = true;
+  onReplyClick() {
+    this.replyClicked = true;
   }
 
   //specific reply link is clicked
   onReply(index: any) {
-    this.isClicked = true;
+    this.replyClicked = true;
     this.quotedIndex = index;
   }
 
-  onClose(close: boolean) {
+  onReplyClose(close: boolean) {
     this.quotedIndex = null;
-    this.isClicked = close;
+    this.replyClicked = close;
   }
 }

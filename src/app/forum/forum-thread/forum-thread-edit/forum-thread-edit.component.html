@@ -1,0 +1,21 @@
+<form [formGroup]="editForm">
+  <h2>Edit reply</h2>
+  <div class="form-group message-area">
+    <textarea
+      class="form-control"
+      id="message"
+      rows="10"
+      formControlName="message"
+    ></textarea>
+  </div>
+  <button type="button" class="btn btn-dark btn-md" (click)="onSubmit()">
+    Edit Reply
+  </button>
+  <button
+    type="button"
+    class="btn btn-secondary btn-md"
+    (click)="closeEvent(false)"
+  >
+    Cancel
+  </button>
+</form>

@@ -18,50 +18,94 @@ export class ForumThreadBlockComponent implements OnInit {
   faEdit = faEdit;
   faDelete = faTrashAlt;
 
-  //@Input() replies$: any;
-  @Input() reply: any;
+  @Input() replies$: any;
   @Input() index: any;
   @Output() quotedReply = new EventEmitter<any>();
+  //@Output() replyToEdit = new EventEmitter<any>();
 
-  from: any;
-  to: any;
+  from$: any[] = [];
+  to$: any[] = [];
   topicID: any;
   threadID: any;
   currentUserID: any;
+  replyToDelete: any;
+  fromReplyToDelete: any;
+  replyToEdit: any;
+
+  isAdmin = false;
+  editClicked = false;
 
   constructor(private route: ActivatedRoute, public topicService: TopicService, public authService: AuthService) {
     this.topicID = 'YFb7yHbbsy0EfujSESXV' //(for test purposes) -- general discussion topicID
     this.threadID = this.route.snapshot.paramMap.get('id');
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
+
+    this.to$ = [];
+    this.from$ = [];
   }
 
   ngOnInit(): void {
-    //get userdata in reply
-    this.authService.getSingleUser(this.reply.from).subscribe(result => {
-      this.from = {
-        displayName: result.get('displayName'),
-        email: result.get('email'),
-        photoURL: result.get('photoURL')
-      }
-    })
+    this.isAdmin = this.authService.isAdmin;
+    this.replyToDelete = {
+      replyID: '',
+      message: ''
+    };
 
-    //if user is replying to another user
-    if (this.reply.to) {
-      //get user displayName
-      this.authService.getSingleUser(this.reply.to).subscribe(result => {
-        //get message
-        this.topicService.getSingleReply(this.topicID, this.threadID, this.reply.toReplyID).subscribe(reply => {
-          this.to = {
-            displayName: result.get('displayName'),
-            message: reply.get('message')
-          }
-        })
+    this.fromReplyToDelete = '';
+  }
+
+  ngOnChanges(): void {
+    //get complete reply details for each reply
+    this.replies$.forEach((element: any, index: number) => {
+      //get detail of user replying
+      this.authService.getSingleUser(element.from).subscribe(result => {
+        const fromInfo = {
+          displayName: result.get('displayName'),
+          email: result.get('email'),
+          photoURL: result.get('photoURL')
+        }
+        this.from$[index] = fromInfo;
       })
-    }
+
+      //if user is replying to another user
+      if (element.to) {
+        //get detail of user being replied to
+        this.authService.getSingleUser(element.to).subscribe(result => {
+          //get message
+          this.topicService.getSingleReply(this.topicID, this.threadID, element.toReplyID).subscribe(reply => {
+            const toInfo = {
+              displayName: result.get('displayName'),
+              message: reply.get('message')
+            }
+            this.to$[index] = toInfo;
+          })
+        })
+      }
+
+      //set index adjacent to replies$ to blank if user is not replying to anyone
+      else {
+        this.to$[index] = '';
+      }
+    });
   }
 
   //output index of the specific reply that user wants to quote and reply to
   onReply(i: number) {
     this.quotedReply.emit(i);
+  }
+
+  onDelete(reply: any, from: any) {
+    this.replyToDelete = reply;
+    this.fromReplyToDelete = from;
+  }
+
+  onEdit(reply: any) {
+    this.editClicked = true;
+    this.replyToEdit = reply;
+  }
+
+  onEditClose(close: boolean) {
+    //this.replyToEdit = null;
+    this.editClicked = false;
   }
 }

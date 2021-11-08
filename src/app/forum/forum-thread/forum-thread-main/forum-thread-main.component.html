@@ -22,19 +22,16 @@
   <p>
     Original Poster: <strong>{{ displayName }}</strong>
   </p>
-  <button type="button" class="btn btn-md btn-dark" (click)="onClick()">
+  <button type="button" class="btn btn-md btn-dark" (click)="onReplyClick()">
     Reply to thread
   </button>
-
   <app-forum-thread-block
-    *ngFor="let reply of replies$; index as i"
-    [reply]="reply"
-    [index]="i"
+    [replies$]="replies$"
     (quotedReply)="onReply($event)"
   ></app-forum-thread-block>
   <app-forum-thread-reply
-    *ngIf="isClicked"
+    *ngIf="replyClicked"
     [quotedReply]="replies$[quotedIndex]"
-    (onClose)="onClose($event)"
+    (onClose)="onReplyClose($event)"
   ></app-forum-thread-reply>
 </div>
