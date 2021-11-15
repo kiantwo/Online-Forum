@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TopicService } from 'src/app/shared/services/topic.service';
 
@@ -18,6 +18,9 @@ export class ForumThreadEditComponent implements OnInit {
   topicID: any;
   existingMessage: any;
 
+  buttonPressed = false;
+  hasChange = false;
+
   constructor(private topicService: TopicService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -25,21 +28,41 @@ export class ForumThreadEditComponent implements OnInit {
     this.topicID = 'YFb7yHbbsy0EfujSESXV';
 
     this.editForm = this.fb.group({
-      message: [this.replyToEdit.message]
+      message: [this.replyToEdit.message, [Validators.required]]
     })
+
+    this.onFormValueChange();
   }
 
   ngOnChanges(): void {
     this.editForm = this.fb.group({
-      message: [this.replyToEdit.message]
+      message: [this.replyToEdit.message, [Validators.required]]
     })
+    this.onFormValueChange();
+  }
+
+  onFormValueChange() {
+    const initialValue = this.editForm.value
+    this.editForm.valueChanges.subscribe(value => {
+      this.hasChange = Object.keys(initialValue).some(key => this.editForm.value[key] !=
+        initialValue[key])
+
+      //set buttonPressed back to false if user changes input
+      if (this.hasChange) {
+        this.buttonPressed = false;
+      }
+    });
+
   }
 
   onSubmit() {
-    const newMessage = this.f.message.value;
+    this.buttonPressed = true;
 
-    this.topicService.editReply(newMessage, this.replyToEdit.replyID, this.topicID, this.threadID);
-    this.closeEvent(false);
+    if (this.editForm.valid) {
+      const newMessage = this.f.message.value;
+      this.topicService.editReply(newMessage, this.replyToEdit.replyID, this.topicID, this.threadID);
+      this.closeEvent(false);
+    }
   }
 
   closeEvent(close: boolean) {
@@ -48,5 +71,9 @@ export class ForumThreadEditComponent implements OnInit {
 
   get f() {
     return this.editForm.controls;
+  }
+
+  get message() {
+    return this.editForm.controls.message;
   }
 }

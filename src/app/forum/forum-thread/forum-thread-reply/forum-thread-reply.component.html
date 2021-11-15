@@ -22,6 +22,9 @@
               formControlName="message"
             ></textarea>
           </div>
+          <div class="text-danger" *ngIf="message.errors?.required && buttonPressed">
+            Reply cannot be blank.
+          </div>
           <button
             type="button"
             class="btn btn-dark btn-md"

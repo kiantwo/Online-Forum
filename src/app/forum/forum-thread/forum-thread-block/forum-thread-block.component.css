@@ -13,9 +13,9 @@
 
 .user-details {
   width: 170px;
+  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  white-space: nowrap;
   padding-top: 10%;
 }
 

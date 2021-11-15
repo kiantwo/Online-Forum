@@ -20,6 +20,7 @@ export class ForumThreadBlockComponent implements OnInit {
 
   @Input() replies$: any;
   @Input() index: any;
+  @Input() page: any;
   @Output() quotedReply = new EventEmitter<any>();
   //@Output() replyToEdit = new EventEmitter<any>();
 
@@ -31,6 +32,10 @@ export class ForumThreadBlockComponent implements OnInit {
   replyToDelete: any;
   fromReplyToDelete: any;
   replyToEdit: any;
+  firstReply: any;
+
+  //pagination
+  p = 1;
 
   isAdmin = false;
   editClicked = false;
@@ -55,6 +60,12 @@ export class ForumThreadBlockComponent implements OnInit {
   }
 
   ngOnChanges(): void {
+    //get id of the reply that started the thread
+    this.firstReply = this.replies$[0].replyID;
+
+    //set page
+    this.p = this.page;
+
     //get complete reply details for each reply
     this.replies$.forEach((element: any, index: number) => {
       //get detail of user replying
@@ -105,7 +116,7 @@ export class ForumThreadBlockComponent implements OnInit {
   }
 
   onEditClose(close: boolean) {
-    //this.replyToEdit = null;
+    this.replyToEdit = null;
     this.editClicked = false;
   }
 }

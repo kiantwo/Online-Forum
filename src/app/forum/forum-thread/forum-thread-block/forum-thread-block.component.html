@@ -1,5 +1,5 @@
 <table class="table table-bordered">
-  <tbody *ngFor="let reply of replies$; index as i">
+  <tbody *ngFor="let reply of replies$ | paginate : { itemsPerPage: 5, currentPage: p}; index as i">
     <tr>
       <td scope="col"></td>
       <td scope="col-6">
@@ -68,7 +68,7 @@
           >
           <a
             href="javascript:void(0)"
-            *ngIf="i != 0 && (currentUserID === reply.from || isAdmin)"
+            *ngIf="reply.replyID != firstReply && (currentUserID === reply.from || isAdmin)"
             data-bs-toggle="modal"
             data-bs-target="#delete-modal"
             (click)="onDelete(reply, from$[i].displayName)"

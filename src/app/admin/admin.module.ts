@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminMainComponent } from './admin-main/admin-main.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgxPaginationModule
   ],
   exports: [AdminMainComponent]
 })

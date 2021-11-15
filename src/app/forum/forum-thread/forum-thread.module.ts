@@ -9,6 +9,7 @@ import { ForumThreadReplyComponent } from './forum-thread-reply/forum-thread-rep
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForumThreadDeleteReplyComponent } from './forum-thread-delete-reply/forum-thread-delete-reply.component';
 import { ForumThreadEditComponent } from './forum-thread-edit/forum-thread-edit.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ForumThreadEditComponent } from './forum-thread-edit/forum-thread-edit.
     CommonModule,
     ForumThreadRoutingModule,
     FontAwesomeModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   exports: [ForumThreadMainComponent]
 })

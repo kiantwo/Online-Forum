@@ -17,13 +17,20 @@ export class ForumThreadMainComponent implements OnInit {
   thread: any;
   displayName: any;
   quotedIndex: any;
+  currentUserID: any;
+  page: number = 1;
+
+  isAdmin = false;
   replyClicked = false;
 
-  constructor(public authService: AuthService, public topicService: TopicService, private route: ActivatedRoute, public afs: AngularFirestore) { }
+  constructor(public authService: AuthService, public topicService: TopicService, private route: ActivatedRoute, public afs: AngularFirestore) {
+    this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
+  }
 
   ngOnInit(): void {
     //get id passed to route
     this.threadID = this.route.snapshot.paramMap.get('id');
+    this.isAdmin = this.authService.isAdmin;
 
     this.topicService.getSingleTopic('YFb7yHbbsy0EfujSESXV').subscribe(topics => {
       //(partial / to change later) get topic info

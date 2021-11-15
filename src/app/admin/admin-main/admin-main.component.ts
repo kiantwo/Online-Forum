@@ -11,6 +11,9 @@ export class AdminMainComponent implements OnInit {
   users$: any[] = [];
   faUserSlash = faUserSlash;
 
+  //pagination
+  page = 1;
+
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {

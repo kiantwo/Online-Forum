@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/compat/app';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -18,7 +18,7 @@ export class ForumThreadReplyComponent implements OnInit {
 
   form = this.fb.group({
     replyID: [''],
-    message: [''],
+    message: ['', [Validators.required]],
     to: [''],
     toReplyID: [''],
   });
@@ -26,6 +26,9 @@ export class ForumThreadReplyComponent implements OnInit {
   threadID: any;
   topicID: any;
   currentUserID: any;
+
+  buttonPressed = false;
+  hasChange = false;
 
   constructor(private route: ActivatedRoute, private topicService: TopicService, public authService: AuthService, private fb: FormBuilder) { }
 
@@ -43,6 +46,7 @@ export class ForumThreadReplyComponent implements OnInit {
           this.quotedDisplayName = result.get('displayName');
         }
       })
+      this.onFormValueChange();
     }
 
     else {
@@ -55,18 +59,35 @@ export class ForumThreadReplyComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    const reply: any = {
-      replyID: '',
-      message: this.f.message.value,
-      to: this.quotedReply.from,
-      toReplyID: this.quotedReply.replyID,
-      from: this.currentUserID,
-      datePosted: firebase.default.firestore.FieldValue.serverTimestamp()
-    }
+  onFormValueChange() {
+    const initialValue = this.form.value
+    this.form.valueChanges.subscribe(value => {
+      this.hasChange = Object.keys(initialValue).some(key => this.form.value[key] !=
+        initialValue[key])
 
-    this.topicService.addReply(reply, this.topicID, this.threadID);
-    this.closeEvent(false);
+      //set buttonPressed back to false if user changes input
+      if (this.hasChange) {
+        this.buttonPressed = false;
+      }
+    });
+  }
+
+  onSubmit() {
+    this.buttonPressed = true;
+
+    if (this.form.valid) {
+      const reply: any = {
+        replyID: '',
+        message: this.f.message.value,
+        to: this.quotedReply.from,
+        toReplyID: this.quotedReply.replyID,
+        from: this.currentUserID,
+        datePosted: firebase.default.firestore.FieldValue.serverTimestamp()
+      }
+
+      this.topicService.addReply(reply, this.topicID, this.threadID);
+      this.closeEvent(false);
+    }
   }
 
   closeEvent(close: boolean) {
@@ -75,5 +96,9 @@ export class ForumThreadReplyComponent implements OnInit {
 
   get f() {
     return this.form.controls;
+  }
+
+  get message() {
+    return this.form.controls.message;
   }
 }
