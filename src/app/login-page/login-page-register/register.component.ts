@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   hasChange = false;
 
   form = this.fb.group({
-    displayName: ['', [Validators.required, Validators.minLength(6)]],
+    displayName: ['', [Validators.required, Validators.minLength(6), Validators.pattern("^[a-zA-Z]+[0-9]+$")]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     confirmPass: ['', [Validators.required, Validators.minLength(6)]],
     email: ['', [Validators.required, Validators.email]]
@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     //re-direct to forum page if user already logged in
-    if(this.authService.isLoggedIn)
+    if (this.authService.isLoggedIn)
       this.router.navigate(['main']);
 
     this.onFormValueChange();
@@ -66,6 +66,7 @@ export class RegisterComponent implements OnInit {
           email: this.f.email.value,
           password: this.f.password.value,
           isAdmin: false,
+          isBanned: false,
           dateRegistered: ''
         };
 

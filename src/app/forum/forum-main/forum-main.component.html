@@ -1,5 +1,5 @@
-<div class="container">
-  <div class="row" *ngIf="authService.userData as user">
+<div class="container"*ngIf="authService.userData as user">
+  <div class="row">
     <div class="col-md-12">
       <div class="media">
         <div class="media-body">
@@ -19,5 +19,5 @@
     }}</a>
   </div>
 
-  <app-forum-topics></app-forum-topics>
+  <app-forum-topics *ngIf="authService.userData"></app-forum-topics>
 </div>

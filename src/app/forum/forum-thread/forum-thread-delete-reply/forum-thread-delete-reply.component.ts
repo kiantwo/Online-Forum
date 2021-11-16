@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TopicService } from 'src/app/shared/services/topic.service';
 
@@ -10,6 +10,7 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 export class ForumThreadDeleteReplyComponent implements OnInit {
   @Input() reply: any;
   @Input() from: any;
+  @Output() success = new EventEmitter<any>();
 
   topicID: any;
   threadID: any;
@@ -22,6 +23,7 @@ export class ForumThreadDeleteReplyComponent implements OnInit {
   }
 
   onDelete() {
+    this.success.emit();
     this.topicService.deleteReply(this.reply.replyID, this.topicID, this.threadID);
   }
 

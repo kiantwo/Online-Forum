@@ -34,15 +34,16 @@
   </button>
   <app-forum-thread-block
     [replies$]="replies$"
-    [page]="page"
+    [p]="page"
     (quotedReply)="onReply($event)"
   ></app-forum-thread-block>
   <app-forum-thread-reply
     *ngIf="replyClicked"
     [quotedReply]="replies$[quotedIndex]"
     (onClose)="onReplyClose($event)"
+    (success)="onReplySuccess()"
   ></app-forum-thread-reply>
-  <div class="d-flex justify-content-center" *ngIf="replies$.length > 5">
-    <pagination-controls (pageChange)="page = $event" (click)="replyClicked=false"></pagination-controls>
+  <div class="d-flex justify-content-center" *ngIf="replies$.length > itemsPerPage">
+    <pagination-controls (pageChange)="goToTop($event)"></pagination-controls>
   </div>
 </div>

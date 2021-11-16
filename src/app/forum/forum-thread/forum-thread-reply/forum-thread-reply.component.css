@@ -16,6 +16,10 @@ td > .form-group {
   padding-right: 1%;
 }
 
+.text-danger {
+  margin-bottom: 2%;
+}
+
 td {
     padding: 2%;
 }

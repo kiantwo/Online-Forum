@@ -90,6 +90,7 @@ export class AuthService {
       displayName: user.displayName,
       password: user.password,
       isAdmin: user.isAdmin,
+      isBanned: user.isBanned,
       dateRegistered: firebase.default.firestore.FieldValue.serverTimestamp()
     }
 
@@ -101,6 +102,7 @@ export class AuthService {
 
   logout() {
     return this.afAuth.signOut().then(() => {
+      console.log(this.isLoggedIn);
       localStorage.removeItem('user');
       localStorage.removeItem('isAdmin');
       this.userData = null;

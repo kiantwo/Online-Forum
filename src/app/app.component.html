@@ -71,6 +71,7 @@
   </div>
 </nav>
 <hr />
+<app-banned *ngIf="isBanned"></app-banned>
 <app-user-profile
   *ngIf="authService.userData as user"
   [user]="user"
@@ -84,4 +85,4 @@
 >
   <app-forum-create-topic></app-forum-create-topic>
 </div>
-<router-outlet></router-outlet>
+<router-outlet *ngIf="!isBanned"></router-outlet>

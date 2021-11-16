@@ -46,6 +46,9 @@
     <div class="text-danger" *ngIf="displayName.errors?.required && buttonPressed">
       Display name is required.
     </div>
+    <div class="text-danger" *ngIf="displayName.errors?.pattern && buttonPressed">
+      Please input a valid Display name (Letters then numbers).
+    </div>
     <div
       class="text-danger"
       *ngIf="displayName.errors?.minlength && buttonPressed"

@@ -24,7 +24,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ForumThreadRoutingModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   exports: [ForumThreadMainComponent]
 })

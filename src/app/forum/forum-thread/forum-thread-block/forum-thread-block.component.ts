@@ -20,12 +20,12 @@ export class ForumThreadBlockComponent implements OnInit {
 
   @Input() replies$: any;
   @Input() index: any;
-  @Input() page: any;
+  @Input() p: any;
   @Output() quotedReply = new EventEmitter<any>();
   //@Output() replyToEdit = new EventEmitter<any>();
 
-  from$: any[] = [];
-  to$: any[] = [];
+  from$: any[];
+  to$: any[];
   topicID: any;
   threadID: any;
   currentUserID: any;
@@ -35,7 +35,9 @@ export class ForumThreadBlockComponent implements OnInit {
   firstReply: any;
 
   //pagination
-  p = 1;
+  page = 1;
+  itemsPerPage = 10;
+  lastPage: any;
 
   isAdmin = false;
   editClicked = false;
@@ -61,10 +63,12 @@ export class ForumThreadBlockComponent implements OnInit {
 
   ngOnChanges(): void {
     //get id of the reply that started the thread
-    this.firstReply = this.replies$[0].replyID;
+    this.firstReply = this.replies$[0]?.replyID;
 
     //set page
-    this.p = this.page;
+    this.page = this.p;
+    //get value of last page
+    this.lastPage = Math.floor((this.replies$.length / this.itemsPerPage) + 1);
 
     //get complete reply details for each reply
     this.replies$.forEach((element: any, index: number) => {
@@ -86,7 +90,8 @@ export class ForumThreadBlockComponent implements OnInit {
           this.topicService.getSingleReply(this.topicID, this.threadID, element.toReplyID).subscribe(reply => {
             const toInfo = {
               displayName: result.get('displayName'),
-              message: reply.get('message')
+              message: reply.get('message'),
+              datePosted: reply.get('datePosted')
             }
             this.to$[index] = toInfo;
           })
@@ -108,6 +113,13 @@ export class ForumThreadBlockComponent implements OnInit {
   onDelete(reply: any, from: any) {
     this.replyToDelete = reply;
     this.fromReplyToDelete = from;
+  }
+
+  onDeleteSuccess() {
+    const currentLength = this.replies$.length - 1;
+    if(currentLength % this.itemsPerPage === 0) {
+      this.p = this.lastPage - 1;
+    }
   }
 
   onEdit(reply: any) {

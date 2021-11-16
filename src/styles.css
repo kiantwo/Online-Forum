@@ -36,3 +36,16 @@ a:hover {
   background-color: transparent;
   text-decoration: underline;
 }
+
+/* Pagination */
+.ngx-pagination {
+  margin-top: 10%;
+  padding-left: 0px !important;
+}
+
+.ngx-pagination .current,
+.btn-info {
+  background: black !important;
+  border: transparent !important;
+  border-radius: 5px !important;
+}

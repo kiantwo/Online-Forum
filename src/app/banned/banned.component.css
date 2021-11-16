@@ -1,0 +1,9 @@
+/* visited link */
+a:visited,
+a:hover,
+a:active,
+a:link {
+  background-color: black;
+  color: white;
+  text-decoration: none;
+}

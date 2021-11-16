@@ -1,14 +1,28 @@
 <table class="table table-bordered">
-  <tbody *ngFor="let reply of replies$ | paginate : { itemsPerPage: 5, currentPage: p}; index as i">
+  <tbody
+    *ngFor="
+      let reply of replies$
+        | paginate: { itemsPerPage: itemsPerPage, currentPage: page };
+      index as i
+    "
+  >
     <tr>
       <td scope="col"></td>
       <td scope="col-6">
-        <div class="date-posted">
+        <div class="date-posted" *ngIf="!reply?.lastEdit">
           <p>
             <span class="clock-icon">
               <fa-icon [icon]="faClock"></fa-icon> </span
             >Date posted:
-            {{ reply.datePosted.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
+            {{ reply?.datePosted?.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
+          </p>
+        </div>
+        <div class="date-posted" *ngIf="reply?.lastEdit">
+          <p>
+            <span class="clock-icon">
+              <fa-icon [icon]="faClock"></fa-icon> </span
+            >Edited:
+            {{ reply?.lastEdit?.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
           </p>
         </div>
       </td>
@@ -19,40 +33,52 @@
           <div class="user-avatar">
             <img
               src="{{
-                from$[i].photoURL
-                  ? from$[i].photoURL
+                from$[(page - 1) * itemsPerPage + i]?.photoURL
+                  ? from$[(page - 1) * itemsPerPage + i]?.photoURL
                   : '/assets/images/default-icon.png'
               }}"
               class="img-thumbnail rounded-circle"
             />
           </div>
           <div class="user-details">
-            <h3>{{ from$[i].displayName }}</h3>
-            <p>{{ from$[i].email }}</p>
+            <h3>{{ from$[(page - 1) * itemsPerPage + i]?.displayName }}</h3>
+            <p>{{ from$[(page - 1) * itemsPerPage + i]?.email }}</p>
           </div>
         </div>
       </td>
       <td class="message-cell">
-        <div class="reply" *ngIf="reply.to">
+        <div class="reply" *ngIf="reply?.to">
           <p class="reply-to">
             <span class="comment-icon">
               <fa-icon [icon]="faCommentDots"></fa-icon> </span
-            ><strong>{{ to$[i].displayName }}</strong> wrote:
+            ><strong>{{
+              to$[(page - 1) * itemsPerPage + i]?.displayName
+            }}</strong>
+            wrote:
           </p>
-          <p class="quote-text" *ngIf="to$[i].message">
-            {{ to$[i].message }}
+          <p
+            class="quote-text"
+            *ngIf="to$[(page - 1) * itemsPerPage + i]?.message"
+          >
+            {{ to$[(page - 1) * itemsPerPage + i]?.message }}
           </p>
-          <p class="quote-text" *ngIf="!to$[i].message">
+          <p
+            class="quote-text"
+            *ngIf="!to$[(page - 1) * itemsPerPage + i]?.message"
+          >
             <i>Reply has been deleted.</i>
           </p>
         </div>
         <div class="message">
           <p>
-            {{ reply.message }}
+            {{ reply?.message }}
           </p>
         </div>
         <div class="footer">
-          <a href="javascript:void(0)" (click)="onReply(i)" class="reply-link"
+          <a
+            href="javascript:void(0)"
+            (click)="onReply((page - 1) * itemsPerPage + i)"
+            class="reply-link"
             ><span class="reply-icon">
               <fa-icon [icon]="faReply"></fa-icon> </span
             >Reply</a
@@ -68,7 +94,10 @@
           >
           <a
             href="javascript:void(0)"
-            *ngIf="reply.replyID != firstReply && (currentUserID === reply.from || isAdmin)"
+            *ngIf="
+              reply.replyID != firstReply &&
+              (currentUserID === reply.from || isAdmin)
+            "
             data-bs-toggle="modal"
             data-bs-target="#delete-modal"
             (click)="onDelete(reply, from$[i].displayName)"
@@ -97,4 +126,5 @@
   *ngIf="replyToDelete"
   [reply]="replyToDelete"
   [from]="fromReplyToDelete"
+  (success)="onDeleteSuccess()"
 ></app-forum-thread-delete-reply>

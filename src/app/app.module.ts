@@ -21,12 +21,14 @@ import { AuthService } from './shared/services/auth.service';
 import { AdminModule } from './admin/admin.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ForumThreadModule } from './forum/forum-thread/forum-thread.module';
+import { BannedComponent } from './banned/banned.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
     NotFoundComponent,
+    BannedComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebase),

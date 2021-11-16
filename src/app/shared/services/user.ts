@@ -6,5 +6,6 @@ export interface User {
     displayName: string;
     password: string;
     isAdmin: boolean,
+    isBanned: false,
     dateRegistered: FieldValue | any
 }

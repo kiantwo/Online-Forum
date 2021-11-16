@@ -1,0 +1,21 @@
+<!-- Button trigger modal -->
+<button type="button" [hidden]="true" #openModal id="openModal" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade in" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">User Banned</h5>
+        </div>
+        <div class="modal-body">
+          You have been <strong>banned.</strong>
+        </div>
+        <div class="modal-footer">
+          <a href="" class="btn btn-dark" (click)="authService.logout()">Return</a>
+        </div>
+      </div>
+    </div>
+  </div>

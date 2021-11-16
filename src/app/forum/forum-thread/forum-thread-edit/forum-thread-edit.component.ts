@@ -58,9 +58,13 @@ export class ForumThreadEditComponent implements OnInit {
   onSubmit() {
     this.buttonPressed = true;
 
-    if (this.editForm.valid) {
+    if (this.editForm.valid && this.replyToEdit.message !== this.f.message.value) {
       const newMessage = this.f.message.value;
       this.topicService.editReply(newMessage, this.replyToEdit.replyID, this.topicID, this.threadID);
+      this.closeEvent(false);
+    }
+
+    else if(this.editForm.valid && this.replyToEdit.message === this.f.message.value) {
       this.closeEvent(false);
     }
   }

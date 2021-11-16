@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import * as firebase from 'firebase/compat/app';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { Reply } from 'src/app/shared/services/topic';
 import { TopicService } from 'src/app/shared/services/topic.service';
 
 @Component({
@@ -13,6 +14,7 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 export class ForumThreadReplyComponent implements OnInit {
   @Input() quotedReply: any;
   @Output() onClose = new EventEmitter<boolean>();
+  @Output() success = new EventEmitter<any>();
 
   quotedDisplayName: any;
 
@@ -33,6 +35,7 @@ export class ForumThreadReplyComponent implements OnInit {
   constructor(private route: ActivatedRoute, private topicService: TopicService, public authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.goToBottom();
     this.threadID = this.route.snapshot.paramMap.get('id');
     this.topicID = 'YFb7yHbbsy0EfujSESXV';
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
@@ -76,7 +79,7 @@ export class ForumThreadReplyComponent implements OnInit {
     this.buttonPressed = true;
 
     if (this.form.valid) {
-      const reply: any = {
+      const reply: Reply = {
         replyID: '',
         message: this.f.message.value,
         to: this.quotedReply.from,
@@ -86,10 +89,10 @@ export class ForumThreadReplyComponent implements OnInit {
       }
 
       this.topicService.addReply(reply, this.topicID, this.threadID);
-      this.closeEvent(false);
+      this.success.emit();
     }
   }
-
+  
   closeEvent(close: boolean) {
     this.onClose.emit(close);
   }
@@ -100,5 +103,9 @@ export class ForumThreadReplyComponent implements OnInit {
 
   get message() {
     return this.form.controls.message;
+  }
+
+  goToBottom(){
+    window.scrollTo(0,document.body.scrollHeight);
   }
 }

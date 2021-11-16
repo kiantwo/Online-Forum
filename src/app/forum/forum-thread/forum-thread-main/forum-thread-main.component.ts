@@ -10,15 +10,18 @@ import { TopicService } from 'src/app/shared/services/topic.service';
   styleUrls: ['./forum-thread-main.component.css']
 })
 export class ForumThreadMainComponent implements OnInit {
-  topics$: any;
-  replies$: any;
+  topics$: any = [];
+  replies$: any = [];
 
-  threadID: any;
-  thread: any;
-  displayName: any;
+  threadID: any = '';
+  thread: any = [];
+  displayName: any = '';
   quotedIndex: any;
   currentUserID: any;
+
   page: number = 1;
+  itemsPerPage = 10;
+  lastPage: any;
 
   isAdmin = false;
   replyClicked = false;
@@ -38,7 +41,7 @@ export class ForumThreadMainComponent implements OnInit {
         this.topics$ = topics.data();
 
         //get thread info
-        this.afs.collection('topics/' + this.topics$.topicID + '/threads').doc(this.threadID).get().subscribe(result => {
+        this.topicService.getSingleThread(this.topics$.topicID, this.threadID).subscribe(result => {
           this.thread = result.data();
           this.getDisplayName();
         })
@@ -46,6 +49,9 @@ export class ForumThreadMainComponent implements OnInit {
         //get replies in thread
         this.topicService.getReplies(this.topics$.topicID, this.threadID).subscribe(replies => {
           this.replies$ = replies;
+
+          //get value of last page
+          this.lastPage = Math.floor((this.replies$.length / this.itemsPerPage) + 1);
         })
       }
     })
@@ -55,6 +61,13 @@ export class ForumThreadMainComponent implements OnInit {
     this.authService.getSingleUser(this.thread.poster).subscribe(result => {
       this.displayName = result.get('displayName');
     })
+  }
+
+  //when page number is clicked
+  goToTop(e: any){
+    this.replyClicked = false;
+    window.scrollTo(document.body.scrollHeight, 0);
+    this.page = e;
   }
 
   //big reply button is clicked
@@ -68,8 +81,18 @@ export class ForumThreadMainComponent implements OnInit {
     this.quotedIndex = index;
   }
 
+  //if reply component is closed
   onReplyClose(close: boolean) {
     this.quotedIndex = null;
     this.replyClicked = close;
+  }
+
+  //if reply is submitted successfully
+  onReplySuccess() {
+    this.onReplyClose(false);
+
+    //go to position/page where latest reply is displayed
+    this.page = this.lastPage;
+    window.scrollTo(0, document.body.scrollHeight);
   }
 }

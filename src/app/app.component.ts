@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 
 @Component({
@@ -19,8 +20,9 @@ export class AppComponent {
   });
 
   isAdmin = false;
+  isBanned = false;
 
-  constructor(private fb: FormBuilder, public authService: AuthService, public afs: AngularFirestore) {
+  constructor(private router: Router, private fb: FormBuilder, public authService: AuthService, public afs: AngularFirestore) {
   }
 
   ngOnInit(): void {
@@ -29,6 +31,9 @@ export class AppComponent {
       if (currentUser) {
         this.afs.collection('users').doc(currentUser.uid).get().subscribe((result) => {
           if (result) {
+            if(result.get('isBanned')) {
+              this.isBanned = true;
+            }
             this.isAdmin = result.get('isAdmin');
           }
         })
