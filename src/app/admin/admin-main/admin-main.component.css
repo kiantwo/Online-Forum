@@ -18,17 +18,28 @@
   text-align: center;
 }
 
+.actions > a {
+  margin: 0;
+  padding: 0;
+  font-size: 11pt;
+}
+
 .ban-icon > fa-icon {
   color: red;
   font-size: 16pt;
 }
 
-.ban-icon > p {
+.unban-icon > fa-icon {
+  color: black;
+  font-size: 16pt;
+}
+
+.ban-icon > span {
   margin-top: 5%;
   padding: 0;
 }
 
-.actions > a {
-  margin: 0;
-  padding: 0;
+.password {
+  width: 250px;
+  word-wrap: break-word;
 }

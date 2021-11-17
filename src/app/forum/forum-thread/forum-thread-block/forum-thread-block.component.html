@@ -9,20 +9,16 @@
     <tr>
       <td scope="col"></td>
       <td scope="col-6">
-        <div class="date-posted" *ngIf="!reply?.lastEdit">
+        <div class="date-posted">
           <p>
             <span class="clock-icon">
               <fa-icon [icon]="faClock"></fa-icon> </span
-            >Date posted:
-            {{ reply?.datePosted?.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
-          </p>
-        </div>
-        <div class="date-posted" *ngIf="reply?.lastEdit">
-          <p>
-            <span class="clock-icon">
-              <fa-icon [icon]="faClock"></fa-icon> </span
-            >Edited:
-            {{ reply?.lastEdit?.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
+            >{{ !reply?.lastEdit ? "Date posted: " : "Edited: " }}
+            {{
+              (!reply?.lastEdit
+                ? reply?.datePosted?.seconds
+                : reply?.lastEdit?.seconds) * 1000 | date: "yyyy-MM-dd h:mm a"
+            }}
           </p>
         </div>
       </td>
@@ -40,9 +36,46 @@
               class="img-thumbnail rounded-circle"
             />
           </div>
-          <div class="user-details">
-            <h3>{{ from$[(page - 1) * itemsPerPage + i]?.displayName }}</h3>
-            <p>{{ from$[(page - 1) * itemsPerPage + i]?.email }}</p>
+          <div class="user-details" *ngIf="from$ && from$.length > 0">
+            <div
+              [ngClass]="
+                isAdmin &&
+                from$[(page - 1) * itemsPerPage + i]?.displayName.length > 8
+                  ? 'display-name-long'
+                  : 'display-name'
+              "
+            >
+              <h3
+                [ngClass]="
+                  from$[(page - 1) * itemsPerPage + i]?.isBanned ? 'banned' : ''
+                "
+              >
+                {{ from$[(page - 1) * itemsPerPage + i]?.displayName }}
+              </h3>
+            </div>
+            <div>
+              <a
+                href="javascript:void(0)"
+                (click)="
+                  onBan(reply.from, from$[(page - 1) * itemsPerPage + i])
+                "
+                [ngClass]="
+                  !from$[(page - 1) * itemsPerPage + i]?.isBanned
+                    ? 'ban-icon'
+                    : 'unban-icon'
+                "
+                data-bs-toggle="modal"
+                data-bs-target="#ban-modal"
+                *ngIf="
+                  isAdmin && !from$[(page - 1) * itemsPerPage + i]?.isAdmin
+                "
+              >
+                <fa-icon [icon]="faUserSlash"></fa-icon>
+              </a>
+            </div>
+            <div class="email-address">
+              <p>{{ from$[(page - 1) * itemsPerPage + i]?.email }}</p>
+            </div>
           </div>
         </div>
       </td>
@@ -51,9 +84,12 @@
           <p class="reply-to">
             <span class="comment-icon">
               <fa-icon [icon]="faCommentDots"></fa-icon> </span
-            ><strong>{{
-              to$[(page - 1) * itemsPerPage + i]?.displayName
-            }}</strong>
+            ><strong
+              [ngClass]="
+                to$[(page - 1) * itemsPerPage + i]?.isBanned ? 'banned' : ''
+              "
+              >{{ to$[(page - 1) * itemsPerPage + i]?.displayName }}</strong
+            >
             wrote:
           </p>
           <p
@@ -100,7 +136,9 @@
             "
             data-bs-toggle="modal"
             data-bs-target="#delete-modal"
-            (click)="onDelete(reply, from$[i].displayName)"
+            (click)="
+              onDelete(reply, from$[(page - 1) * itemsPerPage + i].displayName)
+            "
             class="delete-link"
             ><span class="reply-icon">
               <fa-icon [icon]="faDelete"></fa-icon> </span
@@ -122,6 +160,11 @@
     </tr>
   </tbody>
 </table>
+<app-admin-ban-user
+  *ngIf="toBan"
+  [user]="toBan"
+  (banSuccess)="onBanSuccess($event)"
+></app-admin-ban-user>
 <app-forum-thread-delete-reply
   *ngIf="replyToDelete"
   [reply]="replyToDelete"

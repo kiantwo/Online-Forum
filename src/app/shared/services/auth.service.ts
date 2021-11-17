@@ -17,7 +17,7 @@ export class AuthService {
 
   constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public ngZone: NgZone) {
     //get user data from collection
-    this.usersCollection = this.afs.collection<User>('users', (ref) => ref.orderBy('dateRegistered', 'desc'));
+    this.usersCollection = this.afs.collection<User>('users', (ref) => ref.orderBy('dateRegistered', 'desc').where('isAdmin', '==', false));
     this.user$ = this.usersCollection.valueChanges();
 
     //save user data in localstorage when logged in
@@ -82,6 +82,7 @@ export class AuthService {
 
   SetUserData(user: any) {
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    user.password = this.saltPassword(user.password);
 
     //assigning data to be stored in Firestore Database Document
     const userData: User = {
@@ -110,6 +111,14 @@ export class AuthService {
     })
   }
 
+  saltPassword(password: any): any {
+    var bcrypt = require('bcryptjs');
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(password, salt);
+
+    return hash;
+  }
+
   get isLoggedIn(): boolean {
     const user = JSON.parse(localStorage.getItem('user') || '');
     return user !== null ? true : false;
@@ -127,5 +136,9 @@ export class AuthService {
 
   getSingleUser(uid: any) {
     return this.afs.collection('users').doc(uid).get();
+  }
+
+  banUser(uid: any, banStatus: boolean) {
+    this.afs.collection('users').doc(uid).update({isBanned: banStatus});
   }
 }

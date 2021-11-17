@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { faClock, faCommentDots } from '@fortawesome/free-regular-svg-icons';
-import { faEdit, faReply, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faReply, faTrashAlt, faUserSlash } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TopicService } from 'src/app/shared/services/topic.service';
 
@@ -17,6 +17,7 @@ export class ForumThreadBlockComponent implements OnInit {
   faCommentDots = faCommentDots;
   faEdit = faEdit;
   faDelete = faTrashAlt;
+  faUserSlash = faUserSlash;
 
   @Input() replies$: any;
   @Input() index: any;
@@ -26,6 +27,7 @@ export class ForumThreadBlockComponent implements OnInit {
 
   from$: any[];
   to$: any[];
+  toBan: any;
   topicID: any;
   threadID: any;
   currentUserID: any;
@@ -58,6 +60,14 @@ export class ForumThreadBlockComponent implements OnInit {
       message: ''
     };
 
+    this.toBan = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+      isBanned: false,
+    };
+
     this.fromReplyToDelete = '';
   }
 
@@ -75,9 +85,12 @@ export class ForumThreadBlockComponent implements OnInit {
       //get detail of user replying
       this.authService.getSingleUser(element.from).subscribe(result => {
         const fromInfo = {
+          uid: result.get('uid'),
           displayName: result.get('displayName'),
           email: result.get('email'),
-          photoURL: result.get('photoURL')
+          photoURL: result.get('photoURL'),
+          isBanned: result.get('isBanned'),
+          isAdmin: result.get('isAdmin')
         }
         this.from$[index] = fromInfo;
       })
@@ -89,9 +102,11 @@ export class ForumThreadBlockComponent implements OnInit {
           //get message
           this.topicService.getSingleReply(this.topicID, this.threadID, element.toReplyID).subscribe(reply => {
             const toInfo = {
+              uid: result.get('uid'),
               displayName: result.get('displayName'),
               message: reply.get('message'),
-              datePosted: reply.get('datePosted')
+              datePosted: reply.get('datePosted'),
+              isBanned: result.get('isBanned')
             }
             this.to$[index] = toInfo;
           })
@@ -110,25 +125,58 @@ export class ForumThreadBlockComponent implements OnInit {
     this.quotedReply.emit(i);
   }
 
+  //delete button is clicked, get replyToDelete and display name of replyToDelete
   onDelete(reply: any, from: any) {
     this.replyToDelete = reply;
     this.fromReplyToDelete = from;
   }
 
+  //if deleted reply is the only reply on the page, jump to previous page.
   onDeleteSuccess() {
     const currentLength = this.replies$.length - 1;
-    if(currentLength % this.itemsPerPage === 0) {
+    if (currentLength % this.itemsPerPage === 0) {
       this.p = this.lastPage - 1;
     }
   }
 
+  //edit button is clicked, get replyToEdit
   onEdit(reply: any) {
     this.editClicked = true;
     this.replyToEdit = reply;
   }
 
+  //edit is aborted, clear replyToEdit
   onEditClose(close: boolean) {
     this.replyToEdit = null;
     this.editClicked = false;
+  }
+
+  //ban link is clicked
+  onBan(id: any, from: any) {
+    this.toBan = {
+      uid: id,
+      email: from.email,
+      displayName: from.displayName,
+      photoURL: from.photoURL,
+      isBanned: from.isBanned,
+    };
+  }
+
+  //if ban successful
+  onBanSuccess(uid: any) {
+    this.toBan.isBanned = null;
+
+    //update ban icon in every cell the user appears
+    this.from$.forEach((result: any) => {
+      if(result.uid === uid) {
+        result.isBanned = !result.isBanned;
+      }
+    })
+
+    this.to$.forEach((result: any) => {
+      if(result.uid == uid) {
+        result.isBanned = !result.isBanned;
+      }
+    })
   }
 }

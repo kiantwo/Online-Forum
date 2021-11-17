@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ForumThreadDeleteReplyComponent } from './forum-thread-delete-reply/forum-thread-delete-reply.component';
 import { ForumThreadEditComponent } from './forum-thread-edit/forum-thread-edit.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { AdminModule } from 'src/app/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxPaginationModule,
+    AdminModule
   ],
   exports: [ForumThreadMainComponent]
 })

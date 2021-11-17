@@ -47,6 +47,6 @@ import { BannedComponent } from './banned/banned.component';
     FontAwesomeModule
   ],
   providers: [AngularFirestore, AuthService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

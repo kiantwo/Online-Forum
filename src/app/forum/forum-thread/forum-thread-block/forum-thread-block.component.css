@@ -12,18 +12,46 @@
 }
 
 .user-details {
+  padding-top: 10%;
+}
+
+.user-details > .display-name-long > h3 {
+  float: left;
+  width: 130px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-details > .display-name > h3 {
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.email-address > p {
   width: 170px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  padding-top: 10%;
 }
 
-.user-details > h3 {
+.user-details > h3 > .display-name > div {
+  float: left;
+}
+
+.user-details > div > h3 {
   font-weight: 700;
   font-size: 18pt;
   margin: 0;
   padding: 0;
+}
+
+.user-details > div > .banned,
+.reply-to > .banned {
+  color: red;
+  text-decoration: line-through;
 }
 
 .user-details > p {
@@ -43,10 +71,11 @@
 .message {
   padding: 1%;
   padding-top: 2%;
+  margin-bottom: 2%;
 }
 
 .footer {
-  margin-top: 2%;
+  margin-bottom: 2%;
   padding: 1%;
 }
 
@@ -92,4 +121,14 @@
 
 .footer > a {
   margin-right: 1%;
+}
+
+.ban-icon > fa-icon {
+  color: red;
+  font-size: 12pt;
+}
+
+.unban-icon > fa-icon {
+  color: black;
+  font-size: 12pt;
 }

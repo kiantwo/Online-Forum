@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="authService.userData as user">
   <div class="header">
     <h3>Admin Dashboard</h3>
     <p>User List:</p>
@@ -15,36 +15,48 @@
           <th scope="col">Actions</th>
         </tr>
       </thead>
-      <tbody>
-        <tr
-          *ngFor="
-            let user of users$
-              | paginate
-                : {
-                    itemsPerPage: 10,
-                    currentPage: page
-                  };
-            index as i
-          "
-        >
+      <tbody
+        *ngFor="
+          let user of users$
+            | paginate
+              : {
+                  itemsPerPage: itemsPerPage,
+                  currentPage: page
+                };
+          index as i
+        "
+      >
+        <tr>
           <th scope="row">{{ user.uid }}</th>
           <td>{{ user.email }}</td>
           <td>{{ user.displayName }}</td>
-          <td>{{ user.password }}</td>
+          <td class>
+            <div class="password">{{ user.password }}</div>
+          </td>
           <td>{{ user.dateRegistered.seconds * 1000 | date: "MMMM d, y" }}</td>
           <td class="actions">
-            <a href="" (click)="onClick(i)">
-              <p class="ban-icon">
+            <a
+              href="javascript:void(0)"
+              (click)="onClick(i)"
+              data-bs-toggle="modal"
+              data-bs-target="#ban-modal"
+            >
+              <span [ngClass]="!user.isBanned ? 'ban-icon' : 'unban-icon'">
                 <fa-icon [icon]="faUserSlash"></fa-icon>
-              </p>
-              Ban User
+              </span>
+              <br />
+              {{ !user.isBanned ? "Ban User" : "Unban User" }}
             </a>
           </td>
         </tr>
       </tbody>
     </table>
     <div class="d-flex justify-content-center">
-      <pagination-controls (pageChange)="page = $event" *ngIf="users$.length > 10"></pagination-controls>
+      <pagination-controls
+        (pageChange)="page = $event"
+        *ngIf="users$.length > itemsPerPage"
+      ></pagination-controls>
     </div>
   </div>
+  <app-admin-ban-user *ngIf="toBan" [user]="toBan"></app-admin-ban-user>
 </div>

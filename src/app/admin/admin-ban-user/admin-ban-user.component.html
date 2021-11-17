@@ -1,0 +1,46 @@
+<div class="modal fade" tabindex="-1" id="ban-modal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header modal-header-warning">
+        <h5 class="modal-title">
+          {{ !user.isBanned ? "Ban User" : "Unban User" }}
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          {{
+            !user.isBanned
+              ? "Are you sure you want to ban this user?"
+              : "Are you sure you want to unban this user?"
+          }}
+        </p>
+        <img
+          class="align-self-start mr-5 img-thumbnail rounded-circle"
+          src="{{
+            user?.photoURL ? user?.photoURL : '/assets/images/default-icon.png'
+          }}"
+        />
+        <p><strong>Display Name: </strong> {{ user?.displayName }}</p>
+        <p><strong>E-mail address: </strong> {{ user?.email }}</p>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onClick()">
+            {{ !user.isBanned ? "Ban User" : "Unban User" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+          >
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

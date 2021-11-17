@@ -9,14 +9,24 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 })
 export class AdminMainComponent implements OnInit {
   users$: any[] = [];
+  toBan: any;
   faUserSlash = faUserSlash;
 
   //pagination
   page = 1;
+  itemsPerPage = 10;
 
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
+    this.toBan = {
+      uid: '',
+      email: '',
+      displayName: '',
+      photoURL: '',
+      isBanned: false,
+    };
+
     this.authService.getUsers().subscribe((value) => {
       //retrieve and assign user data from collection to users$ array
       this.users$ = value;
@@ -24,6 +34,6 @@ export class AdminMainComponent implements OnInit {
   }
 
   onClick(i: number) {
-    console.log(this.users$[i]);
+    this.toBan = this.users$[i];
   }
 }
