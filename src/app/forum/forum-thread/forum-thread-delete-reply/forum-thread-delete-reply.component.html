@@ -12,9 +12,14 @@
       </div>
       <div class="modal-body">
         <p>Are you sure you want to delete this reply?</p>
-        <p><strong>From: </strong>{{ from }}</p>
+        <p>
+          <fa-icon [icon]="faReply"></fa-icon><strong>From: </strong>{{ from }}
+        </p>
         <hr />
-        <p><strong>Message: </strong>{{ reply.message }}</p>
+        <p>
+          <fa-icon [icon]="faEnvelope"></fa-icon><strong>Message: </strong
+          >{{ reply.message }}
+        </p>
       </div>
       <div class="modal-footer">
         <button

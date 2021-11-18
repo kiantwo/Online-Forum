@@ -1,0 +1,32 @@
+.user-avatar,
+.user-info {
+  float: left;
+}
+
+.user-avatar > .img-thumbnail {
+  height: 120px;
+  width: 130px;
+  object-fit: cover;
+}
+
+.user-info > p {
+  padding: 0;
+  margin: 2%;
+}
+
+.user-info > .heading {
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.user-info {
+  margin-left: 2%;
+}
+
+.modal-body {
+  width: 500px;
+}
+
+strong {
+  font-size: 18pt;
+}

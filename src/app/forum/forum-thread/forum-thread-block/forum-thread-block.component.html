@@ -44,6 +44,9 @@
                   ? 'display-name-long'
                   : 'display-name'
               "
+              data-bs-toggle="tooltip"
+              data-bs-placement="top"
+              [title]="!from$[(page - 1) * itemsPerPage + i]?.isBanned ? from$[(page - 1) * itemsPerPage + i]?.displayName : 'User is banned'"
             >
               <h3
                 [ngClass]="
@@ -53,7 +56,7 @@
                 {{ from$[(page - 1) * itemsPerPage + i]?.displayName }}
               </h3>
             </div>
-            <div>
+            <div class="ban-user">
               <a
                 href="javascript:void(0)"
                 (click)="

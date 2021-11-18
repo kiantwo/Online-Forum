@@ -26,18 +26,18 @@
           index as i
         "
       >
-        <tr>
+        <tr [ngClass]="user.isBanned ? 'info-row-banned' : ''">
           <th scope="row">{{ user.uid }}</th>
           <td>{{ user.email }}</td>
           <td>{{ user.displayName }}</td>
-          <td class>
+          <td>
             <div class="password">{{ user.password }}</div>
           </td>
           <td>{{ user.dateRegistered.seconds * 1000 | date: "MMMM d, y" }}</td>
           <td class="actions">
             <a
               href="javascript:void(0)"
-              (click)="onClick(i)"
+              (click)="onClick((page - 1) * itemsPerPage + i)"
               data-bs-toggle="modal"
               data-bs-target="#ban-modal"
             >

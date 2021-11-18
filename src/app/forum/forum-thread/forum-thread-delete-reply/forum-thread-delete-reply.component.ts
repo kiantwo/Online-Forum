@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { faEnvelope, faReply } from '@fortawesome/free-solid-svg-icons';
 import { TopicService } from 'src/app/shared/services/topic.service';
 
 @Component({
@@ -8,6 +9,9 @@ import { TopicService } from 'src/app/shared/services/topic.service';
   styleUrls: ['./forum-thread-delete-reply.component.css']
 })
 export class ForumThreadDeleteReplyComponent implements OnInit {
+  faReply = faReply;
+  faEnvelope = faEnvelope;
+
   @Input() reply: any;
   @Input() from: any;
   @Output() success = new EventEmitter<any>();

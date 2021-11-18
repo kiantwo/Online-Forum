@@ -14,6 +14,11 @@
   width: auto;
 }
 
+.info-row-banned {
+  color: red;
+  text-decoration: line-through;
+}
+
 .actions {
   text-align: center;
 }

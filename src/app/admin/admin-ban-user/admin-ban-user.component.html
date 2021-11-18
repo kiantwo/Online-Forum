@@ -20,26 +20,37 @@
               : "Are you sure you want to unban this user?"
           }}
         </p>
-        <img
-          class="align-self-start mr-5 img-thumbnail rounded-circle"
-          src="{{
-            user?.photoURL ? user?.photoURL : '/assets/images/default-icon.png'
-          }}"
-        />
-        <p><strong>Display Name: </strong> {{ user?.displayName }}</p>
-        <p><strong>E-mail address: </strong> {{ user?.email }}</p>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="onClick()">
-            {{ !user.isBanned ? "Ban User" : "Unban User" }}
-          </button>
-          <button
-            type="button"
-            class="btn btn-secondary"
-            data-bs-dismiss="modal"
-          >
-            Cancel
-          </button>
+        <div class="user-avatar">
+          <img
+            class="align-self-start mr-5 img-thumbnail rounded-circle"
+            src="{{
+              user?.photoURL
+                ? user?.photoURL
+                : '/assets/images/default-icon.png'
+            }}"
+          />
         </div>
+        <div [ngClass]="user.isBanned ? 'user-info-banned' : 'user-info'">
+          <p class="display-name">
+            <strong>Display Name: </strong> {{ user?.displayName }}
+          </p>
+          <p class="email-address">
+            <strong>E-mail address: </strong> {{ user?.email }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="onClick()"
+        >
+          {{ !user.isBanned ? "Ban User" : "Unban User" }}
+        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Cancel
+        </button>
       </div>
     </div>
   </div>

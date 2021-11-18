@@ -1,0 +1,26 @@
+.user-avatar,
+.user-info, .user-info-banned {
+  float: left;
+}
+
+.user-avatar > .img-thumbnail {
+  height: 100px;
+  width: 110px;
+  object-fit: cover;
+}
+
+.user-info > p,
+.user-info-banned > p {
+  padding: 0;
+  margin: 0;
+}
+
+.user-info, .user-info-banned {
+  margin-top: 5%;
+  margin-left: 2%;
+}
+
+.user-info-banned {
+  color: red;
+  text-decoration: line-through;
+}
