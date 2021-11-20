@@ -15,8 +15,6 @@
         <td
           class="edit"
           (click)="onClick(i)"
-          data-bs-toggle="modal"
-          data-bs-target="#editTopic"
         >
           Edit
         </td>
@@ -25,12 +23,13 @@
   </table>
 </div>
 
-<div
-  class="modal fade"
-  id="editTopic"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <app-forum-edit-topic></app-forum-edit-topic>
+<div *ngIf="inEdit">
+  <app-forum-edit-topic 
+    (editStatus)="editComplete($event)"
+    [topicToEdit]="topicToEdit"
+  ></app-forum-edit-topic>
 </div>
+ 
+
+
+

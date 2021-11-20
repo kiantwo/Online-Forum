@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { Topic } from 'src/app/shared/services/topic';
 import { FormBuilder } from '@angular/forms';
@@ -10,6 +10,8 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./forum-create-topic.component.css']
 })
 export class ForumCreateTopicComponent implements OnInit {
+
+
   form = this.fb.group({
     topicID: [''],
     name:[''],

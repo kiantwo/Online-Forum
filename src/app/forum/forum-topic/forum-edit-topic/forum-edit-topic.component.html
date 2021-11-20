@@ -1,21 +1,21 @@
 <div class="modal-dialog">
     <div class="modal-content">
-        <div class="modal-header modal-header-warning">
-            <h1>Create a Topic</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-header">
+            <h1>Edit Topic</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
         </div>
         <div class="modal-body">
             <div class="main-div">
                 <form 
                 class="text-center"
-                [formGroup]="form"
-                (ngSubmit)="onSubmit()"
+                [formGroup]="editForm"
+                (ngSubmit)="onSubmitChanges()"
                 >
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text">Title: </span>
                         </div>
-                        <input type="text" class="form-control" formControlName="name">
+                        <input type="text" class="form-control" formControlName="name" >
                     </div>
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
@@ -38,7 +38,8 @@
                         </div>
                         <input type="file" class="form-control" formControlName="imageUrl" name="topicImage" id="topicImage">
                     </div>
-                    <button type="submit" class="btn btn-dark"> Create Topic</button>
+                    <button type="submit" class="btn btn-primary" > Edit</button>
+                    <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>
                 </form>
             </div>
 

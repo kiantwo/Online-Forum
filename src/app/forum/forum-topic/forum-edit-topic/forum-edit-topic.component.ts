@@ -1,7 +1,8 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { Topic } from 'src/app/shared/services/topic';
+
 
 
 @Component({
@@ -11,27 +12,25 @@ import { Topic } from 'src/app/shared/services/topic';
 })
 export class ForumEditTopicComponent implements OnInit {
  
-  //@Input() topicToEdit: Topic;
+  @Input() topicToEdit: any;
   //editForm: FormGroup;
   editForm: any;
+  @Output() editStatus = new EventEmitter<boolean>();
     
 
 
 
-  constructor(private fb: FormBuilder, private topicService: TopicService) {
-    console.log("I AM HERE!");
-  }
+  constructor(private fb: FormBuilder, private topicService: TopicService) {}
   
 
   ngOnInit(): void {
     this.editForm = this.fb.group({
-      topicID: [''],
-      name:[''],
-      description: [''],
-      access:[''],
+      topicID: [this.topicToEdit.topicID],
+      name:[this.topicToEdit.name],
+      description: [this.topicToEdit.description],
+      access:[this.topicToEdit.access],
       imageUrl: [''],
     });
-    console.log("I SEOCOND");
   }
 
 
@@ -46,14 +45,14 @@ export class ForumEditTopicComponent implements OnInit {
     
     this.topicService.editTopic(payload.topicID, payload);
     this.editForm.reset();
+    this.onClose();
   }
 
   get f(){
     return this.editForm.controls;
   }
 
-  onClick(){
-    console.log("I'm Clicked!");
-    //console.log(this.topicToEdit);
+  onClose(){
+    this.editStatus.emit(false);
   }
 }

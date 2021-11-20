@@ -28,9 +28,11 @@ export class ForumTopicsComponent implements OnInit {
     this.topicToEdit = this.topic$[i];
     this.inEdit = true;
     this.topicIndex = i;
-    console.log(this.topicToEdit);
-    console.log("MY VALUE IS "+ this.inEdit);
 
+  }
+
+  editComplete(value: any){
+    this.inEdit = value;
   }
 
 }

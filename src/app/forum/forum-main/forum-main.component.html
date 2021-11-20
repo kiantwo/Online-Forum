@@ -19,5 +19,21 @@
     }}</a>
   </div>
 
+  <button 
+  data-bs-toggle="modal"
+  data-bs-target="#createTopic"
+ >Create Topic
+</button>
+
   <app-forum-topics *ngIf="authService.userData"></app-forum-topics>
+</div>
+
+<div
+  class="modal fade"
+  id="createTopic"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <app-forum-create-topic></app-forum-create-topic>
 </div>
