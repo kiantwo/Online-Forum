@@ -3,3 +3,77 @@
     text-decoration-line: underline;
 }
 
+/* tbody{
+    width: 100%;
+    display:block;
+    border-width: 1px;
+    border-style: groove;
+    border-collapse: separate;
+    border-spacing: 4px; 
+} */
+
+.overall-block{
+    height: 100px;
+    border-top-width: 1px;
+    border-color: rgb(47, 47, 47);
+}
+
+.block-topic{
+    width: 90%;
+    /* background-color: darksalmon; */
+}
+
+.block-topic-name{
+
+   /* background-color: rgb(35, 24, 129); */
+   height: 40%;
+   display: flex;
+  align-items: center;
+  justify-content: start;
+
+}
+
+.block-below{
+    /* background-color: gold; */
+    height:60%;
+}
+
+.block-opt{
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.tname{
+    font-size: 25px;
+    /* background-color: rgb(38, 125, 128); */
+}
+
+.tdesc{
+    width: 85%;
+    /* background-color: burlywood; */
+    font-size: 15px;
+}
+.tlast{
+    width: 15%;
+    /* background-color: coral; */
+}
+
+.tb-row{
+    /* background-color: crimson; */
+    height: 100%;
+    display: inline-flex;
+}
+
+.topt{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.custom-bg{
+    background-color:rgb(5, 32, 51);
+    /* background-color:rgb(6, 31, 49); */
+  }
+

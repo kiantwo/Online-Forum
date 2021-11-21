@@ -66,13 +66,4 @@
   *ngIf="authService.userData as user"
   [user]="user"
 ></app-user-profile>
-<div
-  class="modal fade"
-  id="createTopic"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <app-forum-create-topic></app-forum-create-topic>
-</div>
 <router-outlet *ngIf="!isBanned"></router-outlet>

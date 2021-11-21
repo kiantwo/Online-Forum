@@ -52,8 +52,8 @@ export class TopicService {
     return this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies').doc(replyID).get();
   }
 
-  deleteTopic() {
-    //this.topicCollection.doc()
+  deleteTopic(topicID: any) {
+    this.topicCollection.doc(topicID).delete();
   }
 
   editTopic(topicID: string, topicChanges: Topic) {

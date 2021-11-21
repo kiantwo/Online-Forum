@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicService } from 'src/app/shared/services/topic.service';
+import { faEdit, faStore } from '@fortawesome/free-solid-svg-icons';
+
 
 @Component({
   selector: 'app-forum-topics',
@@ -11,12 +13,16 @@ export class ForumTopicsComponent implements OnInit {
   topicToEdit: any;
   topicIndex: number = 0;
   inEdit: boolean = false;
+  faEdit = faEdit;
+  faStore = faStore;
+
 
   
 
   constructor(public topicSerivce: TopicService) { }
 
   ngOnInit(): void {
+
     //retreive topics using topicSerivce from firestore and assign it to topic$
     this.topicSerivce.getTopics().subscribe((value) => {
       this.topic$ = value;
@@ -24,8 +30,8 @@ export class ForumTopicsComponent implements OnInit {
   }
 
   onClick(i: number){
-    console.log(i);
     this.topicToEdit = this.topic$[i];
+    this.inEdit = false
     this.inEdit = true;
     this.topicIndex = i;
 
@@ -34,5 +40,7 @@ export class ForumTopicsComponent implements OnInit {
   editComplete(value: any){
     this.inEdit = value;
   }
+
+
 
 }

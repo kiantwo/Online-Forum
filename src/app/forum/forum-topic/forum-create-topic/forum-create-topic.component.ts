@@ -2,6 +2,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { Topic } from 'src/app/shared/services/topic';
 import { FormBuilder } from '@angular/forms';
+import { AngularFireStorage } from '@angular/fire/compat/storage';
+import * as firebase from 'firebase/compat';
 
 
 @Component({
@@ -20,7 +22,15 @@ export class ForumCreateTopicComponent implements OnInit {
     imageUrl: [''],
   })
 
-  constructor(private fb: FormBuilder, private topicService: TopicService) { }
+  constructor(private fb: FormBuilder, private topicService: TopicService, private storage: AngularFireStorage) { }
+
+  uploadFile(event: any){
+    const file = event.target.files[0];
+    // const filePath = '/photos'
+    // const task = this.storage.upload(filePath,file);
+    console.log(file.name);
+    
+  }
 
   ngOnInit(): void {
   }

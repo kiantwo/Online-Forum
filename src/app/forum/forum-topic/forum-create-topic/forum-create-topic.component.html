@@ -36,9 +36,10 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Image: </span>
                         </div>
-                        <input type="file" class="form-control" formControlName="imageUrl" name="topicImage" id="topicImage">
+                        <input type="file" class="form-control" formControlName="imageUrl" name="topicImage" id="topicImage" (change)="uploadFile($event)">
                     </div>
-                    <button type="submit" class="btn btn-dark"> Create Topic</button>
+                    <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>
 

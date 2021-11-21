@@ -1,10 +1,10 @@
-<div class="modal-dialog">
+<div class="custom-bg">
     <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header custom-field-bg">
             <h1>Edit Topic</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="onClose()"></button>
         </div>
-        <div class="modal-body">
+        <div class="modal-body custom-bg">
             <div class="main-div">
                 <form 
                 class="text-center"
@@ -13,32 +13,33 @@
                 >
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Title: </span>
+                            <span class="input-group-text custom-field-bg">Title: </span>
                         </div>
-                        <input type="text" class="form-control" formControlName="name" >
+                        <input type="text" class="form-control custom-field-bg" formControlName="name" >
                     </div>
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text"> Description: </span>
+                            <span class="input-group-text custom-field-bg"> Description: </span>
                         </div>
-                        <input type="text" class="form-control" formControlName="description">
+                        <input type="text" class="form-control custom-field-bg" formControlName="description">
                     </div>
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text">Access: </span>
+                            <span class="input-group-text custom-field-bg">Access: </span>
                         </div>
-                        <select class="form-control" formControlName="access">
+                        <select class="form-control custom-field-bg" formControlName="access">
                             <option value="private">Private</option>
                             <option value="public">Public</option>
                         </select>
                     </div>
                     <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Image: </span>
+                        <div class="input-group-prepend custom-field-bg">
+                            <span class="input-group-text custom-field-bg">Image: </span>
                         </div>
-                        <input type="file" class="form-control" formControlName="imageUrl" name="topicImage" id="topicImage">
+                        <input type="file" class="form-control custom-field-bg" formControlName="imageUrl" name="topicImage" id="topicImage">
                     </div>
                     <button type="submit" class="btn btn-primary" > Edit</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteTopic" >Delete</button>
                     <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>
                 </form>
             </div>
@@ -46,3 +47,11 @@
         </div>
     </div>
 </div>
+
+<div class="modal fade" id="deleteTopic" tabindex="-1" aria-labelledby="deleteTopicLabel" aria-hidden="true">
+    <app-forum-delete 
+    [topicId]="topicToEdit.topicID"
+    (deleteStatus)="onDeleteTopic($event)"
+    ></app-forum-delete>
+</div>
+

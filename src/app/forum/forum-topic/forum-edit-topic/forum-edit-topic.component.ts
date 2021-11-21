@@ -10,7 +10,7 @@ import { Topic } from 'src/app/shared/services/topic';
   templateUrl: './forum-edit-topic.component.html',
   styleUrls: ['./forum-edit-topic.component.css']
 })
-export class ForumEditTopicComponent implements OnInit {
+export class ForumEditTopicComponent implements OnInit, OnChanges {
  
   @Input() topicToEdit: any;
   //editForm: FormGroup;
@@ -24,12 +24,24 @@ export class ForumEditTopicComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this.goToBottom();
     this.editForm = this.fb.group({
       topicID: [this.topicToEdit.topicID],
       name:[this.topicToEdit.name],
       description: [this.topicToEdit.description],
       access:[this.topicToEdit.access],
-      imageUrl: [''],
+      imageUrl: [this.topicToEdit.imageUrl],
+    });
+  }
+
+  ngOnChanges(): void{
+    this.goToBottom();
+    this.editForm = this.fb.group({
+      topicID: [this.topicToEdit.topicID],
+      name:[this.topicToEdit.name],
+      description: [this.topicToEdit.description],
+      access:[this.topicToEdit.access],
+      imageUrl: [this,this.topicToEdit.imageUrl],
     });
   }
 
@@ -38,7 +50,7 @@ export class ForumEditTopicComponent implements OnInit {
     const payload: Topic = {
       topicID: this.f.topicID.value,
       description: this.f.description.value,
-      imageUrl: '',
+      imageUrl: this.f.imageUrl.value,
       name: this.f.name.value,
       access: this.f.access.value,
     };
@@ -54,5 +66,14 @@ export class ForumEditTopicComponent implements OnInit {
 
   onClose(){
     this.editStatus.emit(false);
+  }
+
+  onDeleteTopic(status: boolean){
+    this.editStatus.emit(status);
+  }
+
+
+  goToBottom(){
+    window.scrollTo(0,document.body.scrollHeight);
   }
 }

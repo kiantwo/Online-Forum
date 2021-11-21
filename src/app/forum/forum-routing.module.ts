@@ -10,6 +10,14 @@ const routes: Routes = [
     loadChildren: () => import('./forum-thread/forum-thread.module').then((m) => m.ForumThreadModule),
     canActivate: [AuthGuard],
   },
+  
+  {
+    path: 'topic/:id',
+    loadChildren: () => import('./forum-topic/forum-topic.module').then((m) => m.ForumTopicModule),
+    
+  },
+  
+  
   /*{
     path: 'thread',
     component: ForumThreadMainComponent,
