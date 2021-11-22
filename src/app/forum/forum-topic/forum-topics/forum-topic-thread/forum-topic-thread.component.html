@@ -1,1 +1,56 @@
-<p>forum-topic-thread works!</p>
+
+
+<div class="user-list container custom-bg">
+  <nav
+    style="
+      --bs-breadcrumb-divider: url(
+        &#34;data:image/svg + xml,
+        %3Csvgxmlns='http://www.w3.org/2000/svg'width='8'height='8'%3E%3Cpathd='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z'fill='currentColor'/%3E%3C/svg%3E&#34;
+      );
+    "
+    aria-label="breadcrumb"
+  >
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="../..">Forum Main</a>
+      </li>
+      <li class="breadcrumb-item">
+       {{topics$.name}}
+      </li>
+    </ol>
+  </nav>
+
+  
+    <table class="table table-borderless">
+  
+  
+  
+  
+      <tbody *ngFor="let thread of threads$; index as i" class="d-flex overall-block ">
+        <td class=" block-topic px-3">
+          <div class="block-topic-name text-light">
+            <tr class="tb-row">
+              <p class="tname">
+                
+                <a [routerLink]="[thread.threadID]" routerLinkActive="router-link-active" >{{thread.title}}</a>
+              </p>
+            </tr>
+          </div>
+          
+        </td>
+  
+        <td class="block-opt text-light">
+          <div >
+            <p class="topt">
+              <span class="text-info">.</span>
+              <span class="text-warning">.</span>
+              <span class="text-danger">.</span>
+            </p>
+          </div>
+          
+        </td>
+        
+      </tbody>
+      
+    </table>
+  </div>

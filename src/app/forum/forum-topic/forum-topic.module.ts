@@ -9,6 +9,7 @@ import { ForumEditTopicComponent } from './forum-edit-topic/forum-edit-topic.com
 import { ForumTopicsComponent } from './forum-topics/forum-topics.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ForumTopicThreadComponent } from './forum-topics/forum-topic-thread/forum-topic-thread.component';
+import { ForumThreadModule } from '../forum-thread/forum-thread.module';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { ForumTopicThreadComponent } from './forum-topics/forum-topic-thread/for
     CommonModule,
     ForumTopicRoutingModule,
     FormsModule,
+    ForumThreadModule,
     ReactiveFormsModule,
     FontAwesomeModule,
   ],

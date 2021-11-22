@@ -23,7 +23,7 @@ export class ForumThreadDeleteReplyComponent implements OnInit {
 
   ngOnInit(): void {
     this.topicID = 'YFb7yHbbsy0EfujSESXV' //(for test purposes) -- general discussion topicID
-    this.threadID = this.route.snapshot.paramMap.get('id');
+    this.threadID = this.route.snapshot.paramMap.get('tid');
   }
 
   onDelete() {

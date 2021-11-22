@@ -19,7 +19,8 @@
             <p class="tname">
               <img [src]="topic.imageUrl">
               <fa-icon [icon]="faStore"></fa-icon>
-              {{topic.name}}
+              <a [routerLink]="[topic.topicID]" routerLinkActive="router-link-active" >{{topic.name}}</a>
+              
             </p>
           </tr>
         </div>

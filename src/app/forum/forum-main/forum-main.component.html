@@ -14,7 +14,7 @@
   </div>
   <div class="threads" *ngFor="let thread of threads$">
     <!--route to /thread/threadID-->
-    <a routerLinkActive="active" [routerLink]="['/thread', thread.threadID]">{{
+    <a routerLinkActive="active" [routerLink]="[topics$.topicID, thread.threadID]">{{
       thread.title
     }}</a>
   </div>

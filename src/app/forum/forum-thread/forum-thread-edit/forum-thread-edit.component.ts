@@ -24,7 +24,7 @@ export class ForumThreadEditComponent implements OnInit {
   constructor(private topicService: TopicService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    this.threadID = this.route.snapshot.paramMap.get('id');
+    this.threadID = this.route.snapshot.paramMap.get('tid');
     this.topicID = 'YFb7yHbbsy0EfujSESXV';
 
     this.editForm = this.fb.group({

@@ -45,8 +45,9 @@ export class ForumThreadBlockComponent implements OnInit {
   editClicked = false;
 
   constructor(private route: ActivatedRoute, public topicService: TopicService, public authService: AuthService) {
-    this.topicID = 'YFb7yHbbsy0EfujSESXV' //(for test purposes) -- general discussion topicID
-    this.threadID = this.route.snapshot.paramMap.get('id');
+    //this.topicID = 'YFb7yHbbsy0EfujSESXV' //(for test purposes) -- general discussion topicID
+    this.topicID = this.route.snapshot.paramMap.get('id');
+    this.threadID = this.route.snapshot.paramMap.get('tid');
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
 
     this.to$ = [];

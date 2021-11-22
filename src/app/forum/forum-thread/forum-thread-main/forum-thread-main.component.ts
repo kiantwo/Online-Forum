@@ -32,7 +32,7 @@ export class ForumThreadMainComponent implements OnInit {
 
   ngOnInit(): void {
     //get id passed to route
-    this.threadID = this.route.snapshot.paramMap.get('id');
+    this.threadID = this.route.snapshot.paramMap.get('tid');
     this.isAdmin = this.authService.isAdmin;
 
     this.topicService.getSingleTopic('YFb7yHbbsy0EfujSESXV').subscribe(topics => {

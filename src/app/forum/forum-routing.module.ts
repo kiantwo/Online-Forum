@@ -6,16 +6,17 @@ import { ForumThreadMainComponent } from './forum-thread/forum-thread-main/forum
 
 const routes: Routes = [
   {
+    path: 'topic/:id',
+    loadChildren: () => import('./forum-topic/forum-topic.module').then((m) => m.ForumTopicModule),
+    
+  },
+  {
     path: 'thread/:id',
     loadChildren: () => import('./forum-thread/forum-thread.module').then((m) => m.ForumThreadModule),
     canActivate: [AuthGuard],
   },
   
-  {
-    path: 'topic/:id',
-    loadChildren: () => import('./forum-topic/forum-topic.module').then((m) => m.ForumTopicModule),
-    
-  },
+ 
   
   
   /*{

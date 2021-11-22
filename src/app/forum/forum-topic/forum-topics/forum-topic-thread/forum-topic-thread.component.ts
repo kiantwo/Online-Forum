@@ -9,10 +9,9 @@ import { TopicService } from 'src/app/shared/services/topic.service';
   styleUrls: ['./forum-topic-thread.component.css'],
 })
 export class ForumTopicThreadComponent implements OnInit {
-  topic$: any;
-  threads$: any[] = [];
-
-  topicID: any = '';
+  topicID$: any;
+  threads$: any;
+  topics$: any = [];
 
   @Input() topicIndex: any;
 
@@ -23,17 +22,19 @@ export class ForumTopicThreadComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.topic$ = this.route.snapshot.paramMap.get('id');
+    this.topicID$ = this.route.snapshot.paramMap.get('id');
+    
 
+    //getting the threads
+    this.topicService.getThreads(this.topicID$).subscribe(threads => {
+      if (threads) {
+        this.threads$ = threads;
+      }
+    });
 
-    this.topicService.getSingleTopic(this.topic$).subscribe(topics => {
+    this.topicService.getSingleTopic(this.topicID$).subscribe( topics => {
       if(topics){
-
-        //getting the threads
-        this.threads$ = Object.assign([], this.topicService.getThreads(this.topic$));
-
-
-
+        this.topics$ = topics.data();
       }
     })
   }

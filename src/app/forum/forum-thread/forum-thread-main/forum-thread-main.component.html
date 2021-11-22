@@ -9,9 +9,11 @@
     aria-label="breadcrumb"
   >
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a routerLink="main/../..">Forum Main</a></li>
       <li class="breadcrumb-item">
-        <a routerLink="main/../..">{{ topics$.name }}</a>
+        <a routerLink="../..">Forum Main</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="..">{{ topics$.name }}</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
         {{ thread.title }}
