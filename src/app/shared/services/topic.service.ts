@@ -38,7 +38,7 @@ export class TopicService {
   }
 
   getThreads(topicID: any) {
-    const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads', (ref)=>ref.orderBy('dateCreated', 'desc'));
     const thread$ = threadCollection.valueChanges();
 
     return thread$;

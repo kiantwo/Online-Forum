@@ -13,27 +13,33 @@
         <a routerLink="main/../../../..">Forum Main</a>
       </li>
       <li class="breadcrumb-item">
-        <a routerLink="../..">{{ topics$.name }}</a>
+        <a routerLink="../..">{{ topics$?.name }}</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">
-        {{ thread.title }}
+        {{ thread?.title }}
       </li>
     </ol>
   </nav>
-  <h2 class="thread-name">{{ thread.title }}</h2>
-  <p>
-    Original Poster: <strong>{{ displayName }}</strong>
-  </p>
-  <button type="button" class="btn btn-md btn-dark" (click)="onReplyClick()">
-    Reply to thread
-  </button>
-  <button
-    type="button"
-    class="btn btn-md btn-danger"
-    *ngIf="currentUserID === thread.poster || isAdmin"
-  >
-    Delete thread
-  </button>
+  <div class="thread-header">
+    <h2 class="thread-name">{{ thread?.title }}</h2>
+    <p class="date-posted" *ngIf="thread?.dateCreated">
+      Date posted:
+      {{ thread?.dateCreated?.seconds * 1000 | date: "yyyy-MM-dd h:mm a" }}
+    </p>
+    <p class="original-poster" *ngIf="displayName">
+      Original Poster: <strong>{{ displayName }}</strong>
+    </p>
+    <button type="button" class="btn btn-md btn-dark" (click)="onReplyClick()">
+      Reply to thread
+    </button>
+    <button
+      type="button"
+      class="btn btn-md btn-danger"
+      *ngIf="currentUserID === thread.poster || isAdmin"
+    >
+      Delete thread
+    </button>
+  </div>
   <app-forum-thread-block
     [replies$]="replies$"
     [p]="page"
@@ -45,7 +51,10 @@
     (onClose)="onReplyClose($event)"
     (success)="onReplySuccess()"
   ></app-forum-thread-reply>
-  <div class="d-flex justify-content-center" *ngIf="replies$.length > itemsPerPage">
+  <div
+    class="d-flex justify-content-center"
+    *ngIf="replies$.length > itemsPerPage"
+  >
     <pagination-controls (pageChange)="goToTop($event)"></pagination-controls>
   </div>
 </div>

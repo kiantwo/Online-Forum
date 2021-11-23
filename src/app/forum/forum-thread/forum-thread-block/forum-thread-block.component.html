@@ -9,7 +9,7 @@
     <tr>
       <td scope="col"></td>
       <td scope="col-6">
-        <div class="date-posted">
+        <div class="date-posted" *ngIf="reply?.datePosted">
           <p>
             <span class="clock-icon">
               <fa-icon [icon]="faClock"></fa-icon> </span

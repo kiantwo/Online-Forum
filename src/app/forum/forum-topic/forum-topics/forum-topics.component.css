@@ -1,6 +1,6 @@
-.edit{
-    color: lightblue;
-    text-decoration-line: underline;
+.edit {
+  color: lightblue;
+  text-decoration-line: underline;
 }
 
 /* tbody{
@@ -12,68 +12,88 @@
     border-spacing: 4px; 
 } */
 
-.overall-block{
-    height: 100px;
-    border-top-width: 1px;
-    border-color: rgb(47, 47, 47);
+.overall-block {
+  height: 100px;
+  border-top-width: 1px;
+  border-color: rgb(47, 47, 47);
 }
 
-.block-topic{
-    width: 90%;
-    /* background-color: darksalmon; */
+.block-topic {
+  width: 90%;
+  /* background-color: darksalmon; */
 }
 
-.block-topic-name{
-
-   /* background-color: rgb(35, 24, 129); */
-   height: 40%;
-   display: flex;
+.block-topic-name {
+  /* background-color: rgb(35, 24, 129); */
+  height: 40%;
+  display: flex;
   align-items: center;
   justify-content: start;
-
 }
 
-.block-below{
-    /* background-color: gold; */
-    height:60%;
+.block-below {
+  /* background-color: gold; */
+  height: 60%;
 }
 
-.block-opt{
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.block-opt {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.tname{
-    font-size: 25px;
-    /* background-color: rgb(38, 125, 128); */
+.tname {
+  font-size: 25px;
+  /* background-color: rgb(38, 125, 128); */
 }
 
-.tdesc{
-    width: 85%;
-    /* background-color: burlywood; */
-    font-size: 15px;
-}
-.tlast{
-    width: 15%;
-    /* background-color: coral; */
+.tdesc {
+  width: 100%;
+  /* background-color: burlywood; */
+  font-size: 15px;
 }
 
-.tb-row{
-    /* background-color: crimson; */
-    height: 100%;
-    display: inline-flex;
+.tlast {
+  margin-top: 1.5%;
+  color: lightblue;
+  width: 25%;
+  /* background-color: coral; */
 }
 
-.topt{
-    font-size: 40px;
-    font-weight: bold;
+.last-thread > .thread-info > a > p {
+  margin: 0;
+  padding: 0;
+  font-size: 11pt;
 }
 
-.custom-bg{
-    background-color:rgb(5, 32, 51);
-    /* background-color:rgb(6, 31, 49); */
-  }
+.user-image > img,
+thread-info > p {
+  float: left;
+}
 
+.user-image > img {
+  height: 40px;
+  width: 40px;
+  margin-right: 2%;
+}
+
+.last-thread {
+  width: 400px;
+}
+
+.tb-row {
+  /* background-color: crimson; */
+  height: 100%;
+  display: inline-flex;
+}
+
+.topt {
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.custom-bg {
+  background-color: rgb(5, 32, 51);
+  /* background-color:rgb(6, 31, 49); */
+}

@@ -9,3 +9,9 @@
   margin-bottom: 2%;
   margin-right: 0.5%;
 }
+
+.date-posted {
+  color: grey;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}

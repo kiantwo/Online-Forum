@@ -33,6 +33,7 @@ export class ForumThreadMainComponent implements OnInit {
 
   ngOnInit(): void {
     //get id passed to route
+    this.topicID = this.route.snapshot.paramMap.get('id');
     this.threadID = this.route.snapshot.paramMap.get('tid');
     this.topicID = this.route.snapshot.paramMap.get('id');
     this.isAdmin = this.authService.isAdmin;

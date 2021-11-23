@@ -1,56 +1,79 @@
-<button 
+<button
   data-bs-toggle="modal"
   data-bs-target="#createTopic"
   class="btn btn-dark"
- >Create Topic
+>
+  Create Topic
 </button>
-
 
 <div class="user-list custom-bg">
   <table class="table table-borderless">
-
-
-
-
-    <tbody *ngFor="let topic of topic$; index as i" class="d-flex overall-block ">
-      <td class=" block-topic px-3">
+    <tbody
+      *ngFor="let topic of topic$; index as i"
+      class="d-flex overall-block"
+    >
+      <td class="block-topic px-3">
         <div class="block-topic-name text-light">
           <tr class="tb-row">
             <p class="tname">
-              <img [src]="topic.imageUrl">
+              <img [src]="topic.imageUrl" />
               <fa-icon [icon]="faStore"></fa-icon>
-              <a [routerLink]="['/topic', topic.topicID]" routerLinkActive="router-link-active" >{{topic.name}}</a>
-              
+              <a
+                [routerLink]="['/topic', topic.topicID]"
+                routerLinkActive="router-link-active"
+                >{{ topic.name }}</a
+              >
             </p>
           </tr>
         </div>
         <div class="block-below">
           <tr class="d-flex justify-content-between text-secondary">
-            <td class="tdesc px-3">{{(topic.description.length>100)? (topic.description | slice:0:100)+'...' : (topic.description)}}</td>
-            <td class="tlast"  >Last Posted</td>
+            <td class="tdesc px-3">
+              {{
+                topic.description.length > 100
+                  ? (topic.description | slice: 0:100) + "..."
+                  : topic.description
+              }}
+            </td>
           </tr>
         </div>
-        
       </td>
-
+      <td class="tlast" *ngIf="lastThread$[i]">
+        <div class="last-thread">
+          <div class="user-image">
+            <img
+              src="/assets/images/default-icon.png"
+              class="img-thumbnail rounded-circle"
+            />
+          </div>
+          <div class="thread-info">
+            <a href="" [routerLink]="['/topic', topic.topicID, 'thread', lastThread$[i]?.threadID]">
+              <p>Last Thread: {{ lastThread$[i]?.title }}</p>
+              <p>
+                {{
+                  lastThread$[i]?.dateCreated?.seconds * 1000
+                    | date: "yyyy-MM-dd h:mm a"
+                }}
+              </p>
+            </a>
+          </div>
+        </div>
+      </td>
       <td class="block-opt text-light">
-        <div >
+        <div>
           <p (click)="onClick(i)" class="topt">
             <span class="text-info">.</span>
             <span class="text-warning">.</span>
             <span class="text-danger">.</span>
           </p>
         </div>
-        
       </td>
-      
     </tbody>
-    
   </table>
 </div>
 
 <div *ngIf="inEdit" id="editBlock">
-  <app-forum-edit-topic 
+  <app-forum-edit-topic
     (editStatus)="editComplete($event)"
     [topicToEdit]="topicToEdit"
   ></app-forum-edit-topic>
@@ -65,6 +88,3 @@
 >
   <app-forum-create-topic></app-forum-create-topic>
 </div>
-
-
-
