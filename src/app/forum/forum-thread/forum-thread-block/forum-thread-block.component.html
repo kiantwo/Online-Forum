@@ -83,7 +83,7 @@
         </div>
       </td>
       <td class="message-cell">
-        <div class="reply" *ngIf="reply?.to">
+        <div class="reply" *ngIf="to$[(page - 1) * itemsPerPage + i]">
           <p class="reply-to">
             <span class="comment-icon">
               <fa-icon [icon]="faCommentDots"></fa-icon> </span

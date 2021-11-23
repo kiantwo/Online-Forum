@@ -5,13 +5,13 @@ import { ForumMainComponent } from './forum-main/forum-main.component';
 import { ForumThreadMainComponent } from './forum-thread/forum-thread-main/forum-thread-main.component';
 
 const routes: Routes = [
-  {
+  /*{
     path: 'topic/:id',
     loadChildren: () => import('./forum-topic/forum-topic.module').then((m) => m.ForumTopicModule),
-    
-  },
+    canActivate: [AuthGuard],
+  },*/
   {
-    path: 'thread/:id',
+    path: 'topic/:id/thread/:tid',
     loadChildren: () => import('./forum-thread/forum-thread.module').then((m) => m.ForumThreadModule),
     canActivate: [AuthGuard],
   },

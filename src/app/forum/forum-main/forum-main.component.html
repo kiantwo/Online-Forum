@@ -12,15 +12,6 @@
       </div>
     </div>
   </div>
-  <div class="threads" *ngFor="let thread of threads$">
-    <!--route to /thread/threadID-->
-    <a routerLinkActive="active" [routerLink]="[topics$.topicID, thread.threadID]">{{
-      thread.title
-    }}</a>
-  </div>
-
-
-
   <app-forum-topics *ngIf="authService.userData"></app-forum-topics>
 </div>
 

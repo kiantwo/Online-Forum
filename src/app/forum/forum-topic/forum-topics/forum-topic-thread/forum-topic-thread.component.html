@@ -12,7 +12,7 @@
   >
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a routerLink="../..">Forum Main</a>
+        <a routerLink="main/../..">Forum Main</a>
       </li>
       <li class="breadcrumb-item">
        {{topics$.name}}
@@ -32,7 +32,7 @@
             <tr class="tb-row">
               <p class="tname">
                 
-                <a [routerLink]="[thread.threadID]" routerLinkActive="router-link-active" >{{thread.title}}</a>
+                <a [routerLink]="['./thread', thread.threadID]" routerLinkActive="router-link-active" >{{thread.title}}</a>
               </p>
             </tr>
           </div>

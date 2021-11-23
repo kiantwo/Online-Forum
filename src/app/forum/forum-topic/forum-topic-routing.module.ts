@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/shared/guard/auth.guard';
 import { ForumThreadMainComponent } from '../forum-thread/forum-thread-main/forum-thread-main.component';
 import { ForumThreadRoutingModule } from '../forum-thread/forum-thread-routing.module';
 import { ForumThreadModule } from '../forum-thread/forum-thread.module';
@@ -8,13 +9,14 @@ import { ForumTopicsComponent } from './forum-topics/forum-topics.component';
 
 const routes: Routes = [
   {
-    path: 'main/:id',
-    component: ForumTopicThreadComponent
+    path: 'topic/:id',
+    component: ForumTopicThreadComponent,
+    canActivate: [AuthGuard],
   },
-  {
-    path:':id/:tid',
+  /*{
+    path:'topic/:id/thread/:tid',
     component: ForumThreadMainComponent
-  }
+  }*/
 
 
 

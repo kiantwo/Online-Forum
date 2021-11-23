@@ -48,7 +48,8 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ForumTopicModule
   ],
   providers: [AngularFirestore, AuthService,{provide: BUCKET, useValue: 'myBucket'}],
   bootstrap: [AppComponent],

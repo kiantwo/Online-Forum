@@ -15,6 +15,7 @@
 }
 
 .user-info > .heading {
+  width: 200px;
   font-size: 14pt;
   font-weight: bold;
 }
