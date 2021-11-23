@@ -1,6 +1,4 @@
-
-
-<div class="user-list container custom-bg">
+<div class="whole-div container custom-bg">
   <nav
     style="
       --bs-breadcrumb-divider: url(
@@ -15,42 +13,92 @@
         <a routerLink="main/../..">Forum Main</a>
       </li>
       <li class="breadcrumb-item">
-       {{topics$.name}}
+        {{ topics$.name }}
       </li>
     </ol>
   </nav>
-
-  
-    <table class="table table-borderless">
-  
-  
-  
-  
-      <tbody *ngFor="let thread of threads$; index as i" class="d-flex overall-block ">
-        <td class=" block-topic px-3">
-          <div class="block-topic-name text-light">
-            <tr class="tb-row">
-              <p class="tname">
-                
-                <a [routerLink]="['./thread', thread.threadID]" routerLinkActive="router-link-active" >{{thread.title}}</a>
-              </p>
-            </tr>
-          </div>
-          
-        </td>
-  
-        <td class="block-opt text-light">
-          <div >
-            <p class="topt">
-              <span class="text-info">.</span>
-              <span class="text-warning">.</span>
-              <span class="text-danger">.</span>
+  <button
+    data-bs-toggle="modal"
+    data-bs-target="#createThread"
+    class="btn btn-dark"
+  >
+    Create Thread
+  </button>
+  <table class="table table-borderless">
+    <tbody
+      *ngFor="let thread of threads$; index as i"
+      class="d-flex overall-block"
+    >
+      <td class="block-topic justify-content-between px-3">
+        <div class="block-topic-name text-light">
+          <tr class="tb-row">
+            <p class="tname">
+              <a
+                [routerLink]="['./thread', thread.threadID]"
+                routerLinkActive="router-link-active"
+                >{{ thread.title }}</a
+              >
             </p>
-          </div>
-          
-        </td>
-        
-      </tbody>
-      
-    </table>
+          </tr>
+        </div>
+      </td>
+
+      <td class="block-below">
+        <div *ngIf="show[i] == 1">
+          <tr class="text-secondary">
+            <td class="user">
+              <div class="user-avatar">IMAGE</div>
+            </td>
+            <td>
+              <div class="user-details">
+                <tr class="lastReply">
+                  Last reply:
+                  {{
+                    replies$[i]?.message
+                  }}
+                </tr>
+                <tr class="lastDatePosted">
+                  {{
+                    replies$[i]?.datePosted?.seconds * 1000
+                      | date: "yyyy-MM-dd h:mm a"
+                  }}
+                </tr>
+                <tr class="lastUser">
+                  From:{{
+                    authors[i]
+                  }}
+                </tr>
+              </div>
+            </td>
+          </tr>
+        </div>
+      </td>
+
+      <td class="block-opt text-light">
+        <div>
+          <p class="topt" (click)="onClickEdit()">
+            <span class="text-info">.</span>
+            <span class="text-warning">.</span>
+            <span class="text-danger">.</span>
+          </p>
+        </div>
+      </td>
+    </tbody>
+  </table>
+  <div *ngIf="inEdit == 1">
+    <app-forum-topic-thread-edit></app-forum-topic-thread-edit>
   </div>
+  
+</div>
+
+<div
+    class="modal fade"
+    id="createThread"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <app-forum-topic-thread-add></app-forum-topic-thread-add>
+  </div>
+
+

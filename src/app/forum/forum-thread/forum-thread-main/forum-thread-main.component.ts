@@ -13,6 +13,7 @@ export class ForumThreadMainComponent implements OnInit {
   topics$: any = [];
   replies$: any = [];
 
+  topicID: any = '';
   threadID: any = '';
   thread: any = [];
   displayName: any = '';
@@ -33,9 +34,10 @@ export class ForumThreadMainComponent implements OnInit {
   ngOnInit(): void {
     //get id passed to route
     this.threadID = this.route.snapshot.paramMap.get('tid');
+    this.topicID = this.route.snapshot.paramMap.get('id');
     this.isAdmin = this.authService.isAdmin;
 
-    this.topicService.getSingleTopic('YFb7yHbbsy0EfujSESXV').subscribe(topics => {
+    this.topicService.getSingleTopic(this.topicID).subscribe(topics => {
       //(partial / to change later) get topic info
       if (topics) {
         this.topics$ = topics.data();

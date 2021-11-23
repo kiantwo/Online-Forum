@@ -1,0 +1,26 @@
+<div class="modal-dialog" id="the-modal">
+    <div class="modal-content">
+        <div class="modal-header modal-header-warning">
+            <h1>Create a Thread</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <div class="main-div">
+                <form 
+                [formGroup]="form"
+                class="text-center"
+                >
+                    <div class="input-group form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Title: </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="title">
+                    </div>
+                    <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>

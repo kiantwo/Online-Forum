@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
-import { Reply, Topic } from '../services/topic';
+import { Reply, Thread, Topic } from '../services/topic';
 import * as firebase from 'firebase/compat/app';
 
 @Injectable({
@@ -20,6 +20,13 @@ export class TopicService {
     const pushkey = this.afs.createId();
     topic.topicID = pushkey;
     this.topicCollection.doc(pushkey).set(topic);
+  }
+
+  addThread( thread: Thread, topicID: any){
+    const pushkey= this.afs.createId();
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
+    thread.threadID = pushkey;
+    threadCollection.doc(pushkey).set(thread);
   }
 
   getTopics() {

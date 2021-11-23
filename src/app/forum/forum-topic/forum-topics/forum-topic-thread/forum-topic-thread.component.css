@@ -2,10 +2,11 @@
     height: 100px;
     border-top-width: 1px;
     border-color: rgb(47, 47, 47);
+    align-items: center;
 }
 
 .block-topic{
-    width: 90%;
+    width: 60%;
     /* background-color: darksalmon; */
     display: flex;
     align-items: center;
@@ -32,3 +33,34 @@
     justify-content: center;
     align-items: center;
 }
+
+
+.block-below{
+    /* background-color: cornflowerblue; */
+    height: 100%;
+    width: 30%;
+    display: flex;
+    align-items: center;
+    vertical-align:middle;
+
+}
+
+/* .user{
+    background-color:darkseagreen;
+} */
+.user-avatar{
+    min-width: 70px;
+    width: 70px;
+    height: 70%;
+}
+
+.user-details{
+    /* background-color:ghostwhite; */
+    align-items: center;
+}
+
+.whole-div{
+    padding-top: 20px;
+    margin-top: 20px;
+}
+

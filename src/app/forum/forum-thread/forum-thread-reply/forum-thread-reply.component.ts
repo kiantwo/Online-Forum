@@ -37,7 +37,7 @@ export class ForumThreadReplyComponent implements OnInit {
   ngOnInit(): void {
     this.goToBottom();
     this.threadID = this.route.snapshot.paramMap.get('tid');
-    this.topicID = 'YFb7yHbbsy0EfujSESXV';
+    this.topicID = this.route.snapshot.paramMap.get('id');
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
   }
 

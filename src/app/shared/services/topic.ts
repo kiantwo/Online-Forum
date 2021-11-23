@@ -16,3 +16,11 @@ export interface Reply {
     toReplyID: string;
     datePosted: FieldValue | any;
 }
+
+export interface Thread{
+    dateCreated: FieldValue | any;
+    lastPost: FieldValue | any;
+    poster: string;
+    threadID: string;
+    title: string;
+}
