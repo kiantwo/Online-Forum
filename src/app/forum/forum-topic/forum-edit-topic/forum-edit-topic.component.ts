@@ -29,8 +29,6 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
       topicID: [this.topicToEdit.topicID],
       name:[this.topicToEdit.name],
       description: [this.topicToEdit.description],
-      access:[this.topicToEdit.access],
-      imageUrl: [this.topicToEdit.imageUrl],
     });
   }
 
@@ -40,8 +38,7 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
       topicID: [this.topicToEdit.topicID],
       name:[this.topicToEdit.name],
       description: [this.topicToEdit.description],
-      access:[this.topicToEdit.access],
-      imageUrl: [this,this.topicToEdit.imageUrl],
+
     });
   }
 
@@ -50,9 +47,9 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
     const payload: Topic = {
       topicID: this.f.topicID.value,
       description: this.f.description.value,
-      imageUrl: this.f.imageUrl.value,
+
       name: this.f.name.value,
-      access: this.f.access.value,
+
     };
     
     this.topicService.editTopic(payload.topicID, payload);

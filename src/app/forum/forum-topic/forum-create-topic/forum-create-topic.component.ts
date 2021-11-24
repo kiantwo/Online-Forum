@@ -18,8 +18,7 @@ export class ForumCreateTopicComponent implements OnInit {
     topicID: [''],
     name:[''],
     description: [''],
-    access:[''],
-    imageUrl: [''],
+
   })
 
   constructor(private fb: FormBuilder, private topicService: TopicService, private storage: AngularFireStorage) { }
@@ -39,9 +38,7 @@ export class ForumCreateTopicComponent implements OnInit {
     const payload: Topic = {
       topicID: '',
       description: this.f.description.value,
-      imageUrl: '',
       name: this.f.name.value,
-      access: this.f.access.value,
     };
     
     this.topicService.addTopic(payload);

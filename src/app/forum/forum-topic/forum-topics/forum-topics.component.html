@@ -10,7 +10,7 @@
   <table class="table table-borderless">
     <tbody
       *ngFor="let topic of topic$; index as i"
-      class="d-flex overall-block"
+      class="d-flex overall-block justify-content-between"
     >
       <td class="block-topic px-3">
         <div class="block-topic-name text-light">
@@ -21,17 +21,18 @@
               <a
                 [routerLink]="['/topic', topic.topicID]"
                 routerLinkActive="router-link-active"
+                (click)="onClickTopic(i)"
                 >{{ topic.name }}</a
               >
             </p>
           </tr>
         </div>
         <div class="block-below">
-          <tr class="d-flex justify-content-between text-secondary">
+          <tr class="d-flex text-secondary">
             <td class="tdesc px-3">
               {{
-                topic.description.length > 100
-                  ? (topic.description | slice: 0:100) + "..."
+                topic.description.length > 80
+                  ? (topic.description | slice: 0:80) + "..."
                   : topic.description
               }}
             </td>

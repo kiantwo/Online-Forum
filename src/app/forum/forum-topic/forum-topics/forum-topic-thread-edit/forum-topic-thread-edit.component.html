@@ -1,41 +1,26 @@
 <div class="custom-bg">
     <div class="modal-content">
         <div class="modal-header custom-field-bg">
-            <h1>Edit Topic</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1>Edit Thread</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onClose()" aria-label="Close"></button>
         </div>
         <div class="modal-body custom-bg">
             <div class="main-div">
                 <form 
                 class="text-center"
-                
-                
+                [formGroup]="editForm"
+                (ngSubmit)="onSubmitChanges()"
                 >
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text custom-field-bg">Title: </span>
                         </div>
-                        <input type="text" class="form-control custom-field-bg" formControlName="name" >
-                    </div>
-                    <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text custom-field-bg"> Description: </span>
-                        </div>
-                        <input type="text" class="form-control custom-field-bg" formControlName="description">
-                    </div>
-                    <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text custom-field-bg">Access: </span>
-                        </div>
-                        <select class="form-control custom-field-bg" formControlName="access">
-                            <option value="private">Private</option>
-                            <option value="public">Public</option>
-                        </select>
+                        <input type="text" class="form-control custom-field-bg" formControlName="title" >
                     </div>
 
                     <button type="submit" class="btn btn-primary" > Edit</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteThread" >Delete</button>
-                    <button type="button" class="btn btn-primary" >Cancel</button>
+                    <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>
                 </form>
             </div>
 
@@ -44,6 +29,10 @@
 </div>
 
 <div class="modal fade" id="deleteThread" tabindex="-1" aria-labelledby="deleteTopicLabel" aria-hidden="true">
-    <app-forum-topic-thread-delete></app-forum-topic-thread-delete>
+    <app-forum-topic-thread-delete
+    [threadID] = "threadToEdit.threadID"
+    [topicID] = "topicID$"
+    (editStatus)="editComplete($event)"
+    ></app-forum-topic-thread-delete>
 </div>
 

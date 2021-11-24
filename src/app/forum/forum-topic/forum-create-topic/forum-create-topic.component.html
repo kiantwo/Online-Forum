@@ -23,21 +23,6 @@
                         </div>
                         <input type="text" class="form-control" formControlName="description">
                     </div>
-                    <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Access: </span>
-                        </div>
-                        <select class="form-control" formControlName="access">
-                            <option value="private">Private</option>
-                            <option value="public">Public</option>
-                        </select>
-                    </div>
-                    <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">Image: </span>
-                        </div>
-                        <input type="file" class="form-control" formControlName="imageUrl" name="topicImage" id="topicImage" (change)="uploadFile($event)">
-                    </div>
                     <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
                 </form>

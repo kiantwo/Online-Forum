@@ -66,6 +66,11 @@ export class TopicService {
   editTopic(topicID: string, topicChanges: Topic) {
     this.topicCollection.doc(topicID).update(topicChanges);
   }
+  editThread(topicID: string, threadID: string, threadChanges: Thread){
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
+    threadCollection.doc(threadID).update(threadChanges);
+  }
+
 
   addReply(reply: Reply, topicID: any, threadID: any) {
     const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
@@ -83,5 +88,10 @@ export class TopicService {
   deleteReply(replyID: any, topicID: any, threadID: any) {
     const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
     repliesCollection.doc(replyID).delete();
+  }
+
+  deleteThread(topicID: any, threadID: any){
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
+    threadCollection.doc(threadID).delete();
   }
 }

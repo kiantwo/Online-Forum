@@ -19,7 +19,7 @@
 }
 
 .block-topic {
-  width: 90%;
+  width: 60%;
   /* background-color: darksalmon; */
 }
 
@@ -57,7 +57,7 @@
 .tlast {
   margin-top: 1.5%;
   color: lightblue;
-  width: 25%;
+  width: 30%;
   /* background-color: coral; */
 }
 
@@ -79,7 +79,7 @@ thread-info > p {
 }
 
 .last-thread {
-  width: 400px;
+  width: 100%;
 }
 
 .tb-row {

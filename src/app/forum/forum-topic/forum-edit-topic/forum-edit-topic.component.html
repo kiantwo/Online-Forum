@@ -23,21 +23,6 @@
                         </div>
                         <input type="text" class="form-control custom-field-bg" formControlName="description">
                     </div>
-                    <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text custom-field-bg">Access: </span>
-                        </div>
-                        <select class="form-control custom-field-bg" formControlName="access">
-                            <option value="private">Private</option>
-                            <option value="public">Public</option>
-                        </select>
-                    </div>
-                    <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend custom-field-bg">
-                            <span class="input-group-text custom-field-bg">Image: </span>
-                        </div>
-                        <input type="file" class="form-control custom-field-bg" formControlName="imageUrl" name="topicImage" id="topicImage">
-                    </div>
                     <button type="submit" class="btn btn-primary" > Edit</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteTopic" >Delete</button>
                     <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>

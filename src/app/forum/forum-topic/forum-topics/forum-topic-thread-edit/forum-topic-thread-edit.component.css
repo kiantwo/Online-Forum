@@ -1,0 +1,13 @@
+.custom-bg{
+    background-color:rgb(5, 32, 51);
+    /* background-color:rgb(6, 31, 49); */
+}
+
+.custom-field-bg{
+    background-color:rgb(4, 28, 46);
+    color: white;
+}
+
+form button {
+    margin-left: 10px;
+}

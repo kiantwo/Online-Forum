@@ -57,6 +57,9 @@
 .user-details{
     /* background-color:ghostwhite; */
     align-items: center;
+    margin-left: 4%;
+    width: 100%;
+    font-size: 12px;
 }
 
 .whole-div{
@@ -64,3 +67,32 @@
     margin-top: 20px;
 }
 
+
+.user-image > img,
+thread-info > p {
+  float: left;
+}
+
+.user-image > img {
+  height: 40px;
+  width: 40px;
+  margin-right: 2%;
+  
+}
+
+
+.user{
+    vertical-align: middle;
+}
+
+.user-cell{
+    width: 100%;
+}
+
+.lastReply{
+font-size: 13px;
+}
+
+.user-details  p{
+    margin:0;
+}

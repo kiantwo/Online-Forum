@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TopicService } from 'src/app/shared/services/topic.service';
 
 @Component({
   selector: 'app-forum-topic-thread-delete',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForumTopicThreadDeleteComponent implements OnInit {
 
-  constructor() { }
+  constructor(public topicService: TopicService) { }
+
+  @Input() topicID: any;
+  @Input() threadID: any;
+  @Output() editStatus = new EventEmitter<number>();
+  
 
   ngOnInit(): void {
+  }
+
+  onDelete(){
+    this.topicService.deleteThread(this.topicID, this.threadID);
+    this.editStatus.emit(0);
   }
 
 }
