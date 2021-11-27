@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { faEdit, faStore } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/shared/services/auth.service';
 
 @Component({
   selector: 'app-forum-topics',
@@ -19,9 +20,14 @@ export class ForumTopicsComponent implements OnInit {
   threadsOfATopic: any = [];
   specificTopidID: any;
 
-  constructor(public topicSerivce: TopicService) {}
+  isAdmin = false;
+
+  constructor(public topicSerivce: TopicService, public authService: AuthService) {}
 
   ngOnInit(): void {
+    console.log(localStorage);
+    this.isAdmin = this.authService.isAdmin;
+    
     //retreive topics using topicSerivce from firestore and assign it to topic$
     this.topicSerivce.getTopics().subscribe((value) => {
       this.topic$ = value;

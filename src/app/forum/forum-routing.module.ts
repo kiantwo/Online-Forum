@@ -27,7 +27,7 @@ const routes: Routes = [
   {
     path: '',
     component: ForumMainComponent,
-    //canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
   },
   /*{
     path: 'thread/:id', // localhost:4200/(topic)/thread/threadid

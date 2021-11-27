@@ -126,6 +126,7 @@ export class AuthService {
 
   get isAdmin(): boolean {
     const role = JSON.parse(localStorage.getItem('isAdmin') || '');
+    
     return role;
   }
 

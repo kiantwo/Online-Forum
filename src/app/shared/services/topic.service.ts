@@ -33,6 +33,8 @@ export class TopicService {
     return this.topic$;
   }
 
+  
+
   getSingleTopic(topicID: any) {
     return this.afs.collection('topics').doc(topicID).get();
   }
@@ -93,5 +95,20 @@ export class TopicService {
   deleteThread(topicID: any, threadID: any){
     const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
     threadCollection.doc(threadID).delete();
+  }
+
+  getLastestReply(topicID: string, threadID: string){
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies', (ref) => ref.orderBy('datePosted', 'desc').limit(1));
+    const replies$ = repliesCollection.valueChanges();
+
+    return replies$;
+
+  }
+
+  getLatestThread(topicID: string){
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads', (ref)=>ref.orderBy('dateCreated', 'desc').limit(1));
+    const thread$ = threadCollection.valueChanges();
+
+    return thread$;
   }
 }

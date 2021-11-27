@@ -2,6 +2,7 @@
   data-bs-toggle="modal"
   data-bs-target="#createTopic"
   class="btn btn-dark"
+  *ngIf="isAdmin"
 >
   Create Topic
 </button>
@@ -61,7 +62,7 @@
         </div>
       </td>
       <td class="block-opt text-light">
-        <div>
+        <div *ngIf="isAdmin">
           <p (click)="onClick(i)" class="topt">
             <span class="text-info">.</span>
             <span class="text-warning">.</span>

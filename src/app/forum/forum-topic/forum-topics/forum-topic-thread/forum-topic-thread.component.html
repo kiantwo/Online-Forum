@@ -85,7 +85,7 @@
       </td>
 
       <td class="block-opt text-light">
-        <div>
+        <div *ngIf="currentUserID === thread.poster || isAdmin">
           <p class="topt" (click)="onClickEdit(i)" (click)="goToBottom()">
             <span class="text-info">.</span>
             <span class="text-warning">.</span>

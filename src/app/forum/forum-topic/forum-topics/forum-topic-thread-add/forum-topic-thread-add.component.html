@@ -16,6 +16,19 @@
                         </div>
                         <input type="text" class="form-control" formControlName="title">
                     </div>
+                    <!-- <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
+                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button> -->
+                </form>
+                <form 
+                [formGroup]="replyForm"
+                class="text-center"
+                >
+                    <div class="input-group form-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Reply: </span>
+                        </div>
+                        <input type="text" class="form-control" formControlName="message">
+                    </div>
                     <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
                     <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
                 </form>

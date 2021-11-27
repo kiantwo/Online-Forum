@@ -22,6 +22,11 @@ export class ForumTopicThreadComponent implements OnInit {
   inEdit: any = 0;
   threadToEdit: any;
 
+  isAdmin = false;
+  currentUserID: any;
+
+
+
   @Input() topicIndex: any;
 
   constructor(
@@ -29,24 +34,26 @@ export class ForumTopicThreadComponent implements OnInit {
     public topicService: TopicService,
     private route: ActivatedRoute,
     public authService: AuthService
-  ) {}
+  ) {
+    this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
+  }
 
   ngOnInit(): void {
     this.topicID$ = this.route.snapshot.paramMap.get('id');
+    this.isAdmin = this.authService.isAdmin;
     //getting the threads
     this.topicService.getThreads(this.topicID$).subscribe((threads) => {
       if (threads) {
         this.threads$ = threads;
-
         //pushing each returned latest reply to the replies$ array
         this.threads$.forEach((element: { threadID: any }, index: any) => {
-          this.topicService.getReplies(this.topicID$, element.threadID).subscribe((replies) => {
-              this.replies$[index] = replies[replies.length - 1];
-              if(replies.length != 0){
-                this.getDisplayName(index, this.replies$[index]['from']);
-              }
-              
-            });
+          //get latest reply
+          this.topicService.getLastestReply(this.topicID$, element.threadID).subscribe(reply => {
+            this.replies$[index] = reply[0];
+            if(reply.length != 0){
+              this.getDisplayName(index, this.replies$[index]['from']);
+            }
+          })
         });
       }
     });
@@ -57,6 +64,9 @@ export class ForumTopicThreadComponent implements OnInit {
         this.topics$ = topics.data();
       }
     });
+
+
+
   }
 
   getDisplayName(i: number, id: string) {
