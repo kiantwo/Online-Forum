@@ -12,14 +12,7 @@ import { User } from './user';
 export class AuthService {
   userData: any;
 
-  private usersCollection: AngularFirestoreCollection<User>;
-  user$!: Observable<User[]>;
-
   constructor(public afs: AngularFirestore, public afAuth: AngularFireAuth, public router: Router, public ngZone: NgZone) {
-    //get user data from collection
-    this.usersCollection = this.afs.collection<User>('users', (ref) => ref.orderBy('dateRegistered', 'desc').where('isAdmin', '==', false));
-    this.user$ = this.usersCollection.valueChanges();
-
     //save user data in localstorage when logged in
     this.afAuth.authState.subscribe(user => {
       if (user) {
@@ -126,13 +119,14 @@ export class AuthService {
 
   get isAdmin(): boolean {
     const role = JSON.parse(localStorage.getItem('isAdmin') || '');
-    
     return role;
   }
 
   //get all users from firestore
   getUsers() {
-    return this.user$;
+    const usersCollection = this.afs.collection<User>('users', (ref) => ref.orderBy('dateRegistered', 'desc').where('isAdmin', '==', false));
+    const user$ = usersCollection.valueChanges();
+    return user$;
   }
 
   getSingleUser(uid: any) {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/guard/auth.guard';
 import { ForumMainComponent } from './forum-main/forum-main.component';
-import { ForumThreadMainComponent } from './forum-thread/forum-thread-main/forum-thread-main.component';
 
 const routes: Routes = [
   /*{
@@ -15,10 +14,6 @@ const routes: Routes = [
     loadChildren: () => import('./forum-thread/forum-thread.module').then((m) => m.ForumThreadModule),
     canActivate: [AuthGuard],
   },
-  
- 
-  
-  
   /*{
     path: 'thread',
     component: ForumThreadMainComponent,

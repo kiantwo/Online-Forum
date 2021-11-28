@@ -2,6 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { faEdit, faStore } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/shared/services/auth.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-forum-topics',
@@ -22,23 +23,33 @@ export class ForumTopicsComponent implements OnInit {
 
   isAdmin = false;
 
-  constructor(public topicSerivce: TopicService, public authService: AuthService) {}
+  constructor(public topicSerivce: TopicService, public authService: AuthService, private afs: AngularFirestore) {}
 
   ngOnInit(): void {
-    console.log(localStorage);
-    this.isAdmin = this.authService.isAdmin;
-    
+    this.isUserAdmin();
     //retreive topics using topicSerivce from firestore and assign it to topic$
     this.topicSerivce.getTopics().subscribe((value) => {
       this.topic$ = value;
 
       //get info of most recent threads
       this.topic$.forEach((element: any, index: any) => {
-        this.topicSerivce.getThreads(element.topicID).subscribe((result) => {
+        this.topicSerivce.getLatestThread(element.topicID).subscribe((result) => {
           this.lastThread$[index] = result[0];
-        });
+        })
       });
     });
+  }
+
+  isUserAdmin() {
+    this.authService.afAuth.onAuthStateChanged(currentUser => {
+      if (currentUser) {
+        this.afs.collection('users').doc(currentUser.uid).get().subscribe((result) => {
+          if (result) {
+            this.isAdmin = result.get('isAdmin');
+          }
+        })
+      }
+    })
   }
 
   onClick(i: number) {

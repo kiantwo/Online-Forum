@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 
 @Component({
@@ -22,7 +21,7 @@ export class AppComponent {
   isAdmin = false;
   isBanned = false;
 
-  constructor(private router: Router, private fb: FormBuilder, public authService: AuthService, public afs: AngularFirestore) {
+  constructor(private fb: FormBuilder, public authService: AuthService, public afs: AngularFirestore) {
   }
 
   ngOnInit(): void {

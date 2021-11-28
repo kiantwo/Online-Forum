@@ -36,6 +36,8 @@
       type="button"
       class="btn btn-md btn-danger"
       *ngIf="currentUserID === thread.poster || isAdmin"
+      data-bs-toggle="modal"
+      data-bs-target="#deleteThread"
     >
       Delete thread
     </button>
@@ -51,6 +53,12 @@
     (onClose)="onReplyClose($event)"
     (success)="onReplySuccess()"
   ></app-forum-thread-reply>
+  <div class="modal fade" id="deleteThread" tabindex="-1" aria-labelledby="deleteTopicLabel" aria-hidden="true">
+    <app-forum-thread-delete-thread
+    [threadID] = "threadID"
+    [topicID] = "topicID"
+    ></app-forum-thread-delete-thread>
+</div>
   <div
     class="d-flex justify-content-center"
     *ngIf="replies$.length > itemsPerPage"

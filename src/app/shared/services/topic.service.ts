@@ -33,8 +33,6 @@ export class TopicService {
     return this.topic$;
   }
 
-  
-
   getSingleTopic(topicID: any) {
     return this.afs.collection('topics').doc(topicID).get();
   }

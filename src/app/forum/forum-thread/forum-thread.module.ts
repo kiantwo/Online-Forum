@@ -11,6 +11,7 @@ import { ForumThreadDeleteReplyComponent } from './forum-thread-delete-reply/for
 import { ForumThreadEditComponent } from './forum-thread-edit/forum-thread-edit.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { AdminModule } from 'src/app/admin/admin.module';
+import { ForumThreadDeleteThreadComponent } from './forum-thread-delete-thread/forum-thread-delete-thread.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AdminModule } from 'src/app/admin/admin.module';
     ForumThreadBlockComponent,
     ForumThreadReplyComponent,
     ForumThreadDeleteReplyComponent,
-    ForumThreadEditComponent
+    ForumThreadEditComponent,
+    ForumThreadDeleteThreadComponent
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,7 @@ import { AdminModule } from 'src/app/admin/admin.module';
     FontAwesomeModule,
     ReactiveFormsModule,
     NgxPaginationModule,
-    AdminModule
+    AdminModule,
   ],
   exports: [ForumThreadMainComponent]
 })

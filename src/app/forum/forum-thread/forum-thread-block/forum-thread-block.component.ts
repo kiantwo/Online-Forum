@@ -23,7 +23,6 @@ export class ForumThreadBlockComponent implements OnInit {
   @Input() index: any;
   @Input() p: any;
   @Output() quotedReply = new EventEmitter<any>();
-  //@Output() replyToEdit = new EventEmitter<any>();
 
   from$: any[];
   to$: any[];
@@ -45,7 +44,6 @@ export class ForumThreadBlockComponent implements OnInit {
   editClicked = false;
 
   constructor(private route: ActivatedRoute, public topicService: TopicService, public authService: AuthService) {
-    //this.topicID = 'YFb7yHbbsy0EfujSESXV' //(for test purposes) -- general discussion topicID
     this.topicID = this.route.snapshot.paramMap.get('id');
     this.threadID = this.route.snapshot.paramMap.get('tid');
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
@@ -84,18 +82,33 @@ export class ForumThreadBlockComponent implements OnInit {
     //get complete reply details for each reply
     this.replies$.forEach((element: any, index: number) => {
       //get detail of user replying
-      this.authService.getSingleUser(element.from).subscribe(result => {
-        const fromInfo = {
-          uid: result.get('uid'),
-          displayName: result.get('displayName'),
-          email: result.get('email'),
-          photoURL: result.get('photoURL'),
-          isBanned: result.get('isBanned'),
-          isAdmin: result.get('isAdmin')
-        }
-        this.from$[index] = fromInfo;
-      })
+      
+      //check data within from$
+      if(this.from$.length > 0) {
+        var i = 0;
+        i = this.from$?.findIndex(x => x.uid === element.from);
+      }
 
+      //if user's info already stored in from$, then just use that
+      if(i) {
+        this.from$[index] = this.from$[i];
+      }
+
+      //if user's info not yet in from$, fetch from db
+      else {
+        this.authService.getSingleUser(element.from).subscribe(result => {
+          const fromInfo = {
+            uid: result.get('uid'),
+            displayName: result.get('displayName'),
+            email: result.get('email'),
+            photoURL: result.get('photoURL'),
+            isBanned: result.get('isBanned'),
+            isAdmin: result.get('isAdmin')
+          }
+          this.from$[index] = fromInfo;
+        })
+      }
+      
       //if user is replying to another user
       if (element.to) {
         //get detail of user being replied to

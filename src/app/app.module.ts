@@ -22,7 +22,6 @@ import { AdminModule } from './admin/admin.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { ForumThreadModule } from './forum/forum-thread/forum-thread.module';
 import { BannedComponent } from './banned/banned.component';
-import { ForumTopicModule } from './forum/forum-topic/forum-topic.module';
 
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
 
@@ -40,7 +39,6 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
     LoginPageModule,
     AdminModule,
     ForumModule,
-    ForumTopicModule,
     ForumThreadModule,
     AppRoutingModule,
     ReactiveFormsModule,
@@ -49,7 +47,6 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     FontAwesomeModule,
-    ForumTopicModule
   ],
   providers: [AngularFirestore, AuthService,{provide: BUCKET, useValue: 'myBucket'}],
   bootstrap: [AppComponent],

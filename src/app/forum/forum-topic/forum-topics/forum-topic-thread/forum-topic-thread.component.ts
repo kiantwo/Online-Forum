@@ -25,8 +25,6 @@ export class ForumTopicThreadComponent implements OnInit {
   isAdmin = false;
   currentUserID: any;
 
-
-
   @Input() topicIndex: any;
 
   constructor(
@@ -64,9 +62,6 @@ export class ForumTopicThreadComponent implements OnInit {
         this.topics$ = topics.data();
       }
     });
-
-
-
   }
 
   getDisplayName(i: number, id: string) {
