@@ -17,6 +17,11 @@
       </li>
     </ol>
   </nav>
+
+  <div class="topicDescription">
+    <p>{{description}}</p>
+  </div>
+
   <button
     data-bs-toggle="modal"
     data-bs-target="#createThread"
@@ -24,7 +29,11 @@
   >
     Create Thread
   </button>
+
+
+
   <table class="table table-borderless">
+    <tbody *ngIf="!threads$"><p>WALAY SULOD</p></tbody>
     <tbody
       *ngFor="let thread of threads$; index as i"
       class="d-flex overall-block"

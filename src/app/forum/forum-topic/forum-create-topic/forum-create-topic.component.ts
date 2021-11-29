@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { Topic } from 'src/app/shared/services/topic';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import * as firebase from 'firebase/compat';
 
@@ -16,8 +16,8 @@ export class ForumCreateTopicComponent implements OnInit {
 
   form = this.fb.group({
     topicID: [''],
-    name:[''],
-    description: [''],
+    name:['', [Validators.required, Validators.pattern("[a-zA-z ()]+")]],
+    description: ['',[Validators.required, Validators.minLength(2), Validators.pattern("[0-9a-zA-z ().,?\'\"]+"), Validators.maxLength(350)]],
 
   })
 
@@ -43,10 +43,22 @@ export class ForumCreateTopicComponent implements OnInit {
     
     this.topicService.addTopic(payload);
     this.form.reset();
+    this.onClose();
   }
 
   get f(){
     return this.form.controls;
   }
+
+  onClose(){
+    if( document.getElementById("topicName").classList.contains('ng-touched') ){
+      this.f.name.markAsUntouched();
+    }
+    
+    if ( document.getElementById("description").classList.contains('ng-touched') ){
+      this.f.description.markAsUntouched();
+    }
+  }
+
 
 }

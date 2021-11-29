@@ -96,3 +96,15 @@ font-size: 13px;
 .user-details  p{
     margin:0;
 }
+
+.topicDescription{
+    padding: 20px;
+    height: 100px;
+    /* background-color: crimson; */
+    margin-bottom: 15px;
+    font-style: italic;
+    color: rgba(79, 173, 227, 89);
+    font-size: 18px;
+    text-align: justify;
+    text-indent: 40px;
+}

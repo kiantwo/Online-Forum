@@ -12,3 +12,15 @@
 .modal-header > h1 {
     font-size: 22pt;
 }
+
+.errorMessage {
+  margin-bottom: 10px;
+  font-size: 12px;
+  color: red;
+  text-align: left;
+}
+
+button {
+  margin-left: 5px;
+  margin-right: 5px;
+}

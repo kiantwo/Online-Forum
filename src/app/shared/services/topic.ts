@@ -4,8 +4,6 @@ export interface Topic{
     topicID: string;
     name: string;
     description: string;
-
-
 }
 
 export interface Reply {
@@ -19,7 +17,6 @@ export interface Reply {
 
 export interface Thread{
     dateCreated: FieldValue | any;
-    lastPost: FieldValue | any;
     poster: string;
     threadID: string;
     title: string;

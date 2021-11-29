@@ -2,7 +2,7 @@
     <div class="modal-content">
         <div class="modal-header modal-header-warning">
             <h1>Create a Thread</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" (click)="onClose()" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
             <div class="main-div">
@@ -14,10 +14,14 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Title: </span>
                         </div>
-                        <input type="text" class="form-control" formControlName="title">
+                        <input type="text" class="form-control" formControlName="title" id="title">
                     </div>
-                    <!-- <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button> -->
+
+                    <div class="errorMessage" *ngIf="form.controls.title.errors?.pattern" >Thread title is Invalid</div>
+                    <div class="errorMessage" *ngIf="form.controls.title.errors?.required && form.controls.title.touched">Thread title is Required</div> 
+                    <div class="errorMessage" *ngIf="form.controls.title.errors?.minlength" >Thread title is too short</div>
+                    <div class="errorMessage" *ngIf="form.controls.title.errors?.maxlength" >Thread title character limit has exceeded</div>
+
                 </form>
                 <form 
                 [formGroup]="replyForm"
@@ -27,10 +31,20 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Reply: </span>
                         </div>
-                        <input type="text" class="form-control" formControlName="message">
+                        <input type="text" class="form-control" formControlName="message" id="reply">
                     </div>
-                    <button type="button" class="btn btn-dark" (click)="onSubmit()" data-bs-dismiss="modal"> Create Topic</button>
-                    <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Cancel</button>
+
+                    <div class="errorMessage" *ngIf="replyForm.controls.message.errors?.minlength" >Reply is too short</div>
+                    <div class="errorMessage" *ngIf="replyForm.controls.message.errors?.required && replyForm.controls.message.touched">A first message is Required</div>
+
+                    <button 
+                        type="button" 
+                        class="btn btn-dark" 
+                        (click)="onSubmit()" 
+                        data-bs-dismiss="modal"
+                        [disabled]="!form.valid || !replyForm.valid"
+                        > Create Topic</button>
+                    <button type="button" class="btn btn-dark" (click)="onClose()" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>
 

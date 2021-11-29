@@ -10,6 +10,7 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 export class ForumDeleteComponent implements OnInit {
 
 @Input() topicId: string;
+@Input() topicTitle: string;
 @Output() deleteStatus = new EventEmitter<boolean>();
 
 

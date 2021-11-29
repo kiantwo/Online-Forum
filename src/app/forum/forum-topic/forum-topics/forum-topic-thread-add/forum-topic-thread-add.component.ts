@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Thread, Reply } from 'src/app/shared/services/topic';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import * as firebase from 'firebase/compat/app';
@@ -31,14 +31,13 @@ export class ForumTopicThreadAddComponent implements OnInit {
 
   form = this.fb.group({
     dateCreated: [''],
-    lastPost: [''],
     poster: [''],
     threadID: [''],
-    title:[''],
+    title:['', [Validators.required, Validators.pattern("[0-9a-zA-z ()]+"), Validators.minLength(2), Validators.maxLength(30)]],
   })
   replyForm = this.fb.group({
     from: [''],
-    message: [''],
+    message: ['',[Validators.required, Validators.minLength(2)]],
     replyID: [''],
     to: [''],
     toReplyID: [''],
@@ -48,7 +47,6 @@ export class ForumTopicThreadAddComponent implements OnInit {
   onSubmit(){
     const payload: Thread = {
       threadID: '',
-      lastPost: '',
       poster: this.currentUserID,
       dateCreated: firebase.default.firestore.FieldValue.serverTimestamp(),
       title: this.f.title.value,
@@ -57,6 +55,8 @@ export class ForumTopicThreadAddComponent implements OnInit {
     this.topicService.addThread(payload, this.topicID);
     this.form.reset();
     this.includeMyReply();
+
+    this.onClose();
     
   }
 
@@ -87,6 +87,16 @@ export class ForumTopicThreadAddComponent implements OnInit {
 
   get r(){
     return this.replyForm.controls;
+  }
+
+  onClose(){
+    if( document.getElementById("title").classList.contains('ng-touched') ){
+      this.f.title.markAsUntouched();
+    }
+    
+    if ( document.getElementById("reply").classList.contains('ng-touched') ){
+      this.r.message.markAsUntouched();
+    }
   }
 
 

@@ -15,15 +15,30 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text custom-field-bg">Title: </span>
                         </div>
-                        <input type="text" class="form-control custom-field-bg" formControlName="name" >
+                        <input type="text" class="form-control custom-field-bg" formControlName="name" id="topicName" >
                     </div>
+
+                    
+                    <div class="errorMessage" *ngIf="editForm.controls.name.errors?.pattern" >Topic Name is Invalid</div>
+                    <div class="errorMessage" *ngIf="editForm.controls.name.errors?.required && editForm.controls.name.touched">Topic Name is Required</div> 
+
+
+
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
                             <span class="input-group-text custom-field-bg"> Description: </span>
                         </div>
-                        <input type="text" class="form-control custom-field-bg" formControlName="description">
+                        <input type="text" class="form-control custom-field-bg" formControlName="description" id="topicDescription">
                     </div>
-                    <button type="submit" class="btn btn-primary" > Edit</button>
+
+                    <div class="errorMessage" *ngIf="editForm.controls.description.errors?.pattern" >Topic Description is Invalid</div>
+                    <div class="errorMessage" *ngIf="editForm.controls.description.errors?.required && editForm.controls.description.touched">Topic Description is Required</div> 
+                    <div class="errorMessage" *ngIf="editForm.controls.description.errors?.minlength" >Topic Description is too short</div>
+                    <div class="errorMessage" *ngIf="editForm.controls.description.errors?.maxlength" >Topic description character limit has exceeded</div>
+                    
+
+
+                    <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary" > Edit</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteTopic" >Delete</button>
                     <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>
                 </form>
@@ -36,6 +51,7 @@
 <div class="modal fade" id="deleteTopic" tabindex="-1" aria-labelledby="deleteTopicLabel" aria-hidden="true">
     <app-forum-delete 
     [topicId]="topicToEdit.topicID"
+    [topicTitle]="topicToEdit.name"
     (deleteStatus)="onDeleteTopic($event)"
     ></app-forum-delete>
 </div>

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { Topic } from 'src/app/shared/services/topic';
 
@@ -26,18 +26,18 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.goToBottom();
     this.editForm = this.fb.group({
-      topicID: [this.topicToEdit.topicID],
-      name:[this.topicToEdit.name],
-      description: [this.topicToEdit.description],
+      topicID: [this.topicToEdit.topicID,],
+      name:[this.topicToEdit.name,  [Validators.required, Validators.pattern("[a-zA-z ()]+")]],
+      description: [this.topicToEdit.description, [Validators.required, Validators.minLength(2), Validators.pattern("[0-9a-zA-z ().,?\'\"]+"), Validators.maxLength(350)]],
     });
   }
 
   ngOnChanges(): void{
     this.goToBottom();
     this.editForm = this.fb.group({
-      topicID: [this.topicToEdit.topicID],
-      name:[this.topicToEdit.name],
-      description: [this.topicToEdit.description],
+      topicID: [this.topicToEdit.topicID, ],
+      name:[this.topicToEdit.name, [Validators.required, Validators.pattern("[a-zA-z ()]+")]],
+      description: [this.topicToEdit.description, [Validators.required, Validators.minLength(2), Validators.pattern("[0-9a-zA-z ().,?\'\"]+"), Validators.maxLength(350)]],
 
     });
   }
@@ -62,6 +62,14 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
   }
 
   onClose(){
+    if( document.getElementById("topicName").classList.contains('ng-touched') ){
+      this.f.name.markAsUntouched();
+    }
+    
+    if ( document.getElementById("description").classList.contains('ng-touched') ){
+      this.f.description.markAsUntouched();
+    }
+
     this.editStatus.emit(false);
   }
 

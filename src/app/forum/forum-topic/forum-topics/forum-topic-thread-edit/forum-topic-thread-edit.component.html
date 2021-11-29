@@ -18,7 +18,13 @@
                         <input type="text" class="form-control custom-field-bg" formControlName="title" >
                     </div>
 
-                    <button type="submit" class="btn btn-primary" > Edit</button>
+                    <div class="errorMessage" *ngIf="editForm.controls.title.errors?.pattern" >Thread title is Invalid</div>
+                    <div class="errorMessage" *ngIf="editForm.controls.title.errors?.required && editForm.controls.title.touched">Thread title is Required</div> 
+                    <div class="errorMessage" *ngIf="editForm.controls.title.errors?.minlength" >Thread title is too short</div>
+                    <div class="errorMessage" *ngIf="editForm.controls.title.errors?.maxlength" >Thread title character limit has exceeded</div>
+
+
+                    <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary" > Edit</button>
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteThread" >Delete</button>
                     <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>
                 </form>
@@ -32,6 +38,7 @@
     <app-forum-topic-thread-delete
     [threadID] = "threadToEdit.threadID"
     [topicID] = "topicID$"
+    [threadTitle] = "threadToEdit.title"
     (editStatus)="editComplete($event)"
     ></app-forum-topic-thread-delete>
 </div>

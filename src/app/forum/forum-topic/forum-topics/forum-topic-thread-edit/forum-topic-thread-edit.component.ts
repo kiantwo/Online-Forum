@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { Form, FormBuilder, FormGroup } from '@angular/forms';
+import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Thread } from 'src/app/shared/services/topic';
 import { TopicService } from 'src/app/shared/services/topic.service';
@@ -21,21 +21,20 @@ export class ForumTopicThreadEditComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.editForm = this.fb.group({
-      title: [this.threadToEdit.title]
+      title: [this.threadToEdit.title, [Validators.required, Validators.pattern("[0-9a-zA-z ()]+"), Validators.minLength(2), Validators.maxLength(30)]]
     });
     this.topicID$ = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnChanges(): void {
     this.editForm = this.fb.group({
-      title: [this.threadToEdit.title]
+      title: [this.threadToEdit.title, [Validators.required, Validators.pattern("[0-9a-zA-z ()]+"), Validators.minLength(2), Validators.maxLength(30)]]
     })
   }
 
   onSubmitChanges(){
     const payload: Thread = {
       dateCreated: this.threadToEdit.dateCreated,
-      lastPost: '',
       poster: this.threadToEdit.poster,
       threadID: this.threadToEdit.threadID,
       title: this.f.title.value,

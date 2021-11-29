@@ -5,11 +5,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" >
-        <p>Are you sure you want to delete this thread?</p>
+        <p>Are you sure you want to delete {{ threadTitle }} thread?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" (click)="onDelete()" data-bs-dismiss="modal" >Save changes</button>
+        <button type="submit" class="btn btn-dark" (click)="onDelete()" data-bs-dismiss="modal" >Delete Thread</button>
       </div>
     </div>
 </div>

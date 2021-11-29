@@ -17,7 +17,7 @@ export class ForumTopicThreadComponent implements OnInit {
   topics$: any = [];
   replies$: any = [];
   authors: any = [];
-  show: any = [];
+  description: any;
 
   inEdit: any = 0;
   threadToEdit: any;
@@ -62,6 +62,12 @@ export class ForumTopicThreadComponent implements OnInit {
         this.topics$ = topics.data();
       }
     });
+
+    this.topicService.getSingleTopic(this.topicID$).subscribe( result => {
+      if(result){
+        this.description = result.get('description');
+      }
+    })
   }
 
   getDisplayName(i: number, id: string) {
