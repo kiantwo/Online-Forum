@@ -27,10 +27,7 @@
                      
                     
                     <div class="input-group form-group mb-3">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text"> Description: </span>
-                        </div>
-                        <input type="text" class="form-control" formControlName="description" id="description">
+                        <textarea type="text" class="form-control" formControlName="description" id="description" rows="7" cols="50" placeholder="Description"></textarea>
                     </div>
                     <div class="errorMessage" *ngIf="form.controls.description.errors?.minlength" >Topic Description is too short</div>
                     <div class="errorMessage" *ngIf="form.controls.description.errors?.maxlength" >Topic description character limit has exceeded</div>
@@ -44,7 +41,7 @@
                         data-bs-dismiss="modal"
                         [disabled]="!form.valid"
                         > Create Topic</button>
-                    <button type="button" class="btn btn-dark" (click)="onClose()" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" (click)="onClose()" data-bs-dismiss="modal">Cancel</button>
                 </form>
             </div>
 

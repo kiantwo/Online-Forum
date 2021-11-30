@@ -1,10 +1,10 @@
-<div class="custom-bg">
+<div>
     <div class="modal-content">
-        <div class="modal-header custom-field-bg">
+        <div class="modal-header ">
             <h1>Edit Thread</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="onClose()" aria-label="Close"></button>
         </div>
-        <div class="modal-body custom-bg">
+        <div class="modal-body ">
             <div class="main-div">
                 <form 
                 class="text-center"
@@ -13,9 +13,9 @@
                 >
                     <div class="input-group form-group mb-3">
                         <div class="input-group-prepend">
-                            <span class="input-group-text custom-field-bg">Title: </span>
+                            <span class="input-group-text ">Title: </span>
                         </div>
-                        <input type="text" class="form-control custom-field-bg" formControlName="title" >
+                        <input type="text" class="form-control " formControlName="title" >
                     </div>
 
                     <div class="errorMessage" *ngIf="editForm.controls.title.errors?.pattern" >Thread title is Invalid</div>
@@ -24,9 +24,9 @@
                     <div class="errorMessage" *ngIf="editForm.controls.title.errors?.maxlength" >Thread title character limit has exceeded</div>
 
 
-                    <button type="submit" [disabled]="!editForm.valid" class="btn btn-primary" > Edit</button>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteThread" >Delete</button>
-                    <button type="button" class="btn btn-primary" (click)="onClose()" >Cancel</button>
+                    <button type="submit" [disabled]="!editForm.valid" class="btn btn-dark" > Save Changes</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteThread" >Delete Thread</button>
+                    <button type="button" class="btn btn-secondary" (click)="onClose()" >Cancel</button>
                 </form>
             </div>
 

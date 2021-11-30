@@ -14,16 +14,12 @@ const routes: Routes = [
     loadChildren: () => import('./forum-thread/forum-thread.module').then((m) => m.ForumThreadModule),
     canActivate: [AuthGuard],
   },
-  /*{
-    path: 'thread',
-    component: ForumThreadMainComponent,
-    canActivate: [AuthGuard]
-  }*/
   {
     path: '',
     component: ForumMainComponent,
     canActivate: [AuthGuard],
   },
+
   /*{
     path: 'thread/:id', // localhost:4200/(topic)/thread/threadid
     component: ForumThreadMainComponent,

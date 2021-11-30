@@ -60,6 +60,14 @@ export class TopicService {
   }
 
   deleteTopic(topicID: any) {
+    let threads: any = [];
+    this.getThreads(topicID).subscribe(result => {
+      threads = result;
+
+      threads.forEach(element => {
+        this.deleteThread(topicID,element.threadID);
+      });
+    });
     this.topicCollection.doc(topicID).delete();
   }
 
@@ -92,8 +100,10 @@ export class TopicService {
 
   deleteThread(topicID: any, threadID: any){
     const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
+    this.deleteSubcollectionReplies(topicID, threadID);
     threadCollection.doc(threadID).delete();
   }
+
 
   getLastestReply(topicID: string, threadID: string){
     const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies', (ref) => ref.orderBy('datePosted', 'desc').limit(1));
@@ -108,5 +118,17 @@ export class TopicService {
     const thread$ = threadCollection.valueChanges();
 
     return thread$;
+  }
+
+
+  deleteSubcollectionReplies(topicID: string, threadID: string){
+    let replies: any = [];
+    this.getReplies(topicID, threadID).subscribe(reply => {
+      replies = reply;
+
+      replies.forEach(element => {
+        this.deleteReply(element.replyID, topicID, threadID);
+      });
+    });
   }
 }

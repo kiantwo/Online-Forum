@@ -13,14 +13,22 @@ export class ForumDeleteComponent implements OnInit {
 @Input() topicTitle: string;
 @Output() deleteStatus = new EventEmitter<boolean>();
 
+@Input() operation: string = "1";
+
 
   constructor(private topicServer: TopicService) { }
 
   ngOnInit(): void {}
 
   onDelete(id: string){
-    this.topicServer.deleteTopic(id);
-    this.deleteStatus.emit(false);
+
+    if (this.operation == "1"){
+      this.topicServer.deleteTopic(id);
+      this.deleteStatus.emit(false);
+    }
+    else{
+      this.topicServer.deleteTopic(id);
+    }
   }
 
 

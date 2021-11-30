@@ -13,7 +13,7 @@ import { from } from 'rxjs';
 })
 export class ForumTopicThreadComponent implements OnInit {
   topicID$: any;
-  threads$: any;
+  threads$: any =[];
   topics$: any = [];
   replies$: any = [];
   authors: any = [];
@@ -24,6 +24,10 @@ export class ForumTopicThreadComponent implements OnInit {
 
   isAdmin = false;
   currentUserID: any;
+
+
+  posters: any = [];
+  operation = "2";
 
   @Input() topicIndex: any;
 
@@ -45,6 +49,7 @@ export class ForumTopicThreadComponent implements OnInit {
         this.threads$ = threads;
         //pushing each returned latest reply to the replies$ array
         this.threads$.forEach((element: { threadID: any }, index: any) => {
+          this.getPosterName(index, this.threads$[index].poster);
           //get latest reply
           this.topicService.getLastestReply(this.topicID$, element.threadID).subscribe(reply => {
             this.replies$[index] = reply[0];
@@ -62,7 +67,6 @@ export class ForumTopicThreadComponent implements OnInit {
         this.topics$ = topics.data();
       }
     });
-
     this.topicService.getSingleTopic(this.topicID$).subscribe( result => {
       if(result){
         this.description = result.get('description');
@@ -75,6 +79,12 @@ export class ForumTopicThreadComponent implements OnInit {
         //console.log(result.get('displayName'));
         this.authors[i] = result.get('displayName');
       });
+  }
+
+  getPosterName(i: number, id: string){
+    this.authService.getSingleUser(this.threads$[i].poster).subscribe(result => {
+      this.posters[i] = result.get('displayName');
+    });
   }
 
   onClickEdit(i: number) {

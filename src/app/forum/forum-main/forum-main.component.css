@@ -23,6 +23,10 @@ span {
 }*/
 
 
-.custom-bg{
+/* .custom-bg{
     background-color:rgb(4, 28, 46);
-  }
+  } */
+
+.media-body{
+    margin-bottom: 30px;
+}

@@ -21,14 +21,14 @@ export class ForumTopicThreadEditComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.editForm = this.fb.group({
-      title: [this.threadToEdit.title, [Validators.required, Validators.pattern("[0-9a-zA-z ()]+"), Validators.minLength(2), Validators.maxLength(30)]]
+      title: [this.threadToEdit.title, [Validators.required, Validators.pattern("[0-9a-zA-z ()#]+"), Validators.minLength(2), Validators.maxLength(30)]]
     });
     this.topicID$ = this.route.snapshot.paramMap.get('id');
   }
 
   ngOnChanges(): void {
     this.editForm = this.fb.group({
-      title: [this.threadToEdit.title, [Validators.required, Validators.pattern("[0-9a-zA-z ()]+"), Validators.minLength(2), Validators.maxLength(30)]]
+      title: [this.threadToEdit.title, [Validators.required, Validators.pattern("[0-9a-zA-z ()#]+"), Validators.minLength(2), Validators.maxLength(30)]]
     })
   }
 

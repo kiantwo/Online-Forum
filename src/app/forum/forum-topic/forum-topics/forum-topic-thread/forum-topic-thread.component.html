@@ -1,4 +1,4 @@
-<div class="whole-div container custom-bg" *ngIf="authService.userData as user">
+<div class="whole-div container" *ngIf="authService.userData as user">
   <nav
     style="
       --bs-breadcrumb-divider: url(
@@ -10,14 +10,17 @@
   >
     <ol class="breadcrumb">
       <li class="breadcrumb-item">
-        <a routerLink="main/../..">Forum Main</a>
+        <a class="navItem" routerLink="main/../..">Forum Main</a>
       </li>
-      <li class="breadcrumb-item">
+      <li class="breadcrumb-item navTopicName">
         {{ topics$.name }}
       </li>
     </ol>
   </nav>
 
+  <div class="topicName">
+    <p>{{topics$.name}}</p>
+  </div>
   <div class="topicDescription">
     <p>{{description}}</p>
   </div>
@@ -25,15 +28,25 @@
   <button
     data-bs-toggle="modal"
     data-bs-target="#createThread"
-    class="btn btn-dark"
+    class="btn btn-dark createThreadButton"
   >
     Create Thread
+  </button>
+  <button
+    data-bs-toggle="modal"
+    data-bs-target="#deleteTopic"
+    class="btn btn-danger createThreadButton"
+    *ngIf="isAdmin"
+  >
+    Delete Topic
   </button>
 
 
 
   <table class="table table-borderless">
-    <tbody *ngIf="!threads$"><p>WALAY SULOD</p></tbody>
+    <div *ngIf="threads$.length == 0" class="emptyThread">
+      <p>No threads created</p>
+    </div>
     <tbody
       *ngFor="let thread of threads$; index as i"
       class="d-flex overall-block"
@@ -48,6 +61,7 @@
                 >{{ thread.title }}</a
               >
             </p>
+            <p class="posterName">by <span class="posterName2">{{posters[i]}}</span> </p>
           </tr>
         </div>
       </td>
@@ -96,9 +110,9 @@
       <td class="block-opt text-light">
         <div *ngIf="currentUserID === thread.poster || isAdmin">
           <p class="topt" (click)="onClickEdit(i)" (click)="goToBottom()">
-            <span class="text-info">.</span>
-            <span class="text-warning">.</span>
-            <span class="text-danger">.</span>
+            <span >.</span>
+            <span >.</span>
+            <span >.</span>
           </p>
         </div>
       </td>
@@ -120,4 +134,16 @@
   aria-hidden="true"
 >
   <app-forum-topic-thread-add></app-forum-topic-thread-add>
+</div>
+
+<div
+  class="modal fade"
+  id="deleteTopic"
+  tabindex="-1"
+  aria-hidden="true"
+><app-forum-delete
+  [operation] = "operation"
+  [topicId] = "topicID$"
+  [topicTitle] = "topics$.name"
+></app-forum-delete>
 </div>

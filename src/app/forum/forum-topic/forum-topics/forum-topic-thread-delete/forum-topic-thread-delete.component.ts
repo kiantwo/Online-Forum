@@ -14,6 +14,8 @@ export class ForumTopicThreadDeleteComponent implements OnInit {
   @Input() threadID: any;
   @Input() threadTitle: any;
   @Output() editStatus = new EventEmitter<number>();
+
+  replies: any = [];
   
 
   ngOnInit(): void {
