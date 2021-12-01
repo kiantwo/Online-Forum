@@ -12,7 +12,7 @@ export class TopicService {
   topic$!: Observable<Topic[]>;
 
   constructor(private afs: AngularFirestore) {
-    this.topicCollection = this.afs.collection<Topic>('topics');
+    this.topicCollection = this.afs.collection<Topic>('topics', (ref)=>ref.orderBy('dateCreated'));
     this.topic$ = this.topicCollection.valueChanges();
   }
 
@@ -107,10 +107,9 @@ export class TopicService {
 
   getLastestReply(topicID: string, threadID: string){
     const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies', (ref) => ref.orderBy('datePosted', 'desc').limit(1));
-    const replies$ = repliesCollection.valueChanges();
+    const reply = repliesCollection.valueChanges();
 
-    return replies$;
-
+    return reply;
   }
 
   getLatestThread(topicID: string){

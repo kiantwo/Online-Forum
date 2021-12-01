@@ -44,10 +44,9 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
 
 
   onSubmitChanges(){
-    const payload: Topic = {
+    const payload: any = {
       topicID: this.f.topicID.value,
       description: this.f.description.value,
-
       name: this.f.name.value,
 
     };

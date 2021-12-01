@@ -1,78 +1,75 @@
-.overall-block{
-    height: 100px;
-    border-top-width: 1px;
-    align-items: center;
+.overall-block {
+  height: 100px;
+  border-top-width: 1px;
+  align-items: center;
 }
 
-.block-topic{
-    width: 60%;
-    /* background-color: darksalmon; */
-    display: flex;
-    align-items: center;
+.block-topic {
+  width: 60%;
+  /* background-color: darksalmon; */
+  display: flex;
+  align-items: center;
 }
 
-.custom-bg{
-    background-color:rgb(5, 32, 51);
-    /* background-color:rgb(6, 31, 49); */
-  }
-
-.topt{
-    font-size: 40px;
-    font-weight: bold;
-    color: gray;
+.custom-bg {
+  background-color: rgb(5, 32, 51);
+  /* background-color:rgb(6, 31, 49); */
 }
 
-.tname{
-    font-size: 25px;
-    /* background-color: rgb(38, 125, 128); */
-    margin-bottom: 0;
+.topt {
+  font-size: 40px;
+  font-weight: bold;
+  color: gray;
+}
+
+.tname {
+  font-size: 25px;
+  /* background-color: rgb(38, 125, 128); */
+  margin-bottom: 0;
 }
 
 .tname > a {
-    color: black;
-    font-weight: 500;
+  color: black;
+  font-weight: 500;
 }
 
-.block-opt{
-    width: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.block-opt {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-
-.block-below{
-    /* background-color: cornflowerblue; */
-    height: 100%;
-    width: 30%;
-    display: flex;
-    align-items: center;
-    vertical-align:middle;
-
+.block-below {
+  /* background-color: cornflowerblue; */
+  height: 100%;
+  width: 30%;
+  display: flex;
+  align-items: center;
+  vertical-align: middle;
 }
 
 /* .user{
     background-color:darkseagreen;
 } */
-.user-avatar{
-    min-width: 70px;
-    width: 70px;
-    height: 70%;
+.user-avatar {
+  min-width: 70px;
+  width: 70px;
+  height: 70%;
 }
 
-.user-details{
-    /* background-color:ghostwhite; */
-    align-items: center;
-    margin-left: 4%;
-    width: 100%;
-    font-size: 12px;
+.user-details {
+  /* background-color:ghostwhite; */
+  align-items: center;
+  margin-left: 4%;
+  width: 100%;
+  font-size: 12px;
 }
 
-.whole-div{
-    padding-top: 20px;
-    /* margin-top: 20px; */
+.whole-div {
+  padding-top: 20px;
+  /* margin-top: 20px; */
 }
-
 
 .user-image > img,
 thread-info > p {
@@ -83,84 +80,81 @@ thread-info > p {
   height: 40px;
   width: 40px;
   margin-right: 2%;
-  
 }
 
-
-.user{
-    vertical-align: middle;
+.user {
+  vertical-align: middle;
 }
 
-.user-cell{
-    width: 100%;
+.user-cell {
+  width: 100%;
 }
 
-.lastReply{
-font-size: 13px;
+.lastReply {
+  font-size: 13px;
 }
 
-.user-details  p{
-    margin:0;
+.user-details p {
+  margin: 0;
 }
 
-.topicDescription{
-    /* background-color: crimson; */
-    margin-bottom: 15px;
-    font-style: italic;
-    /* color: rgba(79, 173, 227, 89); */
-    color: rgb(42, 42, 42);
-    font-size: 16px;
-    text-align: justify;
-    text-indent: 40px;
-    margin-bottom: 10px;
+.topicDescription {
+  /* background-color: crimson; */
+  margin-bottom: 15px;
+  font-style: italic;
+  /* color: rgba(79, 173, 227, 89); */
+  color: rgb(42, 42, 42);
+  font-size: 16px;
+  text-align: justify;
+  text-indent: 40px;
+  margin-bottom: 10px;
 }
 
-.emptyThread{
-    /* background-color: rgb(24, 23, 23); */
-    height: 200px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    color: black;
-    font-size: 25px;
-    font-style: italic;
-
+.emptyThread {
+  /* background-color: rgb(24, 23, 23); */
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color: black;
+  font-size: 25px;
+  font-style: italic;
 }
 
 .emptyThread > p {
-    opacity: 0.50;
+  opacity: 0.5;
 }
 
-.topicName{
-    font-size: 35px;
-    color: black;
-    opacity: 0.9;
-    margin-left: 10px;
-    font-weight:500;
+.topicName {
+  font-size: 35px;
+  color: black;
+  opacity: 0.9;
+  margin-left: 10px;
+  font-weight: 500;
 }
 
-.navTopicName{
-    color: tomato;
-    opacity: 0.8;
+.navTopicName {
+  color: tomato;
+  opacity: 0.8;
 }
 
-.navItem{
-    color: grey;
+.navItem {
+  color: grey;
 }
 
-.posterName{
-   font-size: 13px;
-   text-indent: 10px;
-   font-style: italic;
-   color: black;
+.posterName {
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+  text-indent: 10px;
+  color: black;
 }
 
-.createThreadButton{
-    margin-bottom: 25px;
-    margin-right: 5px;
+.createThreadButton {
+  margin-bottom: 25px;
+  margin-right: 5px;
 }
 
-.posterName2{
-    font-weight: bold;
-    opacity: 0.85;
+.posterName2 {
+  opacity: 0.85;
 }

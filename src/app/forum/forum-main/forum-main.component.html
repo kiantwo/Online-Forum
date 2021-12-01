@@ -1,12 +1,15 @@
-<div class="container "*ngIf="authService.userData as user">
+<div class="container" *ngIf="authService.userData as user">
   <div class="row">
     <div class="col-md-12">
       <div class="media">
-        <div class="media-body">
+        <div>
           <span>
             Hello
             <strong>{{ user.displayName }}</strong
             >!
+            <p class="date">
+              {{ date | date: "medium" }}
+            </p>
           </span>
         </div>
       </div>
@@ -14,4 +17,3 @@
   </div>
   <app-forum-topics *ngIf="authService.userData"></app-forum-topics>
 </div>
-

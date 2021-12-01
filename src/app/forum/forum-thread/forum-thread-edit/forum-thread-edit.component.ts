@@ -21,6 +21,8 @@ export class ForumThreadEditComponent implements OnInit {
   buttonPressed = false;
   hasChange = false;
 
+  unsubscribe: any;
+
   constructor(private topicService: TopicService, private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class ForumThreadEditComponent implements OnInit {
 
   onFormValueChange() {
     const initialValue = this.editForm.value
-    this.editForm.valueChanges.subscribe(value => {
+    this.unsubscribe = this.editForm.valueChanges.subscribe(value => {
       this.hasChange = Object.keys(initialValue).some(key => this.editForm.value[key] !=
         initialValue[key])
 
@@ -79,5 +81,9 @@ export class ForumThreadEditComponent implements OnInit {
 
   get message() {
     return this.editForm.controls.message;
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.unsubscribe();
   }
 }

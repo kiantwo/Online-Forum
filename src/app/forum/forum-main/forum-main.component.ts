@@ -13,10 +13,12 @@ export class ForumMainComponent implements OnInit {
   topics$: any;
   threads$: any;
 
+  date : Date;
+
   constructor(public authService: AuthService, public afs: AngularFirestore, public topicService: TopicService) { }
 
   ngOnInit(): void {
-
+    this.date = new Date();
   }
 
 }

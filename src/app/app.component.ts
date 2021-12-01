@@ -21,12 +21,14 @@ export class AppComponent {
   isAdmin = false;
   isBanned = false;
 
+  unsubscribe: any;
+
   constructor(private fb: FormBuilder, public authService: AuthService, public afs: AngularFirestore) {
   }
 
   ngOnInit(): void {
     //check if currentUser isAdmin
-    this.authService.afAuth.onAuthStateChanged(currentUser => {
+    this.unsubscribe = this.authService.afAuth.onAuthStateChanged(currentUser => {
       if (currentUser) {
         this.afs.collection('users').doc(currentUser.uid).get().subscribe((result) => {
           if (result) {
@@ -42,5 +44,9 @@ export class AppComponent {
   
   get f() {
     return this.form.controls;
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.unsubscribe();
   }
 }

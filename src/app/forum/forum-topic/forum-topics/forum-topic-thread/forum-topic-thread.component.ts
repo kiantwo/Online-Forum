@@ -29,6 +29,8 @@ export class ForumTopicThreadComponent implements OnInit {
   posters: any = [];
   operation = "2";
 
+  unsubscribe: any;
+
   @Input() topicIndex: any;
 
   constructor(
@@ -44,7 +46,7 @@ export class ForumTopicThreadComponent implements OnInit {
     this.topicID$ = this.route.snapshot.paramMap.get('id');
     this.isAdmin = this.authService.isAdmin;
     //getting the threads
-    this.topicService.getThreads(this.topicID$).subscribe((threads) => {
+    this.unsubscribe = this.topicService.getThreads(this.topicID$).subscribe((threads) => {
       if (threads) {
         this.threads$ = threads;
         //pushing each returned latest reply to the replies$ array
@@ -98,5 +100,9 @@ export class ForumTopicThreadComponent implements OnInit {
 
   goToBottom(){
     window.scrollTo(0,document.body.scrollHeight);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.unsubscribe();
   }
 }

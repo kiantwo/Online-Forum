@@ -19,10 +19,10 @@
   </nav>
 
   <div class="topicName">
-    <p>{{topics$.name}}</p>
+    <p>{{ topics$.name }}</p>
   </div>
   <div class="topicDescription">
-    <p>{{description}}</p>
+    <p>{{ description }}</p>
   </div>
 
   <button
@@ -40,8 +40,6 @@
   >
     Delete Topic
   </button>
-
-
 
   <table class="table table-borderless">
     <div *ngIf="threads$.length == 0" class="emptyThread">
@@ -61,13 +59,23 @@
                 >{{ thread.title }}</a
               >
             </p>
-            <p class="posterName">by <span class="posterName2">{{posters[i]}}</span> </p>
+            <p class="posterName">
+              by <span class="posterName2">{{ posters[i] }}</span>
+            </p>
+            <p class="posterName" *ngIf="thread?.dateCreated">
+              <span class="posterName2">
+                {{
+                  thread?.dateCreated?.seconds * 1000
+                    | date: "yyyy-MM-dd h:mm a"
+                }}
+              </span>
+            </p>
           </tr>
         </div>
       </td>
 
       <td class="block-below">
-        <div  *ngIf="replies$[i] && authors[i]" class="user-cell">
+        <div *ngIf="replies$[i] && authors[i]" class="user-cell">
           <tr class="text-secondary">
             <td class="user">
               <div class="user-image">
@@ -78,7 +86,7 @@
               </div>
             </td>
             <td>
-              <div class="user-details" >
+              <div class="user-details">
                 <a href="" [routerLink]="['./thread', thread.threadID]">
                   <p class="lastReply">
                     Last reply:
@@ -95,11 +103,7 @@
                         | date: "yyyy-MM-dd h:mm a"
                     }}
                   </p>
-                  <p class="lastUser">
-                    From:{{
-                      authors[i]
-                    }}
-                  </p>
+                  <p class="lastUser">From:{{ authors[i] }}</p>
                 </a>
               </div>
             </td>
@@ -110,9 +114,9 @@
       <td class="block-opt text-light">
         <div *ngIf="currentUserID === thread.poster || isAdmin">
           <p class="topt" (click)="onClickEdit(i)" (click)="goToBottom()">
-            <span >.</span>
-            <span >.</span>
-            <span >.</span>
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
           </p>
         </div>
       </td>
@@ -136,14 +140,10 @@
   <app-forum-topic-thread-add></app-forum-topic-thread-add>
 </div>
 
-<div
-  class="modal fade"
-  id="deleteTopic"
-  tabindex="-1"
-  aria-hidden="true"
-><app-forum-delete
-  [operation] = "operation"
-  [topicId] = "topicID$"
-  [topicTitle] = "topics$.name"
-></app-forum-delete>
+<div class="modal fade" id="deleteTopic" tabindex="-1" aria-hidden="true">
+  <app-forum-delete
+    [operation]="operation"
+    [topicId]="topicID$"
+    [topicTitle]="topics$.name"
+  ></app-forum-delete>
 </div>

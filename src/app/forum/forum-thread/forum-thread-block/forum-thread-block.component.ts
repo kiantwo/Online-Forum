@@ -82,35 +82,20 @@ export class ForumThreadBlockComponent implements OnInit {
     //get complete reply details for each reply
     this.replies$.forEach((element: any, index: number) => {
       //get detail of user replying
-      
-      //check data within from$
-      if(this.from$.length > 0) {
-        var i = 0;
-        i = this.from$?.findIndex(x => x.uid === element.from);
-      }
+      this.authService.getSingleUser(element.from).subscribe(result => {
+        const fromInfo = {
+          uid: result.get('uid'),
+          displayName: result.get('displayName'),
+          email: result.get('email'),
+          photoURL: result.get('photoURL'),
+          isBanned: result.get('isBanned'),
+          isAdmin: result.get('isAdmin')
+        }
+        this.from$[index] = fromInfo;
+      })
 
-      //if user's info already stored in from$, then just use that
-      if(i) {
-        this.from$[index] = this.from$[i];
-      }
-
-      //if user's info not yet in from$, fetch from db
-      else {
-        this.authService.getSingleUser(element.from).subscribe(result => {
-          const fromInfo = {
-            uid: result.get('uid'),
-            displayName: result.get('displayName'),
-            email: result.get('email'),
-            photoURL: result.get('photoURL'),
-            isBanned: result.get('isBanned'),
-            isAdmin: result.get('isAdmin')
-          }
-          this.from$[index] = fromInfo;
-        })
-      }
-      
       //if user is replying to another user
-      if (element.to) {
+      if (element.to && index != 0) {
         //get detail of user being replied to
         this.authService.getSingleUser(element.to).subscribe(result => {
           //get message
@@ -182,13 +167,13 @@ export class ForumThreadBlockComponent implements OnInit {
 
     //update ban icon in every cell the user appears
     this.from$.forEach((result: any) => {
-      if(result.uid === uid) {
+      if (result.uid === uid) {
         result.isBanned = !result.isBanned;
       }
     })
 
     this.to$.forEach((result: any) => {
-      if(result.uid == uid) {
+      if (result.uid == uid) {
         result.isBanned = !result.isBanned;
       }
     })

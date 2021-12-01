@@ -16,6 +16,8 @@ export class AdminMainComponent implements OnInit {
   page = 1;
   itemsPerPage = 10;
 
+  unsubscribe: any;
+
   constructor(public authService: AuthService) { }
 
   ngOnInit(): void {
@@ -27,7 +29,7 @@ export class AdminMainComponent implements OnInit {
       isBanned: false,
     };
 
-    this.authService.getUsers().subscribe((value) => {
+    this.unsubscribe = this.authService.getUsers().subscribe((value) => {
       //retrieve and assign user data from collection to users$ array
       this.users$ = value;
     });
@@ -35,5 +37,9 @@ export class AdminMainComponent implements OnInit {
 
   onClick(i: number) {
     this.toBan = this.users$[i];
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.unsubscribe();
   }
 }

@@ -3,7 +3,7 @@ import { TopicService } from 'src/app/shared/services/topic.service';
 import { Topic } from 'src/app/shared/services/topic';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import * as firebase from 'firebase/compat';
+import * as firebase from 'firebase/compat/app';
 
 
 @Component({
@@ -39,6 +39,7 @@ export class ForumCreateTopicComponent implements OnInit {
       topicID: '',
       description: this.f.description.value,
       name: this.f.name.value,
+      dateCreated: firebase.default.firestore.FieldValue.serverTimestamp()
     };
     
     this.topicService.addTopic(payload);

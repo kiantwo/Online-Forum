@@ -32,6 +32,8 @@ export class ForumThreadReplyComponent implements OnInit {
   buttonPressed = false;
   hasChange = false;
 
+  unsubscribe: any;
+
   constructor(private route: ActivatedRoute, private topicService: TopicService, public authService: AuthService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
@@ -44,10 +46,11 @@ export class ForumThreadReplyComponent implements OnInit {
   ngOnChanges() {
     //get displayName of recipient
     if (this.quotedReply) {
-      this.authService.getSingleUser(this.quotedReply.from).subscribe(result => {
+      this.unsubscribe = this.authService.getSingleUser(this.quotedReply.from).subscribe(result => {
         if (result) {
           this.quotedDisplayName = result.get('displayName');
         }
+        this.unsubscribe.unsubscribe();
       })
       this.onFormValueChange();
     }
@@ -92,7 +95,7 @@ export class ForumThreadReplyComponent implements OnInit {
       this.success.emit();
     }
   }
-  
+
   closeEvent(close: boolean) {
     this.onClose.emit(close);
   }
@@ -105,7 +108,7 @@ export class ForumThreadReplyComponent implements OnInit {
     return this.form.controls.message;
   }
 
-  goToBottom(){
-    window.scrollTo(0,document.body.scrollHeight);
+  goToBottom() {
+    window.scrollTo(0, document.body.scrollHeight);
   }
 }

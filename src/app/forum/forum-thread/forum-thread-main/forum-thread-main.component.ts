@@ -27,6 +27,8 @@ export class ForumThreadMainComponent implements OnInit {
   isAdmin = false;
   replyClicked = false;
 
+  unsubscribe: any;
+
   constructor(public authService: AuthService, public topicService: TopicService, private route: ActivatedRoute, public afs: AngularFirestore) {
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
   }
@@ -38,7 +40,7 @@ export class ForumThreadMainComponent implements OnInit {
     this.topicID = this.route.snapshot.paramMap.get('id');
     this.isAdmin = this.authService.isAdmin;
 
-    this.topicService.getSingleTopic(this.topicID).subscribe(topics => {
+    this.unsubscribe = this.topicService.getSingleTopic(this.topicID).subscribe(topics => {
       //(partial / to change later) get topic info
       if (topics) {
         this.topics$ = topics.data();
@@ -97,5 +99,9 @@ export class ForumThreadMainComponent implements OnInit {
     //go to position/page where latest reply is displayed
     this.page = this.lastPage;
     window.scrollTo(0, document.body.scrollHeight);
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.unsubscribe();
   }
 }

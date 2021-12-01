@@ -4,6 +4,7 @@ export interface Topic{
     topicID: string;
     name: string;
     description: string;
+    dateCreated: FieldValue | any;
 }
 
 export interface Reply {

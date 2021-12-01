@@ -22,13 +22,14 @@ export class ForumTopicsComponent implements OnInit {
   specificTopidID: any;
 
   isAdmin = false;
+  unsubscribe: any;
 
   constructor(public topicSerivce: TopicService, public authService: AuthService, private afs: AngularFirestore) {}
 
   ngOnInit(): void {
     this.isUserAdmin();
     //retreive topics using topicSerivce from firestore and assign it to topic$
-    this.topicSerivce.getTopics().subscribe((value) => {
+    this.unsubscribe = this.topicSerivce.getTopics().subscribe((value) => {
       this.topic$ = value;
 
       //get info of most recent threads
@@ -72,5 +73,9 @@ export class ForumTopicsComponent implements OnInit {
 
       //console.log(this.threadsOfATopic);
     });
+  }
+
+  ngOnDestroy() {
+    this.unsubscribe.unsubscribe();
   }
 }
