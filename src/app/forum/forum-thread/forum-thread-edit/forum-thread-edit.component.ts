@@ -27,7 +27,7 @@ export class ForumThreadEditComponent implements OnInit {
 
   ngOnInit(): void {
     this.threadID = this.route.snapshot.paramMap.get('tid');
-    this.topicID = 'YFb7yHbbsy0EfujSESXV';
+    this.topicID = this.route.snapshot.paramMap.get('id');
 
     this.editForm = this.fb.group({
       message: [this.replyToEdit.message, [Validators.required]]
