@@ -8,6 +8,11 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: () =>
       import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [AuthGuard],
+    canLoad: [AuthGuard],
+    data: {
+      role: 'ROLE_ADMIN'
+    }
   },
   {
     path: 'main',
@@ -18,7 +23,16 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login-page/login-page.module').then((m) => m.LoginPageModule),
+  },
+  {
+    path: 'topic',
+    loadChildren: () => import('./forum/forum-topic/forum-topic.module').then((m) => m.ForumTopicModule),
     canActivate: [AuthGuard],
+  },
+  {
+    path: '',
+    redirectTo: 'main',
+    pathMatch: 'full'
   },
   {
     path: "**",

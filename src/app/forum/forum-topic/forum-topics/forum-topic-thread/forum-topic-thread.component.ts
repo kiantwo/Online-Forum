@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TopicService } from 'src/app/shared/services/topic.service';
 import { orderBy } from '@firebase/firestore';
 import { AuthService } from 'src/app/shared/services/auth.service';
@@ -13,7 +13,7 @@ import { from } from 'rxjs';
 })
 export class ForumTopicThreadComponent implements OnInit {
   topicID$: any;
-  threads$: any =[];
+  threads$: any = [];
   topics$: any = [];
   replies$: any = [];
   authors: any = [];
@@ -37,7 +37,8 @@ export class ForumTopicThreadComponent implements OnInit {
     public afs: AngularFirestore,
     public topicService: TopicService,
     private route: ActivatedRoute,
-    public authService: AuthService
+    public authService: AuthService,
+    private router: Router
   ) {
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
   }
@@ -45,45 +46,46 @@ export class ForumTopicThreadComponent implements OnInit {
   ngOnInit(): void {
     this.topicID$ = this.route.snapshot.paramMap.get('id');
     this.isAdmin = this.authService.isAdmin;
-    //getting the threads
-    this.unsubscribe = this.topicService.getThreads(this.topicID$).subscribe((threads) => {
-      if (threads) {
-        this.threads$ = threads;
-        //pushing each returned latest reply to the replies$ array
-        this.threads$.forEach((element: { threadID: any }, index: any) => {
-          this.getPosterName(index, this.threads$[index].poster);
-          //get latest reply
-          this.topicService.getLastestReply(this.topicID$, element.threadID).subscribe(reply => {
-            this.replies$[index] = reply[0];
-            if(reply.length != 0){
-              this.getDisplayName(index, this.replies$[index]['from']);
-            }
-          })
-        });
-      }
-    });
 
     //getting a single topic for the navigation
-    this.topicService.getSingleTopic(this.topicID$).subscribe((topics) => {
-      if (topics) {
+    this.unsubscribe = this.topicService.getSingleTopic(this.topicID$).subscribe((topics) => {
+      if (topics.exists) {
         this.topics$ = topics.data();
+        this.description = topics.get('description');
+
+        //getting the threads
+        this.topicService.getThreads(this.topicID$).subscribe((threads) => {
+          if (threads) {
+            this.threads$ = threads;
+            //pushing each returned latest reply to the replies$ array
+            this.threads$.forEach((element: { threadID: any }, index: any) => {
+              this.getPosterName(index, this.threads$[index].poster);
+              //get latest reply
+              this.topicService.getLastestReply(this.topicID$, element.threadID).subscribe(reply => {
+                this.replies$[index] = reply[0];
+                if (reply.length != 0) {
+                  this.getDisplayName(index, this.replies$[index]['from']);
+                }
+              })
+            });
+          }
+        });
+      }
+      
+      else {
+        this.router.navigate(['404']);
       }
     });
-    this.topicService.getSingleTopic(this.topicID$).subscribe( result => {
-      if(result){
-        this.description = result.get('description');
-      }
-    })
   }
 
   getDisplayName(i: number, id: string) {
     this.authService.getSingleUser(this.replies$[i].from).subscribe((result) => {
-        //console.log(result.get('displayName'));
-        this.authors[i] = result.get('displayName');
-      });
+      //console.log(result.get('displayName'));
+      this.authors[i] = result.get('displayName');
+    });
   }
 
-  getPosterName(i: number, id: string){
+  getPosterName(i: number, id: string) {
     this.authService.getSingleUser(this.threads$[i].poster).subscribe(result => {
       this.posters[i] = result.get('displayName');
     });
@@ -94,12 +96,12 @@ export class ForumTopicThreadComponent implements OnInit {
     this.threadToEdit = this.threads$[i];
   }
 
-  editComplete(value: any){
+  editComplete(value: any) {
     this.inEdit = value;
   }
 
-  goToBottom(){
-    window.scrollTo(0,document.body.scrollHeight);
+  goToBottom() {
+    window.scrollTo(0, document.body.scrollHeight);
   }
 
   ngOnDestroy() {

@@ -12,12 +12,6 @@ export class AppComponent {
   title = 'online-forum';
 
   currentUser: any;
-  form = this.fb.group({
-    username: ['', [Validators.required]],
-    password: ['', [Validators.required]],
-    email: ['', [Validators.required, Validators.email]]
-  });
-
   isAdmin = false;
   isBanned = false;
 
@@ -42,10 +36,6 @@ export class AppComponent {
     })
   }
   
-  get f() {
-    return this.form.controls;
-  }
-
   ngOnDestroy() {
     this.unsubscribe.unsubscribe();
   }

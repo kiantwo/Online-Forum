@@ -41,7 +41,7 @@
     Delete Topic
   </button>
 
-  <table class="table table-borderless">
+  <table class="table table-borderless" *ngIf="threads$">
     <div *ngIf="threads$.length == 0" class="emptyThread">
       <p>No threads created</p>
     </div>

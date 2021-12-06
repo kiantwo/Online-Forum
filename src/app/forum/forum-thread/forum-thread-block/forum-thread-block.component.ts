@@ -43,6 +43,9 @@ export class ForumThreadBlockComponent implements OnInit {
   isAdmin = false;
   editClicked = false;
 
+  unsubscribeTo: any;
+  unsubscribeFrom: any;
+
   constructor(private route: ActivatedRoute, public topicService: TopicService, public authService: AuthService) {
     this.topicID = this.route.snapshot.paramMap.get('id');
     this.threadID = this.route.snapshot.paramMap.get('tid');
@@ -82,7 +85,7 @@ export class ForumThreadBlockComponent implements OnInit {
     //get complete reply details for each reply
     this.replies$.forEach((element: any, index: number) => {
       //get detail of user replying
-      this.authService.getSingleUser(element.from).subscribe(result => {
+      this.unsubscribeTo = this.authService.getSingleUser(element.from).subscribe(result => {
         const fromInfo = {
           uid: result.get('uid'),
           displayName: result.get('displayName'),
@@ -97,7 +100,7 @@ export class ForumThreadBlockComponent implements OnInit {
       //if user is replying to another user
       if (element.to && index != 0) {
         //get detail of user being replied to
-        this.authService.getSingleUser(element.to).subscribe(result => {
+        this.unsubscribeFrom = this.authService.getSingleUser(element.to).subscribe(result => {
           //get message
           this.topicService.getSingleReply(this.topicID, this.threadID, element.toReplyID).subscribe(reply => {
             const toInfo = {
@@ -177,5 +180,10 @@ export class ForumThreadBlockComponent implements OnInit {
         result.isBanned = !result.isBanned;
       }
     })
+  }
+
+  ngOnDestroy() {
+    this.unsubscribeTo.unsubscribe();
+    this.unsubscribeFrom.unsubscribe();
   }
 }

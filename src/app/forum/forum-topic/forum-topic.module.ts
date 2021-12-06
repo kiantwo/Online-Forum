@@ -32,7 +32,6 @@ import { ForumTopicThreadEditComponent } from './forum-topics/forum-topic-thread
     CommonModule,
     ForumTopicRoutingModule,
     FormsModule,
-    ForumThreadModule,
     ReactiveFormsModule,
     FontAwesomeModule,
   ],

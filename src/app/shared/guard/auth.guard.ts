@@ -15,14 +15,20 @@ export class AuthGuard implements CanActivate {
 
     //calls isLoggedIn function from AuthService
     if (this.authService.isLoggedIn !== true) {
-      this.router.navigate([''])
+      this.router.navigate(['login'])
+      return false;
     }
 
+    return true;
+  }
+
+  canLoad(next: ActivatedRouteSnapshot,) {
     //check if user is admin
-    if(next.data['role'] === 'ROLE_ADMIN' && this.authService.isAdmin !== true) {
-      this.router.navigate(['']);
+    if (next.data['role'] === 'ROLE_ADMIN' && this.authService.isLoggedIn && this.authService.isAdmin !== true) {
+      this.router.navigate(['main']);
+      return false;
     }
-    
+
     return true;
   }
 }

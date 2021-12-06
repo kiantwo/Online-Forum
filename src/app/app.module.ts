@@ -8,9 +8,7 @@ import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { LoginPageModule } from './login-page/login-page.module';
 import { NotFoundComponent } from './not-found/not-found.component';
-import { ForumModule } from './forum/forum.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {
   AngularFirestore,
@@ -18,9 +16,7 @@ import {
 } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './shared/services/auth.service';
-import { AdminModule } from './admin/admin.module';
 import { UserProfileComponent } from './user-profile/user-profile.component';
-import { ForumThreadModule } from './forum/forum-thread/forum-thread.module';
 import { BannedComponent } from './banned/banned.component';
 
 import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
@@ -36,10 +32,6 @@ import { AngularFireStorageModule, BUCKET } from '@angular/fire/compat/storage';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     BrowserModule,
-    LoginPageModule,
-    AdminModule,
-    ForumModule,
-    ForumThreadModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,

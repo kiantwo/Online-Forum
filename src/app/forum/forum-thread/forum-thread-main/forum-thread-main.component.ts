@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { TopicService } from 'src/app/shared/services/topic.service';
 
@@ -29,7 +29,7 @@ export class ForumThreadMainComponent implements OnInit {
 
   unsubscribe: any;
 
-  constructor(public authService: AuthService, public topicService: TopicService, private route: ActivatedRoute, public afs: AngularFirestore) {
+  constructor(private router: Router, public authService: AuthService, public topicService: TopicService, private route: ActivatedRoute, public afs: AngularFirestore) {
     this.currentUserID = JSON.parse(localStorage.getItem('user') || '').uid;
   }
 
@@ -40,26 +40,41 @@ export class ForumThreadMainComponent implements OnInit {
     this.topicID = this.route.snapshot.paramMap.get('id');
     this.isAdmin = this.authService.isAdmin;
 
+    if (this.topicID == null) {
+      this.topicID = 'a';
+    }
+
     this.unsubscribe = this.topicService.getSingleTopic(this.topicID).subscribe(topics => {
-      //(partial / to change later) get topic info
-      if (topics) {
+      if (topics.exists) {
         this.topics$ = topics.data();
 
         //get thread info
         this.topicService.getSingleThread(this.topics$.topicID, this.threadID).subscribe(result => {
-          this.thread = result.data();
-          this.getDisplayName();
-        })
+          if (result.exists) {
+            this.thread = result.data();
+            this.getDisplayName();
 
-        //get replies in thread
-        this.topicService.getReplies(this.topics$.topicID, this.threadID).subscribe(replies => {
-          this.replies$ = replies;
+            //get replies in thread
+            this.topicService.getReplies(this.topics$.topicID, this.threadID).subscribe(replies => {
+              this.replies$ = replies;
 
-          //get value of last page
-          this.lastPage = Math.floor((this.replies$.length / this.itemsPerPage) + 1);
+              //get value of last page
+              this.lastPage = Math.floor((this.replies$.length / this.itemsPerPage) + 1);
+            })
+          }
+
+          else {
+            this.router.navigate(['404']);
+          }
         })
       }
+
+      else {
+        this.router.navigate(['404']);
+      }
     })
+
+
   }
 
   getDisplayName() {
@@ -69,7 +84,7 @@ export class ForumThreadMainComponent implements OnInit {
   }
 
   //when page number is clicked
-  goToTop(e: any){
+  goToTop(e: any) {
     this.replyClicked = false;
     window.scrollTo(document.body.scrollHeight, 0);
     this.page = e;
