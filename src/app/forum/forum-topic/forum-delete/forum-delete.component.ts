@@ -20,8 +20,11 @@ export class ForumDeleteComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onDelete(id: string){
 
+
+  //operation 1 is when this component is called from the edit form, thus emitting status false to hide the edit form once a topic has been deleted
+  //operation 2 is when this component is called from forum-topic-thread (deleting the topic from thread lists), so no more hiding the edit form
+  onDelete(id: string){
     if (this.operation == "1"){
       this.topicServer.deleteTopic(id);
       this.deleteStatus.emit(false);

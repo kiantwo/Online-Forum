@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TopicService } from 'src/app/shared/services/topic.service';
-import { Topic } from 'src/app/shared/services/topic';
 
 
 
@@ -13,7 +12,6 @@ import { Topic } from 'src/app/shared/services/topic';
 export class ForumEditTopicComponent implements OnInit, OnChanges {
  
   @Input() topicToEdit: any;
-  //editForm: FormGroup;
   editForm: any;
   @Output() editStatus = new EventEmitter<boolean>();
     
@@ -60,6 +58,7 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
     return this.editForm.controls;
   }
 
+  //upon closing make those elements back to untouched to hide the error/validator messages, and emit false to hide the edit form
   onClose(){
     if( document.getElementById("topicName").classList.contains('ng-touched') ){
       this.f.name.markAsUntouched();
@@ -72,11 +71,12 @@ export class ForumEditTopicComponent implements OnInit, OnChanges {
     this.editStatus.emit(false);
   }
 
+  //emit false to hide the edit form
   onDeleteTopic(status: boolean){
     this.editStatus.emit(status);
   }
 
-
+  //scroll to bottom
   goToBottom(){
     window.scrollTo(0,document.body.scrollHeight);
   }

@@ -13,7 +13,6 @@ export class ForumTopicThreadEditComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder, private topicService: TopicService, private route: ActivatedRoute,) { }
 
-  //editForm: FormGroup;
   @Input() threadToEdit: any;
   editForm: any;
   @Output() editStatus = new EventEmitter<number>();
@@ -32,6 +31,7 @@ export class ForumTopicThreadEditComponent implements OnInit, OnChanges {
     })
   }
 
+  //submit
   onSubmitChanges(){
     const payload: Thread = {
       dateCreated: this.threadToEdit.dateCreated,
@@ -43,10 +43,12 @@ export class ForumTopicThreadEditComponent implements OnInit, OnChanges {
     this.editStatus.emit(0);
   }
 
+  //hides edit form
   onClose(){
     this.editStatus.emit(0);
   }
 
+  //to hide edit form
   editComplete(value: any){
     this.onClose();
   }

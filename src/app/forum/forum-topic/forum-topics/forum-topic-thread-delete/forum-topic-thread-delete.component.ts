@@ -15,12 +15,12 @@ export class ForumTopicThreadDeleteComponent implements OnInit {
   @Input() threadTitle: any;
   @Output() editStatus = new EventEmitter<number>();
 
-  replies: any = [];
   
 
   ngOnInit(): void {
   }
 
+  //deletes a thread, note on services for its subcollection and hide the edit form
   onDelete(){
     this.topicService.deleteThread(this.topicID, this.threadID);
     this.editStatus.emit(0);

@@ -23,14 +23,6 @@ export class ForumCreateTopicComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private topicService: TopicService, private storage: AngularFireStorage) { }
 
-  uploadFile(event: any){
-    const file = event.target.files[0];
-    // const filePath = '/photos'
-    // const task = this.storage.upload(filePath,file);
-    console.log(file.name);
-    
-  }
-
   ngOnInit(): void {
   }
 
@@ -51,6 +43,7 @@ export class ForumCreateTopicComponent implements OnInit {
     return this.form.controls;
   }
 
+  //upon closing make those classes back to untouched to hide the error/validator messages
   onClose(){
     if( document.getElementById("topicName").classList.contains('ng-touched') ){
       this.f.name.markAsUntouched();

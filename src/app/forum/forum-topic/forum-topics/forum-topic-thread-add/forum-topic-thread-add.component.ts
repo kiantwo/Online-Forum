@@ -44,6 +44,7 @@ export class ForumTopicThreadAddComponent implements OnInit {
     datePosted: [''],
   })
 
+  //Insert a thread
   onSubmit(){
     const payload: Thread = {
       threadID: '',
@@ -60,6 +61,7 @@ export class ForumTopicThreadAddComponent implements OnInit {
     
   }
 
+  //Insert the first Reply
   includeMyReply(){
     const repyPayload: Reply = {
       replyID: '',
@@ -89,6 +91,7 @@ export class ForumTopicThreadAddComponent implements OnInit {
     return this.replyForm.controls;
   }
 
+  //mark those elements as untouched to hide the errors/validators message
   onClose(){
     if( document.getElementById("title").classList.contains('ng-touched') ){
       this.f.title.markAsUntouched();

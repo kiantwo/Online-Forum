@@ -16,6 +16,8 @@ export class TopicService {
     this.topic$ = this.topicCollection.valueChanges();
   }
 
+  
+
   addTopic(topic: Topic) {
     const pushkey = this.afs.createId();
     topic.topicID = pushkey;
@@ -28,6 +30,17 @@ export class TopicService {
     thread.threadID = pushkey;
     threadCollection.doc(pushkey).set(thread);
   }
+  addReply(reply: Reply, topicID: any, threadID: any) {
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
+    const pushkey = this.afs.createId();
+    reply.replyID = pushkey;
+    repliesCollection.doc(pushkey).set(reply);
+  }
+
+
+
+
+
 
   getTopics() {
     return this.topic$;
@@ -48,6 +61,13 @@ export class TopicService {
     return this.afs.collection('topics/' + topicID + '/threads').doc(threadID).get();
   }
 
+  getLatestThread(topicID: string){
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads', (ref)=>ref.orderBy('dateCreated', 'desc').limit(1));
+    const thread$ = threadCollection.valueChanges();
+
+    return thread$;
+  }
+  
   getReplies(topicID: any, threadID: any) {
     const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies', (ref) => ref.orderBy('datePosted'));
     const replies$ = repliesCollection.valueChanges();
@@ -58,6 +78,17 @@ export class TopicService {
   getSingleReply(topicID: any, threadID: any, replyID: any) {
     return this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies').doc(replyID).get();
   }
+
+  getLastestReply(topicID: string, threadID: string){
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies', (ref) => ref.orderBy('datePosted', 'desc').limit(1));
+    const reply = repliesCollection.valueChanges();
+
+    return reply;
+  }
+
+
+
+
 
   deleteTopic(topicID: any) {
     let threads: any = [];
@@ -71,54 +102,16 @@ export class TopicService {
     this.topicCollection.doc(topicID).delete();
   }
 
-  editTopic(topicID: string, topicChanges: Topic) {
-    this.topicCollection.doc(topicID).update(topicChanges);
-  }
-  editThread(topicID: string, threadID: string, threadChanges: Thread){
-    const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
-    threadCollection.doc(threadID).update(threadChanges);
-  }
-
-
-  addReply(reply: Reply, topicID: any, threadID: any) {
-    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
-    const pushkey = this.afs.createId();
-    reply.replyID = pushkey;
-    repliesCollection.doc(pushkey).set(reply);
-  }
-
-  editReply(messageChanges: any, replyID: any, topicID: any, threadID: any) {
-    const currentDate = firebase.default.firestore.FieldValue.serverTimestamp();
-    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
-    repliesCollection.doc(replyID).update({ message: messageChanges, lastEdit: currentDate });
-  }
-
-  deleteReply(replyID: any, topicID: any, threadID: any) {
-    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
-    repliesCollection.doc(replyID).delete();
-  }
-
   deleteThread(topicID: any, threadID: any){
     const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
     this.deleteSubcollectionReplies(topicID, threadID);
     threadCollection.doc(threadID).delete();
   }
 
-
-  getLastestReply(topicID: string, threadID: string){
-    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies', (ref) => ref.orderBy('datePosted', 'desc').limit(1));
-    const reply = repliesCollection.valueChanges();
-
-    return reply;
+  deleteReply(replyID: any, topicID: any, threadID: any) {
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
+    repliesCollection.doc(replyID).delete();
   }
-
-  getLatestThread(topicID: string){
-    const threadCollection = this.afs.collection('topics/' + topicID + '/threads', (ref)=>ref.orderBy('dateCreated', 'desc').limit(1));
-    const thread$ = threadCollection.valueChanges();
-
-    return thread$;
-  }
-
 
   deleteSubcollectionReplies(topicID: string, threadID: string){
     let replies: any = [];
@@ -130,4 +123,26 @@ export class TopicService {
       });
     });
   }
+
+
+
+
+
+  editTopic(topicID: string, topicChanges: Topic) {
+    this.topicCollection.doc(topicID).update(topicChanges);
+  }
+
+  editThread(topicID: string, threadID: string, threadChanges: Thread){
+    const threadCollection = this.afs.collection('topics/' + topicID + '/threads');
+    threadCollection.doc(threadID).update(threadChanges);
+  }
+
+  editReply(messageChanges: any, replyID: any, topicID: any, threadID: any) {
+    const currentDate = firebase.default.firestore.FieldValue.serverTimestamp();
+    const repliesCollection = this.afs.collection('topics/' + topicID + '/threads/' + threadID + '/replies');
+    repliesCollection.doc(replyID).update({ message: messageChanges, lastEdit: currentDate });
+  }
+
+
+
 }

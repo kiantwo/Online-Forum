@@ -182,8 +182,4 @@ export class ForumThreadBlockComponent implements OnInit {
     })
   }
 
-  ngOnDestroy() {
-    this.unsubscribeTo.unsubscribe();
-    this.unsubscribeFrom.unsubscribe();
-  }
 }
