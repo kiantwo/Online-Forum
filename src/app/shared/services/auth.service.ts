@@ -96,7 +96,6 @@ export class AuthService {
 
   logout() {
     return this.afAuth.signOut().then(() => {
-      console.log(this.isLoggedIn);
       localStorage.removeItem('user');
       localStorage.removeItem('isAdmin');
       this.userData = null;
